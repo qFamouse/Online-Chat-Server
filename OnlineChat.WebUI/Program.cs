@@ -11,6 +11,7 @@ using OnlineChat.Core.Interfaces.Services;
 using OnlineChat.Core.Queries;
 using OnlineChat.Infrastructure.Data;
 using OnlineChat.Infrastructure.Data.Repositories;
+using OnlineChat.WebUI.Middleware;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -103,6 +104,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
