@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using OnlineChat.Core.Entities;
+using OnlineChat.Core.Exceptions;
 using OnlineChat.Core.Interfaces.Services;
 using OnlineChat.Core.Queries.Users;
 using OnlineChat.Core.Views;
@@ -31,14 +32,12 @@ namespace OnlineChat.Core.QueryHandlers.Users
 
             if (user is null)
             {
-                // TODO: Make HttpStatusCodeException 
-                // throw new HttpStatusCodeException(HttpStatusCode.NotFound, "User not found");
+                throw new HttpStatusCodeException(HttpStatusCode.NotFound, "User not found");
             }
 
             if (!await _userManager.CheckPasswordAsync(user, request.Password))
             {
-                // TODO: Make HttpStatusCodeException 
-                // throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Incorrect password");
+                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Incorrect password");
             }
 
             var roles = await _userManager.GetRolesAsync(user);
