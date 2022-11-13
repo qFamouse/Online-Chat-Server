@@ -3,11 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.32916.344
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineChat.WebUI", "OnlineChat.WebUI\OnlineChat.WebUI.csproj", "{7E987DA4-8259-47EE-B8AB-029D406F9549}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineChat.WebUI", "OnlineChat.WebUI\OnlineChat.WebUI.csproj", "{7E987DA4-8259-47EE-B8AB-029D406F9549}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E3CFCB7-F967-4F5B-9E85-DED5659DED2D} = {3E3CFCB7-F967-4F5B-9E85-DED5659DED2D}
+		{442225EA-5BC9-4B83-BD7A-A07DBEBF5EFB} = {442225EA-5BC9-4B83-BD7A-A07DBEBF5EFB}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineChat.Core", "OnlineChat.Core\OnlineChat.Core.csproj", "{3E3CFCB7-F967-4F5B-9E85-DED5659DED2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineChat.Core", "OnlineChat.Core\OnlineChat.Core.csproj", "{3E3CFCB7-F967-4F5B-9E85-DED5659DED2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineChat.Infrastructure", "OnlineChat.Infrastructure\OnlineChat.Infrastructure.csproj", "{442225EA-5BC9-4B83-BD7A-A07DBEBF5EFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineChat.Infrastructure", "OnlineChat.Infrastructure\OnlineChat.Infrastructure.csproj", "{442225EA-5BC9-4B83-BD7A-A07DBEBF5EFB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E3CFCB7-F967-4F5B-9E85-DED5659DED2D} = {3E3CFCB7-F967-4F5B-9E85-DED5659DED2D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
