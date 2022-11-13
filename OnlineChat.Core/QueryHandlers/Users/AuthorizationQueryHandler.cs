@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using OnlineChat.Core.Configurations;
 using OnlineChat.Core.Entities;
 using OnlineChat.Core.Exceptions;
 using OnlineChat.Core.Interfaces.Services;
@@ -20,10 +22,14 @@ namespace OnlineChat.Core.QueryHandlers.Users
     public class AuthorizationQueryHandler : IRequestHandler<AuthorizationQuery, UserAuthorizationResult>
     {
         private readonly UserManager<User> _userManager;
+        private readonly IdentityConfiguration _identityConfiguration;
 
-        public AuthorizationQueryHandler(UserManager<User> userManager)
+        public AuthorizationQueryHandler(
+            UserManager<User> userManager,
+            IOptions<IdentityConfiguration> identityConfiguration)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _identityConfiguration = identityConfiguration.Value ?? throw new ArgumentNullException(nameof(identityConfiguration));
         }
 
         public async Task<UserAuthorizationResult> Handle(AuthorizationQuery request, CancellationToken cancellationToken)
@@ -49,14 +55,12 @@ namespace OnlineChat.Core.QueryHandlers.Users
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.UserName),
             };
-            authClaims.AddRange(roleClaims); // Add user roles to main claims list
+            authClaims.AddRange(roleClaims); // Adding user roles to main claims list
 
-            // TODO: Add configure for SecurityKey - _identityConfiguration.SecurityKey
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("aksdokjafbkjasbfjabojsfbda"));
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_identityConfiguration.SecurityKey));
 
             var token = new JwtSecurityToken(
-                // TODO: Add configure for ExpiresHours - _identityConfiguration.ExpiresHours
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddHours(_identityConfiguration.ExpiresHours),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
             );

@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using OnlineChat.Core.Commands.Users;
+using OnlineChat.Core.Configurations;
 using OnlineChat.Core.Entities;
 using OnlineChat.Core.Exceptions;
 using OnlineChat.Core.Interfaces.Services;
@@ -16,14 +18,19 @@ namespace OnlineChat.Core.CommandHandlers.Users
     public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, User>
     {
         private readonly UserManager<User> _userManager;
+        private readonly IdentityConfiguration _identityConfiguration;
 
-        public RegistrationCommandHandler(UserManager<User> userManager)
+        public RegistrationCommandHandler(
+            UserManager<User> userManager, 
+            IOptions<IdentityConfiguration> identityConfiguration)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _identityConfiguration = identityConfiguration.Value ?? throw new ArgumentNullException(nameof(identityConfiguration));
         }
 
         public async Task<User> Handle(RegistrationCommand request, CancellationToken cancellationToken)
         {
+
             IdentityResult result = await _userManager.CreateAsync(request.User, request.Password);
 
             if (!result.Succeeded)
@@ -31,8 +38,7 @@ namespace OnlineChat.Core.CommandHandlers.Users
                 throw new HttpStatusCodeException(HttpStatusCode.BadRequest, result.Errors.First().Description);
             }
 
-            // TODO: Create configuration for default user role - _identityConfiguration.UserRole
-            result = await _userManager.AddToRoleAsync(request.User, "User");
+            result = await _userManager.AddToRoleAsync(request.User, _identityConfiguration.DefaultRole);
 
             if (!result.Succeeded)
             {
