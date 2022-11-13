@@ -14,12 +14,10 @@ namespace OnlineChat.WebUI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
         private readonly ISender _sender;
 
         public UsersController(ISender sender)
         {
-            //_userService = userService ?? throw new ArgumentNullException(nameof(userService));
             _sender = sender ?? throw new ArgumentNullException(nameof(sender));
         }
 
