@@ -2,9 +2,11 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineChat.Core.Commands.Users;
+using OnlineChat.Core.Configurations;
 using OnlineChat.Core.Entities;
 using OnlineChat.Core.Interfaces.Repositories;
 using OnlineChat.Core.Interfaces.Services;
@@ -25,6 +27,13 @@ builder.Services.AddSwaggerGen();
 
 
 #region Custom Services
+// 
+ConfigurationManager configuration = builder.Configuration;
+
+builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Identity"));
+
+
+
 builder.Services.AddMediatR(typeof(RegistrationCommand));
 
 // AddInfrastructureDependencies
@@ -49,8 +58,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 ValidateAudience = false,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey( // TODO: Config identity secret Configuration["Identity:SecurityKey"]
-                                Encoding.UTF8.GetBytes("aksdokjafbkjasbfjabojsfbda"))
+                IssuerSigningKey = new SymmetricSecurityKey(
+                                Encoding.UTF8.GetBytes(configuration["Identity:SecurityKey"]))
             };
         }
      );
