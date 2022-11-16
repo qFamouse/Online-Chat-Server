@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineChat.Core.Queries.Users
+namespace OnlineChat.Core.SQRS.Queries.User
 {
     public class AuthorizationQuery : IRequest<UserAuthorizationResult>
     {

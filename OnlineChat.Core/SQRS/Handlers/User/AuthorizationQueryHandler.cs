@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OnlineChat.Core.Configurations;
-using OnlineChat.Core.Entities;
 using OnlineChat.Core.Exceptions;
-using OnlineChat.Core.Interfaces.Services;
-using OnlineChat.Core.Queries.Users;
+using OnlineChat.Core.SQRS.Queries.User;
 using OnlineChat.Core.Views;
 using System;
 using System.Collections.Generic;
@@ -17,8 +15,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineChat.Core.QueryHandlers.Users
+namespace OnlineChat.Core.SQRS.Handlers.User
 {
+    using OnlineChat.Core.Entities;
+
     public class AuthorizationQueryHandler : IRequestHandler<AuthorizationQuery, UserAuthorizationResult>
     {
         private readonly UserManager<User> _userManager;

@@ -1,11 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using OnlineChat.Core.Commands.Users;
 using OnlineChat.Core.Configurations;
-using OnlineChat.Core.Entities;
 using OnlineChat.Core.Exceptions;
-using OnlineChat.Core.Interfaces.Services;
+using OnlineChat.Core.SQRS.Commands.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +11,17 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineChat.Core.CommandHandlers.Users
+namespace OnlineChat.Core.SQRS.Handlers.User
 {
+    using OnlineChat.Core.Entities;
+
     public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, User>
     {
         private readonly UserManager<User> _userManager;
         private readonly IdentityConfiguration _identityConfiguration;
 
         public RegistrationCommandHandler(
-            UserManager<User> userManager, 
+            UserManager<User> userManager,
             IOptions<IdentityConfiguration> identityConfiguration)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));

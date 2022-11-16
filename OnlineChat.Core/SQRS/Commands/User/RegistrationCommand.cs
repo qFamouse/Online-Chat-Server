@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using OnlineChat.Core.Entities;
 using OnlineChat.Core.Requests.User;
 using System;
 using System.Collections.Generic;
@@ -8,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineChat.Core.Commands.Users
+
+namespace OnlineChat.Core.SQRS.Commands.User
 {
+    using OnlineChat.Core.Entities;
     public class RegistrationCommand : IRequest<User>
     {
         public User User { get; set; }

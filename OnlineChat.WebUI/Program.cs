@@ -5,12 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using OnlineChat.Core.Commands.Users;
 using OnlineChat.Core.Configurations;
 using OnlineChat.Core.Entities;
 using OnlineChat.Core.Interfaces.Repositories;
-using OnlineChat.Core.Interfaces.Services;
-using OnlineChat.Core.Queries;
+using OnlineChat.Core.SQRS.Commands.User;
 using OnlineChat.Infrastructure.Data;
 using OnlineChat.Infrastructure.Data.Repositories;
 using OnlineChat.WebUI.Middleware;
@@ -37,7 +35,6 @@ builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Iden
 builder.Services.AddMediatR(typeof(RegistrationCommand));
 
 // AddInfrastructureDependencies
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // AddCoreDependencies - some services
 
