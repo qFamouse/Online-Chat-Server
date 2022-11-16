@@ -15,12 +15,12 @@ namespace OnlineChat.Core.SQRS.Handlers.User
 {
     using OnlineChat.Core.Entities;
 
-    public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, User>
+    public class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand, User>
     {
         private readonly UserManager<User> _userManager;
         private readonly IdentityConfiguration _identityConfiguration;
 
-        public RegistrationCommandHandler(
+        public SignUpUserCommandHandler(
             UserManager<User> userManager,
             IOptions<IdentityConfiguration> identityConfiguration)
         {
@@ -28,7 +28,7 @@ namespace OnlineChat.Core.SQRS.Handlers.User
             _identityConfiguration = identityConfiguration.Value ?? throw new ArgumentNullException(nameof(identityConfiguration));
         }
 
-        public async Task<User> Handle(RegistrationCommand request, CancellationToken cancellationToken)
+        public async Task<User> Handle(SignUpUserCommand request, CancellationToken cancellationToken)
         {
 
             IdentityResult result = await _userManager.CreateAsync(request.User, request.Password);

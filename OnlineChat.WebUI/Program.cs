@@ -32,7 +32,7 @@ builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Iden
 
 
 
-builder.Services.AddMediatR(typeof(RegistrationCommand));
+builder.Services.AddMediatR(typeof(SignUpUserCommand));
 
 // AddInfrastructureDependencies
 

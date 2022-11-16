@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 namespace OnlineChat.Core.SQRS.Commands.User
 {
     using OnlineChat.Core.Entities;
-    public class RegistrationCommand : IRequest<User>
+    public class SignUpUserCommand : IRequest<User>
     {
         public User User { get; set; }
         public string Password { get; set; }
 
-        public RegistrationCommand(UserRegistrationRequest request)
+        public SignUpUserCommand(UserRegistrationRequest request)
         {
             User = new User()
             {

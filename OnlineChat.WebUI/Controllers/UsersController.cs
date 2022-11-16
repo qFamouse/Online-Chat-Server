@@ -22,7 +22,7 @@ namespace OnlineChat.WebUI.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> RegisterAsync([FromBody] UserRegistrationRequest request)
         {
-            return Ok(await _sender.Send(new RegistrationCommand(request)));
+            return Ok(await _sender.Send(new SignUpUserCommand(request)));
         }
 
         [HttpPost("login")]
