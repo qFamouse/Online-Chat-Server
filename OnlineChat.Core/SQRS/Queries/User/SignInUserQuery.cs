@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace OnlineChat.Core.SQRS.Queries.User
 {
-    public class AuthorizationQuery : IRequest<UserAuthorizationResult>
+    public class SignInUserQuery : IRequest<UserAuthorizationResult>
     {
         public string UserName { get; set; }
         public string Password { get; set; }
 
-        public AuthorizationQuery(UserAuthorizationRequest request)
+        public SignInUserQuery(UserAuthorizationRequest request)
         {
             UserName = request.UserName;
             Password = request.Password;

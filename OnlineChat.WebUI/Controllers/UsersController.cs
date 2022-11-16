@@ -28,7 +28,7 @@ namespace OnlineChat.WebUI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> LoginAsync([FromBody] UserAuthorizationRequest request)
         {
-            return Ok(await _sender.Send(new AuthorizationQuery(request)));
+            return Ok(await _sender.Send(new SignInUserQuery(request)));
         }
     }
 }

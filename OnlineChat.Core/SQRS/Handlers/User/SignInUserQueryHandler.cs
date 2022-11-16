@@ -19,12 +19,12 @@ namespace OnlineChat.Core.SQRS.Handlers.User
 {
     using OnlineChat.Core.Entities;
 
-    public class AuthorizationQueryHandler : IRequestHandler<AuthorizationQuery, UserAuthorizationResult>
+    public class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAuthorizationResult>
     {
         private readonly UserManager<User> _userManager;
         private readonly IdentityConfiguration _identityConfiguration;
 
-        public AuthorizationQueryHandler(
+        public SignInUserQueryHandler(
             UserManager<User> userManager,
             IOptions<IdentityConfiguration> identityConfiguration)
         {
@@ -32,7 +32,7 @@ namespace OnlineChat.Core.SQRS.Handlers.User
             _identityConfiguration = identityConfiguration.Value ?? throw new ArgumentNullException(nameof(identityConfiguration));
         }
 
-        public async Task<UserAuthorizationResult> Handle(AuthorizationQuery request, CancellationToken cancellationToken)
+        public async Task<UserAuthorizationResult> Handle(SignInUserQuery request, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
 
