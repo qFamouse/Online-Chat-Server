@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OnlineChat.Core.Views
 {
-    public class UserAuthorizationResult
+    public class UserAuthorizationView
     {
         public string Token { get; }
         public DateTime Expiration { get; }
 
-        public UserAuthorizationResult(string token, DateTime expiration)
+        public UserAuthorizationView(string token, DateTime expiration)
         {
             Token = token;
             Expiration = expiration;
