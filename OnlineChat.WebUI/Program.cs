@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using OnlineChat.Core.Configurations;
 using OnlineChat.Core.Entities;
 using OnlineChat.Core.Interfaces.Repositories;
+using OnlineChat.Core.Interfaces.Services;
 using OnlineChat.Core.SQRS.Commands.User;
 using OnlineChat.Infrastructure.Data;
 using OnlineChat.Infrastructure.Data.Repositories;
@@ -39,6 +40,8 @@ builder.Services.AddMediatR(typeof(SignUpUserCommand));
 // AddCoreDependencies - some services
 
 // AddWebUiDependencies
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IIdentityService, IdentityService>();
 
 // Context
 builder.Services.AddDbContext<OnlineChatContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
