@@ -17,8 +17,8 @@ namespace OnlineChat.Infrastructure.Data.Repositories
 
         public BaseRepository(OnlineChatContext context)
         {
-            DbContext = context ?? throw new ArgumentNullException(nameof(context), "DB Context is null");
-            _dbSet = context.Set<T>() ?? throw new ArgumentNullException(nameof(T), "DbSet is null");
+            DbContext = context ?? throw new ArgumentNullException(nameof(context));
+            _dbSet = context.Set<T>() ?? throw new ArgumentNullException(nameof(T));
         }
 
         public async Task<List<T>> GetAllAsync()
