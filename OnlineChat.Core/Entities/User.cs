@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineChat.Core.Entities
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser<int>, IEntity
     {
         public string Name { get; set; }
     }
