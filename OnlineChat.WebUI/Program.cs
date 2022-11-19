@@ -13,6 +13,7 @@ using OnlineChat.Core.SQRS.Commands.User;
 using OnlineChat.Infrastructure.Data;
 using OnlineChat.Infrastructure.Data.Repositories;
 using OnlineChat.WebUI.Middleware;
+using OnlineChat.WebUI.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +39,7 @@ builder.Services.AddMediatR(typeof(SignUpUserCommand));
 // AddInfrastructureDependencies
 
 // AddCoreDependencies - some services
+builder.Services.AddScoped<IDirectMessageRepository, DirectMessageRepository>();
 
 // AddWebUiDependencies
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
