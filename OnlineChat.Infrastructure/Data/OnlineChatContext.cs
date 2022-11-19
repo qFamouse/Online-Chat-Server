@@ -12,6 +12,8 @@ namespace OnlineChat.Infrastructure.Data
 {
     public class OnlineChatContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
+        public DbSet<DirectMessage> DirectMessages { get; set; }
+
         public OnlineChatContext(DbContextOptions<OnlineChatContext> options) : base(options) { }
     }
 }
