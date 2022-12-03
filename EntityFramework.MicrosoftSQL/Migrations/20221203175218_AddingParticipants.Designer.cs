@@ -12,7 +12,7 @@ using Shared;
 namespace OnlineChat.Infrastructure.Migrations
 {
     [DbContext(typeof(OnlineChatContext))]
-    [Migration("20221203162900_AddingParticipants")]
+    [Migration("20221203175218_AddingParticipants")]
     partial class AddingParticipants
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -344,7 +344,7 @@ namespace OnlineChat.Infrastructure.Migrations
                     b.HasOne("Application.Entities.Conversation", "Conversation")
                         .WithMany()
                         .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Application.Entities.User", "Sender")
@@ -378,7 +378,7 @@ namespace OnlineChat.Infrastructure.Migrations
                     b.HasOne("Application.Entities.Conversation", "Conversation")
                         .WithMany()
                         .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Application.Entities.User", "User")

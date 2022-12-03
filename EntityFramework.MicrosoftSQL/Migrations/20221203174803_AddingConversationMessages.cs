@@ -31,8 +31,7 @@ namespace OnlineChat.Infrastructure.Migrations
                         name: "FK_ConversationMessages_Conversations_ConversationId",
                         column: x => x.ConversationId,
                         principalTable: "Conversations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

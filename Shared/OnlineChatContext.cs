@@ -13,5 +13,20 @@ namespace Shared
         public DbSet<Participant> Participants { get; set; }
 
         public OnlineChatContext(DbContextOptions<OnlineChatContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<ConversationMessage>()
+                .HasOne(cm => cm.Conversation)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Participant>()
+                .HasOne(p => p.Conversation)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            base.OnModelCreating(builder);
+        }
     }
 }
