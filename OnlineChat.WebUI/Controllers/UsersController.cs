@@ -2,7 +2,6 @@
 using Application.CQRS.Queries.User;
 using Contracts.Requests.User;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineChat.WebUI.Controllers
