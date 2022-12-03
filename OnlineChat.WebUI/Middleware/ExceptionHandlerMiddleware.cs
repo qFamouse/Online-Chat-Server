@@ -1,4 +1,4 @@
-﻿using OnlineChat.Core.Exceptions;
+﻿using Exceptions;
 using System.Net;
 
 namespace OnlineChat.WebUI.Middleware

@@ -1,19 +1,18 @@
+using Application.CQRS.Commands.User;
+using Application.Entities;
+using Application.Interfaces.Repositories;
+using Configurations;
+using EntityFramework.MicrosoftSQL;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using OnlineChat.Core.Configurations;
-using OnlineChat.Core.Entities;
-using OnlineChat.Core.Interfaces.Repositories;
-using OnlineChat.Core.Interfaces.Services;
-using OnlineChat.Core.SQRS.Commands.User;
-using OnlineChat.Infrastructure.Data;
-using OnlineChat.Infrastructure.Data.Repositories;
 using OnlineChat.WebUI.Middleware;
 using OnlineChat.WebUI.Services;
+using Repositories;
+using Services.Interfaces;
+using Shared;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,7 +45,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
 
 // Context
-builder.Services.AddDbContext<OnlineChatContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddSqlServerDbContext((builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // JWT Authentication
 

@@ -1,4 +1,4 @@
-﻿using OnlineChat.Core.Interfaces.Services;
+﻿using Services.Interfaces;
 using System.Security.Claims;
 
 namespace OnlineChat.WebUI.Services
