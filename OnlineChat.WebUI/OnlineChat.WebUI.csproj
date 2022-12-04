@@ -17,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Configurations\Configurations.csproj" />
-    <ProjectReference Include="..\Contracts\Contracts.csproj" />
-    <ProjectReference Include="..\EntityFramework.MicrosoftSQL\EntityFramework.MicrosoftSQL.csproj" />
-    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\OnlineChat.Core\Application\Application.csproj" />
+    <ProjectReference Include="..\OnlineChat.Core\Configurations\Configurations.csproj" />
+    <ProjectReference Include="..\OnlineChat.Core\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\OnlineChat.Infrastructure\EntityFramework.MicrosoftSQL\EntityFramework.MicrosoftSQL.csproj" />
+    <ProjectReference Include="..\OnlineChat.Infrastructure\Repositories\Repositories.csproj" />
   </ItemGroup>
 
 </Project>

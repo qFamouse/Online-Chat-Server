@@ -9,21 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OnlineChat.Core", "OnlineCh
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OnlineChat.Infrastructure", "OnlineChat.Infrastructure", "{E8572336-949C-4C05-86F5-4806498BD619}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configurations", "Configurations\Configurations.csproj", "{94087381-DDA1-4999-B814-2A190D94D397}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configurations", "OnlineChat.Core\Configurations\Configurations.csproj", "{94087381-DDA1-4999-B814-2A190D94D397}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{324B453C-D092-4DA7-812E-1CF527C4DF85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "OnlineChat.Core\Application\Application.csproj", "{324B453C-D092-4DA7-812E-1CF527C4DF85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{FFD3CCE3-FEB7-4579-A224-FA2FD8319123}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "OnlineChat.Core\Services\Services.csproj", "{FFD3CCE3-FEB7-4579-A224-FA2FD8319123}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "Exceptions\Exceptions.csproj", "{AC636180-0761-4A44-9343-063692EF8E5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "OnlineChat.Core\Exceptions\Exceptions.csproj", "{AC636180-0761-4A44-9343-063692EF8E5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{5BD09BD1-B11E-4222-BB76-FAF599BDC133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "OnlineChat.Infrastructure\Repositories\Repositories.csproj", "{5BD09BD1-B11E-4222-BB76-FAF599BDC133}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFramework.MicrosoftSQL", "EntityFramework.MicrosoftSQL\EntityFramework.MicrosoftSQL.csproj", "{81B8BD1A-FE12-4EC9-95AD-779A5EFCF5F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFramework.MicrosoftSQL", "OnlineChat.Infrastructure\EntityFramework.MicrosoftSQL\EntityFramework.MicrosoftSQL.csproj", "{81B8BD1A-FE12-4EC9-95AD-779A5EFCF5F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{E889EA16-F890-4279-B503-B3FF23DD3E18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "OnlineChat.Core\Contracts\Contracts.csproj", "{E889EA16-F890-4279-B503-B3FF23DD3E18}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{EBE7FA54-F4AB-466B-B453-12ADDC62719F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "OnlineChat.Infrastructure\Shared\Shared.csproj", "{EBE7FA54-F4AB-466B-B453-12ADDC62719F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

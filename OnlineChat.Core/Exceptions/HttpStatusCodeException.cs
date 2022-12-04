@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 
-namespace OnlineChat.Core.Exceptions
+namespace Exceptions
 {
     public class HttpStatusCodeException : Exception
     {
@@ -13,22 +8,22 @@ namespace OnlineChat.Core.Exceptions
 
         public HttpStatusCodeException(int statusCode) : base(GetDefaultMessage(statusCode))
         {
-            this.StatusCode = statusCode;
+            StatusCode = statusCode;
         }
 
         public HttpStatusCodeException(HttpStatusCode statusCode) : base(GetDefaultMessage((int)statusCode))
         {
-            this.StatusCode = (int)statusCode;
+            StatusCode = (int)statusCode;
         }
 
         public HttpStatusCodeException(int statusCode, string message) : base(message)
         {
-            this.StatusCode = statusCode;
+            StatusCode = statusCode;
         }
 
         public HttpStatusCodeException(HttpStatusCode statusCode, string message) : base(message)
         {
-            this.StatusCode = (int)statusCode;
+            StatusCode = (int)statusCode;
         }
 
         private static string GetDefaultMessage(int statusCode)
