@@ -27,4 +27,19 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\CommandHandlers\ConversationMessage\" />
+    <Folder Include="CQRS\CommandHandlers\Conversation\" />
+    <Folder Include="CQRS\CommandHandlers\Participant\" />
+    <Folder Include="CQRS\Commands\Participant\" />
+    <Folder Include="CQRS\Commands\ConversationMessage\" />
+    <Folder Include="CQRS\Commands\Conversation\" />
+    <Folder Include="CQRS\Queries\ConversationMessage\" />
+    <Folder Include="CQRS\Queries\Conversation\" />
+    <Folder Include="CQRS\Queries\Participant\" />
+    <Folder Include="CQRS\QueryHandlers\ConversationMessage\" />
+    <Folder Include="CQRS\QueryHandlers\Conversation\" />
+    <Folder Include="CQRS\QueryHandlers\Participant\" />
+  </ItemGroup>
+
 </Project>

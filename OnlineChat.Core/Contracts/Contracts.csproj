@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Requests\ConversationMessage\" />
+    <Folder Include="Requests\Conversation\" />
+    <Folder Include="Requests\Participant\" />
+  </ItemGroup>
+
 </Project>
