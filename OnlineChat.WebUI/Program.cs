@@ -39,6 +39,11 @@ builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Iden
 builder.Services.AddMediatR(typeof(SignUpUserCommand));
 
 // AddInfrastructureDependencies
+builder.Services.AddScoped<IDirectMessageRepository, DirectMessageRepository>();
+builder.Services.AddScoped<IConversationRepository, ConversationRepository>();
+builder.Services.AddScoped<IParticipantRepository, ParticipantRepository>();
+builder.Services.AddScoped<IConversationMessagesRepository, ConversationMessagesRepository>();
+
 
 // AddCoreDependencies - some services
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
