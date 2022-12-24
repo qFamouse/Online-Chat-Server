@@ -1,8 +1,10 @@
 using Application.CQRS.Commands.User;
 using Application.Entities;
 using Application.Interfaces.Repositories;
+using Application.Validators;
 using Configurations;
 using EntityFramework.MicrosoftSQL;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +15,7 @@ using OnlineChat.WebUI.Services;
 using Repositories;
 using Services.Interfaces;
 using Shared;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,8 +41,10 @@ builder.Services.AddMediatR(typeof(SignUpUserCommand));
 // AddInfrastructureDependencies
 
 // AddCoreDependencies - some services
-builder.Services.AddScoped<IDirectMessageRepository, DirectMessageRepository>();
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(ValidationBehavior<,>)));
 // AddWebUiDependencies
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
