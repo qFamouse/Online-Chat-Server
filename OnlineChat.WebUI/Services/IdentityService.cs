@@ -20,8 +20,6 @@ namespace OnlineChat.WebUI.Services
         public ClaimsPrincipal ClaimsPrincipal => _httpContext.User;
         public int Id => GetId();
         public string Name => _claimsIdentity.Name;
-        public string Phone => GetClaim(ClaimTypes.MobilePhone)?.Value;
-        public string Birthday => GetClaim(ClaimTypes.DateOfBirth)?.Value;
         public string Email => GetClaim(ClaimTypes.Email)?.Value;
         public List<string> Roles => _claimsIdentity.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
 

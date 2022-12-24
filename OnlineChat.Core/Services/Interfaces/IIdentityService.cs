@@ -7,8 +7,6 @@ namespace Services.Interfaces
         ClaimsPrincipal ClaimsPrincipal { get; }
         int Id { get; }
         string Name { get; }
-        string Phone { get; }
-        string Birthday { get; }
         string Email { get; }
         List<string> Roles { get; }
 
