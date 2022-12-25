@@ -4,15 +4,11 @@ namespace Services.Interfaces
 {
     public interface IIdentityService
     {
-        ClaimsPrincipal ClaimsPrincipal { get; }
-        int Id { get; }
-        string Name { get; }
-        string Email { get; }
-        List<string> Roles { get; }
-
-        // UserView User { get; }
-
-        bool IsAuthenticated { get; }
-        bool IsInRole(string role);
+        int GetUserId();
+        string GetUserName();
+        string GetUserEmail();
+        IList<string> GetUserRoles();
+        bool UserIsInRole(string role);
+        bool UserIsAuthenticated { get; }
     }
 }

@@ -1,45 +1,53 @@
 ﻿using Services.Interfaces;
+using System.Linq;
 using System.Security.Claims;
 
 namespace OnlineChat.WebUI.Services
 {
     public class IdentityService : IIdentityService
     {
+
         private readonly HttpContext _httpContext;
         private readonly ClaimsIdentity _claimsIdentity;
 
+        //public ClaimsPrincipal ClaimsPrincipal => _httpContext.User;
+
         public IdentityService(IHttpContextAccessor httpContextAccessor)
         {
-            _httpContext = httpContextAccessor.HttpContext ??
-                           throw new ArgumentNullException(nameof(httpContextAccessor), "Interface is null");
-            _claimsIdentity = _httpContext.User.Identity as ClaimsIdentity;
+            _httpContext = httpContextAccessor.HttpContext ?? throw new ArgumentNullException(nameof(httpContextAccessor.HttpContext));
+            _claimsIdentity = _httpContext.User.Identity as ClaimsIdentity ?? throw new ArgumentNullException(nameof(_httpContext));
         }
 
-        #region Claims
-
-        public ClaimsPrincipal ClaimsPrincipal => _httpContext.User;
-        public int Id => GetId();
-        public string Name => _claimsIdentity.Name;
-        public string Email => GetClaim(ClaimTypes.Email)?.Value;
-        public List<string> Roles => _claimsIdentity.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
-
-        // public UserView User => new UserView(Id, Name, Phone, Birthday, Email, Roles);
-
-        #endregion
-
-        #region States
-
-        public bool IsAuthenticated => _claimsIdentity.IsAuthenticated;
-        public bool IsInRole(string role) => _httpContext.User.IsInRole(role);
-
-        #endregion
-
-        private int GetId()
+        private string GetClaim(string type)
         {
-            string id = GetClaim(ClaimTypes.NameIdentifier)?.Value;
-            return String.IsNullOrEmpty(id) ? 0 : Int32.Parse(id);
+            return _claimsIdentity.Claims.SingleOrDefault(c => c.Type == type)?.Value ?? throw new ArgumentNullException(type);
         }
 
-        private Claim GetClaim(string claimType) => _claimsIdentity.Claims.SingleOrDefault(c => c.Type == claimType);
+        public int GetUserId()
+        {
+            return int.Parse(GetClaim(ClaimTypes.NameIdentifier));
+        }
+
+        public string GetUserName()
+        {
+            return GetClaim(ClaimTypes.Name);
+        }
+
+        public string GetUserEmail()
+        {
+            return GetClaim(ClaimTypes.Email);
+        }
+
+        public IList<string> GetUserRoles()
+        {
+            return _claimsIdentity.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+        }
+
+        public bool UserIsInRole(string role)
+        {
+            return _httpContext.User.IsInRole(role);
+        }
+
+        public bool UserIsAuthenticated => _claimsIdentity.IsAuthenticated;
     }
 }
