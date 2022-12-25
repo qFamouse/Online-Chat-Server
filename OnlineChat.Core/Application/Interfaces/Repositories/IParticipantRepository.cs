@@ -1,4 +1,5 @@
 ﻿using Application.Entities;
+using Application.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Application.Interfaces.Repositories
 {
     public interface IParticipantRepository : IBaseRepository<Participant>
     {
-
+        Task<Participant?> GetByQueryAsync(ParticipantQuery query);
     }
 }
