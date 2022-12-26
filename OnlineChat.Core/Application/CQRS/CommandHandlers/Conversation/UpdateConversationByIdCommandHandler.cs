@@ -22,15 +22,8 @@ namespace Application.CQRS.CommandHandlers.Conversation
         {
             var conversation = await _conversationRepository.GetByIdAsync(request.ConversationId);
 
-            if (request.Title is not null)
-            {
-                conversation.Title = request.Title;
-            }
-
-            if (conversation.OwnerId is not null)
-            {
-                conversation.OwnerId = request.OwnerId;
-            }
+            conversation.Title = request.Title ?? conversation.Title;
+            conversation.OwnerId = request.OwnerId ?? conversation.OwnerId;
 
             await _conversationRepository.Save();
 
