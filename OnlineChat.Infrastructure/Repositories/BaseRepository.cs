@@ -17,25 +17,25 @@ namespace Repositories
             _dbSet = context.Set<T>() ?? throw new ArgumentNullException(nameof(T));
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.ToListAsync(cancellationToken);
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.FindAsync(id);
+            return await _dbSet.FindAsync(id, cancellationToken);
         }
 
-        public async Task<T> InsertAsync(T entity)
+        public async Task<T> InsertAsync(T entity, CancellationToken cancellationToken = default)
         {
-            await _dbSet.AddAsync(entity);
+            await _dbSet.AddAsync(entity, cancellationToken);
             return entity;
         }
 
-        public async Task DeleteByIdAsync(int id)
+        public async Task DeleteByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            var entity = await _dbSet.FindAsync(id);
+            var entity = await _dbSet.FindAsync(id, cancellationToken);
             _dbSet.Remove(entity);
         }
 
@@ -44,9 +44,14 @@ namespace Repositories
             DbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public async Task Save()
+        public async Task Save(CancellationToken cancellationToken = default)
         {
-            await DbContext.SaveChangesAsync();
+            await DbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<bool> ExistsAsync(int id, CancellationToken cancellationToken = default)
+        {
+            return await _dbSet.FindAsync(id, cancellationToken) != null;
         }
     }
 }
