@@ -15,8 +15,9 @@ namespace Application.Validators.Commands.Conversation
     {
         public CreateConversationCommandValidator()
         {
-            RuleFor(x => x.Title).NotEmpty();
-
+            RuleFor(x => x.Title)
+                .NotEmpty()
+                .MinimumLength(3);
         }
     }
 }
