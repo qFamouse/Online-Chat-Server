@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Resources\Resources.csproj" />
     <ProjectReference Include="..\Configurations\Configurations.csproj" />
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\Exceptions\Exceptions.csproj" />

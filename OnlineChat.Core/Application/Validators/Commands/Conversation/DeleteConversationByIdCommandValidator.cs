@@ -3,9 +3,11 @@ using Application.Interfaces.Repositories;
 using FluentValidation;
 using FluentValidation.Results;
 using Services.Interfaces;
+using Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +28,8 @@ namespace Application.Validators.Commands.Conversation
             RuleFor(x => x.ConversationId)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
-                .MustAsync(_conversationRepository.ExistsAsync)
-                .MustAsync(MustBeConversationOwner);
+                .MustAsync(_conversationRepository.ExistsAsync).WithMessage(Messages.NotFound)
+                .MustAsync(MustBeConversationOwner).WithMessage(Messages.AccessDenied);
         }
 
         private async Task<bool> MustBeConversationOwner(int conversationId, CancellationToken cancellationToken)
