@@ -1,7 +1,9 @@
 ﻿using Application.CQRS.Commands.Participant;
+using Application.Entities;
 using Application.Interfaces.Repositories;
 using Application.Queries;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Resources;
 using Services.Interfaces;
 using System;
@@ -17,18 +19,22 @@ namespace Application.Validators.Participant
         private readonly IParticipantRepository _participantRepository;
         private readonly IConversationRepository _conversationRepository;
         private readonly IIdentityService _identityService;
+        private readonly UserManager<User> _userManager;
 
-        public AddParticipantByUserIdCommandValidator(IConversationRepository conversationRepository, IParticipantRepository participantRepository, IIdentityService identityService)
+        public AddParticipantByUserIdCommandValidator(IConversationRepository conversationRepository, IParticipantRepository participantRepository, IIdentityService identityService, UserManager<User> userManager)
         {
             _participantRepository = participantRepository ?? throw new ArgumentNullException(nameof(participantRepository));
             _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
 
             RuleFor(x => x.UsertId)
-                .NotEmpty();
+                .NotEmpty()
+                .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(Messages.NotFound);
+
 
             RuleFor(x => x)
-                .MustAsync(MustNotBePartisipantOfConversation);
+                .MustAsync(MustNotBePartisipantOfConversation).WithMessage(Messages.AlreadyExists);
 
             RuleFor(x => x.ConversationId)
                 .NotEmpty()
