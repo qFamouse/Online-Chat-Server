@@ -1,4 +1,6 @@
-﻿namespace Contracts.Requests.DirectMessage
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Contracts.Requests.DirectMessage
 {
     public class SendDirectMessageByReceiverIdRequest
     {

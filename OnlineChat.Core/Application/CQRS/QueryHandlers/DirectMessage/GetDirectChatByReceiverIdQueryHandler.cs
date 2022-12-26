@@ -19,7 +19,7 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
 
         public async Task<IEnumerable<Entities.DirectMessage>> Handle(GetDirectChatByReceiverIdQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<Entities.DirectMessage> messages = await _directMessageRepository.GetDirectMessagesByUsersId(_identityService.Id, request.ReceiverId);
+            IEnumerable<Entities.DirectMessage> messages = await _directMessageRepository.GetDirectMessagesByUsersId(_identityService.GetUserId(), request.ReceiverId);
             return messages;
         }
     }

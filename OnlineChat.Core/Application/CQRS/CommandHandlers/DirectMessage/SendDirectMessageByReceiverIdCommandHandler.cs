@@ -2,6 +2,7 @@
 
 namespace Application.CQRS.CommandHandlers.DirectMessage
 {
+    // TODO: Remove funny usings
     using Application.CQRS.Commands.DirectMessage;
     using Application.Entities;
     using Interfaces.Repositories;
@@ -24,7 +25,7 @@ namespace Application.CQRS.CommandHandlers.DirectMessage
         {
             var directMessage = new DirectMessage()
             {
-                SenderId = _identityService.Id,
+                SenderId = _identityService.GetUserId(),
                 ReceiverId = request.ReceiverId,
                 Message = request.Message,
             };
