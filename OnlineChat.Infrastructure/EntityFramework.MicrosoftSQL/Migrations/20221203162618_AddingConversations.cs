@@ -44,7 +44,7 @@ namespace OnlineChat.Infrastructure.Migrations
                         name: "FK_Conversations_AspNetUsers_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "ConversationId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

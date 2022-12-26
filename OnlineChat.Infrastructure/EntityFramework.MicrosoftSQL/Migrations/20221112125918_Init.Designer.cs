@@ -25,11 +25,11 @@ namespace OnlineChat.Infrastructure.Migrations
 
             modelBuilder.Entity("OnlineChat.Core.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConversationId"), 1L, 1);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -39,7 +39,7 @@ namespace OnlineChat.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConversationId");
 
                     b.ToTable("Users");
                 });

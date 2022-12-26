@@ -114,7 +114,7 @@ namespace EntityFramework.MicrosoftSQL.Migrations
             migrationBuilder.AddPrimaryKey(
                 name: "PK_AspNetUsers",
                 table: "AspNetUsers",
-                column: "Id");
+                column: "ConversationId");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
@@ -148,7 +148,7 @@ namespace EntityFramework.MicrosoftSQL.Migrations
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "ConversationId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -168,7 +168,7 @@ namespace EntityFramework.MicrosoftSQL.Migrations
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "ConversationId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -188,7 +188,7 @@ namespace EntityFramework.MicrosoftSQL.Migrations
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "ConversationId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -209,7 +209,7 @@ namespace EntityFramework.MicrosoftSQL.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        principalColumn: "ConversationId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -227,13 +227,13 @@ namespace EntityFramework.MicrosoftSQL.Migrations
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
+                        principalColumn: "ConversationId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "ConversationId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -377,7 +377,7 @@ namespace EntityFramework.MicrosoftSQL.Migrations
             migrationBuilder.AddPrimaryKey(
                 name: "PK_Users",
                 table: "Users",
-                column: "Id");
+                column: "ConversationId");
         }
     }
 }

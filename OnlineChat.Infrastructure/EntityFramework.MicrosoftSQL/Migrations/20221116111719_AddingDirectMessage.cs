@@ -43,12 +43,12 @@ namespace OnlineChat.Infrastructure.Migrations
                         name: "FK_DirectMessages_AspNetUsers_ReceiverId",
                         column: x => x.ReceiverId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "ConversationId");
                     table.ForeignKey(
                         name: "FK_DirectMessages_AspNetUsers_SenderId",
                         column: x => x.SenderId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "ConversationId");
                 });
 
             migrationBuilder.CreateIndex(

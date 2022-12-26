@@ -25,13 +25,13 @@ namespace OnlineChat.Infrastructure.Migrations
                         name: "FK_ConversationMessages_AspNetUsers_SenderId",
                         column: x => x.SenderId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        principalColumn: "ConversationId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ConversationMessages_Conversations_ConversationId",
                         column: x => x.ConversationId,
                         principalTable: "Conversations",
-                        principalColumn: "Id");
+                        principalColumn: "ConversationId");
                 });
 
             migrationBuilder.CreateIndex(

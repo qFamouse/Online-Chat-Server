@@ -26,11 +26,11 @@ namespace OnlineChat.Infrastructure.Migrations
 
             modelBuilder.Entity("Application.Entities.Conversation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConversationId"), 1L, 1);
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
@@ -39,7 +39,7 @@ namespace OnlineChat.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConversationId");
 
                     b.HasIndex("OwnerId");
 
@@ -48,11 +48,11 @@ namespace OnlineChat.Infrastructure.Migrations
 
             modelBuilder.Entity("Application.Entities.ConversationMessage", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConversationId"), 1L, 1);
 
                     b.Property<int>("ConversationId")
                         .HasColumnType("int");
@@ -64,7 +64,7 @@ namespace OnlineChat.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConversationId");
 
                     b.HasIndex("ConversationId");
 
@@ -75,11 +75,11 @@ namespace OnlineChat.Infrastructure.Migrations
 
             modelBuilder.Entity("Application.Entities.DirectMessage", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConversationId"), 1L, 1);
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -91,7 +91,7 @@ namespace OnlineChat.Infrastructure.Migrations
                     b.Property<int?>("SenderId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConversationId");
 
                     b.HasIndex("ReceiverId");
 
@@ -102,11 +102,11 @@ namespace OnlineChat.Infrastructure.Migrations
 
             modelBuilder.Entity("Application.Entities.Participant", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConversationId"), 1L, 1);
 
                     b.Property<int>("ConversationId")
                         .HasColumnType("int");
@@ -114,7 +114,7 @@ namespace OnlineChat.Infrastructure.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConversationId");
 
                     b.HasIndex("ConversationId");
 
@@ -125,11 +125,11 @@ namespace OnlineChat.Infrastructure.Migrations
 
             modelBuilder.Entity("Application.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConversationId"), 1L, 1);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -182,7 +182,7 @@ namespace OnlineChat.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConversationId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -197,11 +197,11 @@ namespace OnlineChat.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConversationId"), 1L, 1);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -215,7 +215,7 @@ namespace OnlineChat.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConversationId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -227,11 +227,11 @@ namespace OnlineChat.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConversationId"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -242,7 +242,7 @@ namespace OnlineChat.Infrastructure.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConversationId");
 
                     b.HasIndex("RoleId");
 
@@ -251,11 +251,11 @@ namespace OnlineChat.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConversationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConversationId"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -266,7 +266,7 @@ namespace OnlineChat.Infrastructure.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConversationId");
 
                     b.HasIndex("UserId");
 
