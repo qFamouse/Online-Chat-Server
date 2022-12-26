@@ -7,12 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Validators\**" />
-    <EmbeddedResource Remove="Validators\**" />
-    <None Remove="Validators\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.11" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.11" />
@@ -28,18 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CQRS\CommandHandlers\ConversationMessage\" />
-    <Folder Include="CQRS\CommandHandlers\Conversation\" />
-    <Folder Include="CQRS\CommandHandlers\Participant\" />
-    <Folder Include="CQRS\Commands\Participant\" />
-    <Folder Include="CQRS\Commands\ConversationMessage\" />
-    <Folder Include="CQRS\Commands\Conversation\" />
-    <Folder Include="CQRS\Queries\ConversationMessage\" />
-    <Folder Include="CQRS\Queries\Conversation\" />
-    <Folder Include="CQRS\Queries\Participant\" />
-    <Folder Include="CQRS\QueryHandlers\ConversationMessage\" />
-    <Folder Include="CQRS\QueryHandlers\Conversation\" />
-    <Folder Include="CQRS\QueryHandlers\Participant\" />
+    <Folder Include="Validators\Queries\ConversationMessage\" />
+    <Folder Include="Validators\Queries\DirectMessage\" />
+    <Folder Include="Validators\Queries\Participant\" />
+    <Folder Include="Validators\Queries\User\" />
+    <Folder Include="Validators\Commands\DirectMessage\" />
+    <Folder Include="Validators\Commands\User\" />
+    <Folder Include="Validators\Commands\ConversationMessage\" />
   </ItemGroup>
 
 </Project>
