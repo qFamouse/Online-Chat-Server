@@ -15,7 +15,7 @@ namespace Application.CQRS.QueryHandlers.User
     using Contracts.Views;
     using Exceptions;
 
-    public class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAuthorizationView>
+    internal class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAuthorizationView>
     {
         private readonly UserManager<User> _userManager;
         private readonly IdentityConfiguration _identityConfiguration;

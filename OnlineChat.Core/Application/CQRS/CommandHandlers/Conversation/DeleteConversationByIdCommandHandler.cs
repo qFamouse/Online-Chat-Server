@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.CQRS.CommandHandlers.Conversation
 {
-    public class DeleteConversationByIdCommandHandler : IRequestHandler<DeleteConversationByIdCommand, Unit>
+    internal class DeleteConversationByIdCommandHandler : IRequestHandler<DeleteConversationByIdCommand, Unit>
     {
         private readonly IConversationRepository _conversationRepository;
 

@@ -10,7 +10,7 @@ namespace Application.CQRS.CommandHandlers.User
     using Configurations;
     using Exceptions;
 
-    public class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand, User>
+    internal class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand, User>
     {
         private readonly UserManager<User> _userManager;
         private readonly IdentityConfiguration _identityConfiguration;

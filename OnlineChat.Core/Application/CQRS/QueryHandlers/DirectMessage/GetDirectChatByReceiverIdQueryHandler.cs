@@ -5,7 +5,7 @@ using Services.Interfaces;
 
 namespace Application.CQRS.QueryHandlers.DirectMessage
 {
-    public class GetDirectChatByReceiverIdQueryHandler :
+    internal class GetDirectChatByReceiverIdQueryHandler :
         IRequestHandler<GetDirectChatByReceiverIdQuery, IEnumerable<Entities.DirectMessage>>
     {
         private readonly IDirectMessageRepository _directMessageRepository;

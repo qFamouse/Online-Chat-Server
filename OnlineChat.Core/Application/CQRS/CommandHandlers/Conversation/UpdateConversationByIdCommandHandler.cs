@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.CQRS.CommandHandlers.Conversation
 {
-    public class UpdateConversationByIdCommandHandler : IRequestHandler<UpdateConversationByIdCommand, Entities.Conversation>
+    internal class UpdateConversationByIdCommandHandler : IRequestHandler<UpdateConversationByIdCommand, Entities.Conversation>
     {
         private readonly IConversationRepository _conversationRepository;
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.CQRS.CommandHandlers.Conversation
 {
-    public class CreateConversationCommandHandler : IRequestHandler<CreateConversationCommand, Entities.Conversation>
+    internal class CreateConversationCommandHandler : IRequestHandler<CreateConversationCommand, Entities.Conversation>
     {
         private readonly IConversationRepository _conversationRepository;
         private readonly IIdentityService _identityService;

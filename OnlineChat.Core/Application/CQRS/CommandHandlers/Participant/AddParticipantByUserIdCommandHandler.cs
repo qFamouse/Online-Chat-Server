@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.CQRS.CommandHandlers.Participant
 {
-    public class AddParticipantByUserIdCommandHandler : IRequestHandler<AddParticipantByUserIdCommand, Entities.Participant>
+    internal class AddParticipantByUserIdCommandHandler : IRequestHandler<AddParticipantByUserIdCommand, Entities.Participant>
     {
         private readonly IParticipantRepository _participantRepository;
 
