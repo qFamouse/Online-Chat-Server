@@ -3,12 +3,12 @@
     public class UserAuthorizationView
     {
         public string Token { get; }
-        public DateTime Expiration { get; }
+        public DateTime Expires { get; }
 
-        public UserAuthorizationView(string token, DateTime expiration)
+        public UserAuthorizationView(string token, DateTime expires)
         {
             Token = token;
-            Expiration = expiration;
+            Expires = expires;
         }
     }
 }
