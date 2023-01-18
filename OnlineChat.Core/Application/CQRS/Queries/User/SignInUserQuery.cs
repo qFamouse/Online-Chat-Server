@@ -6,12 +6,12 @@ namespace Application.CQRS.Queries.User
 {
     public class SignInUserQuery : IRequest<UserAuthorizationView>
     {
-        public string UserName { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
 
         public SignInUserQuery(UserAuthorizationRequest request)
         {
-            UserName = request.UserName;
+            Email = request.Email;
             Password = request.Password;
         }
     }

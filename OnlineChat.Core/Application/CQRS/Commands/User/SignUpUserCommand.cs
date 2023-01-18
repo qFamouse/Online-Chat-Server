@@ -15,8 +15,7 @@ namespace Application.CQRS.Commands.User
         {
             User = new User()
             {
-                Name = request.Name,
-                UserName = request.Email,
+                UserName = request.UserName,
                 Email = request.Email
             };
 

@@ -30,7 +30,7 @@ namespace Application.CQRS.QueryHandlers.User
 
         public async Task<UserAuthorizationView> Handle(SignInUserQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByNameAsync(request.UserName);
+            var user = await _userManager.FindByEmailAsync(request.Email);
 
             if (user is null)
             {
@@ -48,8 +48,8 @@ namespace Application.CQRS.QueryHandlers.User
             List<Claim> authClaims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Email, user.UserName),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
             };
             authClaims.AddRange(roleClaims); // Adding user roles to main claims list
 
