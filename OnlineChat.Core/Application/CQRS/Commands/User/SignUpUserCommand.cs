@@ -11,7 +11,7 @@ namespace Application.CQRS.Commands.User
         public User User { get; set; }
         public string Password { get; set; }
 
-        public SignUpUserCommand(UserRegistrationRequest request)
+        public SignUpUserCommand(UserSignupRequest request)
         {
             User = new User()
             {

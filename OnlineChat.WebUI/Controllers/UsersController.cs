@@ -2,6 +2,7 @@
 using Application.CQRS.Queries.User;
 using Contracts.Requests.User;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineChat.WebUI.Controllers
@@ -17,8 +18,8 @@ namespace OnlineChat.WebUI.Controllers
             _sender = sender ?? throw new ArgumentNullException(nameof(sender));
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult> RegisterAsync([FromBody] UserRegistrationRequest request)
+        [HttpPost("signup")]
+        public async Task<ActionResult> SignupAsync([FromBody] UserSignupRequest request)
         {
             return Ok(await _sender.Send(new SignUpUserCommand(request)));
         }

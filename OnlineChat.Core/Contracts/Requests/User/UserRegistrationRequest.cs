@@ -1,6 +1,6 @@
 ﻿namespace Contracts.Requests.User
 {
-    public class UserRegistrationRequest
+    public class UserSignupRequest
     {
         public string UserName { get; set; }
         public string Email { get; set; }
