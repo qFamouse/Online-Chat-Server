@@ -28,5 +28,11 @@ namespace OnlineChat.WebUI.Controllers
         {
             return Ok(await _sender.Send(new SignInUserQuery(request)));
         }
+        [Authorize]
+        [HttpGet("auth")]
+        public ActionResult Authenticate()
+        {
+            return Ok();
+        }
     }
 }
