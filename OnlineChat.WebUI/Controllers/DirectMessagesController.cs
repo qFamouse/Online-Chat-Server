@@ -2,10 +2,12 @@
 using Application.CQRS.Queries.DirectMessage;
 using Contracts.Requests.DirectMessage;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineChat.WebUI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DirectMessagesController : ControllerBase
@@ -27,6 +29,12 @@ namespace OnlineChat.WebUI.Controllers
         public async Task<ActionResult> GetDirectChatByReceiverIdAsync([FromQuery(Name = "id")] int id)
         {
             return Ok(await _sender.Send(new GetDirectChatByReceiverIdQuery(id)));
+        }
+
+        [HttpGet("interlocutors")]
+        public async Task<ActionResult> GetInterlocutorsAsync()
+        {
+            return Ok(await _sender.Send(new GetInterlocutorsByUserIdQuery()));
         }
     }
 }

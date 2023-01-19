@@ -16,5 +16,18 @@ namespace Repositories
 
             return await fromSender.Union(fromReceiver).ToListAsync();
         }
+
+        public async Task<IEnumerable<User>> GetInterlocutorsByUserIdAsync(int userId)
+        {
+            var senders = DbContext.DirectMessages
+                .Where(dm => dm.ReceiverId == userId)
+                .Select(dm => dm.Sender);
+
+            var receivers = DbContext.DirectMessages
+                .Where(dm => dm.SenderId == userId)
+                .Select(dm => dm.Receiver);
+
+            return await senders.Union(receivers).Distinct().ToListAsync();
+        }
     }
 }

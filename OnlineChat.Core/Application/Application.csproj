@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Validators\Queries\ConversationMessage\" />
-    <Folder Include="Validators\Queries\DirectMessage\" />
     <Folder Include="Validators\Queries\Participant\" />
     <Folder Include="Validators\Commands\DirectMessage\" />
     <Folder Include="Validators\Commands\User\" />
