@@ -57,6 +57,15 @@ builder.Services.AddScoped<IIdentityService, IdentityService>();
 // Context
 builder.Services.AddSqlServerDbContext((builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder => builder
+        .WithOrigins("http://localhost:4200")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials());
+});
+
 // JWT Authentication
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -126,6 +135,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
