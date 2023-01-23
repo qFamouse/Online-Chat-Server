@@ -1,12 +1,13 @@
 ﻿using Application.CQRS.Queries.DirectMessage;
 using Application.Interfaces.Repositories;
+using Contracts.Views;
 using MediatR;
 using Services.Interfaces;
 
 namespace Application.CQRS.QueryHandlers.DirectMessage
 {
     internal class GetDirectChatByReceiverIdQueryHandler :
-        IRequestHandler<GetDirectChatByReceiverIdQuery, IEnumerable<Entities.DirectMessage>>
+        IRequestHandler<GetDirectChatByReceiverIdQuery, IEnumerable<ChatMessageView>>
     {
         private readonly IDirectMessageRepository _directMessageRepository;
         private readonly IIdentityService _identityService;
@@ -17,9 +18,18 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
         }
 
-        public async Task<IEnumerable<Entities.DirectMessage>> Handle(GetDirectChatByReceiverIdQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ChatMessageView>> Handle(GetDirectChatByReceiverIdQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<Entities.DirectMessage> messages = await _directMessageRepository.GetDirectMessagesByUsersId(_identityService.GetUserId(), request.ReceiverId);
+            IEnumerable<Entities.DirectMessage> directMessages = await _directMessageRepository
+                .GetDirectMessagesByUsersId(_identityService.GetUserId(), request.ReceiverId);
+
+            var messages = directMessages.Select(x => new ChatMessageView()
+            {
+                Id = x.Id,
+                SenderId = x.SenderId,
+                Message = x.Message,
+            });
+
             return messages;
         }
     }

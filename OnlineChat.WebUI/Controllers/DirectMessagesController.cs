@@ -25,8 +25,8 @@ namespace OnlineChat.WebUI.Controllers
             return Ok(await _sender.Send(new SendDirectMessageByReceiverIdCommand(request)));
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetDirectChatByReceiverIdAsync([FromQuery(Name = "id")] int id)
+        [HttpGet("chat")]
+        public async Task<ActionResult> GetDirectChatByReceiverIdAsync([FromQuery(Name = "userId")] int id)
         {
             return Ok(await _sender.Send(new GetDirectChatByReceiverIdQuery(id)));
         }

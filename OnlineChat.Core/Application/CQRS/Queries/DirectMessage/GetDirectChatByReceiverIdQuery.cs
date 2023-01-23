@@ -3,8 +3,9 @@
 namespace Application.CQRS.Queries.DirectMessage
 {
     using Application.Entities;
+    using Contracts.Views;
 
-    public class GetDirectChatByReceiverIdQuery : IRequest<IEnumerable<DirectMessage>>
+    public class GetDirectChatByReceiverIdQuery : IRequest<IEnumerable<ChatMessageView>>
     {
         public int ReceiverId { get; set; }
 
