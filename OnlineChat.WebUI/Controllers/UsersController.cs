@@ -38,6 +38,13 @@ namespace OnlineChat.WebUI.Controllers
         }
 
         [Authorize]
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetUserByIdAsync(int id)
+        {
+            return Ok(await _sender.Send(new GetUserByIdQuery(id)));
+        }
+
+        [Authorize]
         [HttpGet("auth")]
         public ActionResult Authenticate()
         {
