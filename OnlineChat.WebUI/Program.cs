@@ -8,8 +8,10 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using OnlineChat.WebUI.Hubs;
 using OnlineChat.WebUI.Middleware;
 using OnlineChat.WebUI.Services;
 using Repositories;
@@ -22,6 +24,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddSignalR();
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -33,7 +38,6 @@ builder.Services.AddSwaggerGen();
 ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Identity"));
-
 
 
 builder.Services.AddMediatR(typeof(SignUpUserCommand));
@@ -53,6 +57,7 @@ builder.Services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(Validatio
 // AddWebUiDependencies
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
+builder.Services.TryAddSingleton<HubConnectionService>();
 
 // Context
 builder.Services.AddSqlServerDbContext((builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -80,6 +85,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(
                                 Encoding.UTF8.GetBytes(configuration["Identity:SecurityKey"]))
+            };
+            options.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = context =>
+                {
+                    var accessToken = context.Request.Query["access_token"];
+                    var path = context.HttpContext.Request.Path;
+                    // if request to hub
+                    if (!string.IsNullOrEmpty(accessToken) &&
+                        (path.StartsWithSegments("/direct")))
+                    { // then get token from request
+                        context.Token = accessToken;
+                    }
+
+                    return Task.CompletedTask;
+                }
             };
         }
      );
@@ -142,5 +163,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<DirectMessageHub>("/direct");
 
 app.Run();
