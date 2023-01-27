@@ -3,6 +3,7 @@ using Application.Interfaces.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Resources;
 
 namespace Shared
 {
@@ -17,6 +18,22 @@ namespace Shared
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<IdentityRole<int>>()
+                .HasData(
+                    new IdentityRole<int>
+                    {
+                        Id = 1,
+                        Name = Resources.Roles.User,
+                        NormalizedName = Resources.Roles.UserNormalized,
+                    },
+                    new IdentityRole<int>
+                    {
+                        Id = 2,
+                        Name = Resources.Roles.Admin,
+                        NormalizedName = Resources.Roles.AdminNormalized,
+                    }
+                );
+
             builder.Entity<ConversationMessage>()
                 .HasOne(cm => cm.Conversation)
                 .WithMany()
