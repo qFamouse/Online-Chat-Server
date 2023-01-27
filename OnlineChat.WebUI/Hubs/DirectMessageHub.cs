@@ -36,7 +36,7 @@ namespace OnlineChat.WebUI.Hubs
                 SenderId = directMessage.SenderId,
                 ReceiverId = directMessage.ReceiverId,
                 Message = directMessage.Message,
-                //Time = DateTime.Now
+                Time = directMessage.CreatedAt
             };
 
             if (ConnectedUsers.TryGetValue(request.ReceiverId, out var connections) && connections.Count > 0)
