@@ -28,6 +28,7 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
                 Id = x.Id,
                 SenderId = x.SenderId,
                 Message = x.Message,
+                Time = x.CreatedAt,
             });
 
             return messages;
