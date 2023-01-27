@@ -17,7 +17,7 @@ namespace Application.Entities
         public User Sender { get; set; }
         public string Text { get; set; }
         // TODO: Add attachment
-        // TODO: Add created_at
-        // TODO: Add updated_at
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Entities;
+using Application.Interfaces.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,26 @@ namespace Shared
                 .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(builder);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is IEntity &&
+                (e.State == EntityState.Added || e.State == EntityState.Modified));
+
+            foreach (var entry in entries)
+            {
+                ((IEntity)entry.Entity).UpdatedAt = DateTime.Now;
+
+                if (entry.State == EntityState.Added)
+                {
+                    ((IEntity)entry.Entity).CreatedAt = DateTime.Now;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -15,8 +15,8 @@ namespace Application.Entities
         public Conversation Conversation { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        // TODO: Add created_at
-        // TODO: Add updated_at
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
     }
 }

@@ -10,8 +10,8 @@ namespace Application.Entities
         public int? ReceiverId { get; set; }
         public User Receiver { get; set; }
         public string Message { get; set; }
-        // TODO: Add created_at
-        // TODO: Add updated_at
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         // TODO: Add attachment
     }
 }

@@ -14,7 +14,7 @@ namespace Application.Entities
         public string Title { get; set; }
         public int OwnerId { get; set; }
         public User Owner { get; set; }
-        // TODO: Add created_at
-        // TODO: Add updated_at
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }
