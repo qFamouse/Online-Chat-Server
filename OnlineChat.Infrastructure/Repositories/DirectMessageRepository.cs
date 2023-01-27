@@ -9,7 +9,7 @@ namespace Repositories
     {
         public DirectMessageRepository(OnlineChatContext context) : base(context) { }
 
-        public async Task<IEnumerable<DirectMessage>> GetDirectMessagesByUsersId(int senderId, int receiverId)
+        public async Task<IEnumerable<DirectMessage>> GetDirectMessagesByUsersIdAsync(int senderId, int receiverId)
         {
             var fromSender = DbContext.DirectMessages.Where(dm => dm.SenderId == senderId && dm.ReceiverId == receiverId);
             var fromReceiver = DbContext.DirectMessages.Where(dm => dm.SenderId == receiverId && dm.ReceiverId == senderId);

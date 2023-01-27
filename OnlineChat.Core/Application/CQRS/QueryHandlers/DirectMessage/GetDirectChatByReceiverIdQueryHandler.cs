@@ -21,7 +21,7 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
         public async Task<IEnumerable<ChatMessageView>> Handle(GetDirectChatByReceiverIdQuery request, CancellationToken cancellationToken)
         {
             IEnumerable<Entities.DirectMessage> directMessages = await _directMessageRepository
-                .GetDirectMessagesByUsersId(_identityService.GetUserId(), request.ReceiverId);
+                .GetDirectMessagesByUsersIdAsync(_identityService.GetUserId(), request.ReceiverId);
 
             var messages = directMessages.Select(x => new ChatMessageView()
             {
