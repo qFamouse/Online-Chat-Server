@@ -1,19 +1,17 @@
-﻿using MediatR;
+﻿using Contracts.Requests.User;
+using MediatR;
 
 
 namespace Application.CQRS.Commands.User
 {
-    using Application.Entities;
-    using Contracts.Requests.User;
-
-    public class SignUpUserCommand : IRequest<User>
+    public class SignUpUserCommand : IRequest<Entities.User>
     {
-        public User User { get; set; }
+        public Entities.User User { get; set; }
         public string Password { get; set; }
 
         public SignUpUserCommand(UserSignupRequest request)
         {
-            User = new User()
+            User = new Entities.User()
             {
                 UserName = request.UserName,
                 Email = request.Email

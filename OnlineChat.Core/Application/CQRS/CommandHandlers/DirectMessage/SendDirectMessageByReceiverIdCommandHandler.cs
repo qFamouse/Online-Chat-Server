@@ -1,15 +1,11 @@
-﻿using MediatR;
+﻿using Application.CQRS.Commands.DirectMessage;
+using Application.Interfaces.Repositories;
+using MediatR;
+using Services.Interfaces;
 
 namespace Application.CQRS.CommandHandlers.DirectMessage
 {
-    // TODO: Remove funny usings
-    using Application.CQRS.Commands.DirectMessage;
-    using Application.Entities;
-    using Interfaces.Repositories;
-    using Services.Interfaces;
-    using System.Threading;
-
-    internal class SendDirectMessageByReceiverIdCommandHandler : IRequestHandler<SendDirectMessageByReceiverIdCommand, DirectMessage>
+    internal class SendDirectMessageByReceiverIdCommandHandler : IRequestHandler<SendDirectMessageByReceiverIdCommand, Entities.DirectMessage>
     {
         // identity service
         private readonly IDirectMessageRepository _directMessageRepository;
@@ -21,9 +17,9 @@ namespace Application.CQRS.CommandHandlers.DirectMessage
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
         }
 
-        public async Task<DirectMessage> Handle(SendDirectMessageByReceiverIdCommand request, CancellationToken cancellationToken)
+        public async Task<Entities.DirectMessage> Handle(SendDirectMessageByReceiverIdCommand request, CancellationToken cancellationToken)
         {
-            var directMessage = new DirectMessage()
+            var directMessage = new Entities.DirectMessage()
             {
                 SenderId = _identityService.GetUserId(),
                 ReceiverId = request.ReceiverId,

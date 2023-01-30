@@ -2,28 +2,26 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Net;
+using Application.CQRS.Commands.User;
+using Configurations;
 using Hellang.Middleware.ProblemDetails;
 
 namespace Application.CQRS.CommandHandlers.User
 {
-    using Application.CQRS.Commands.User;
-    using Application.Entities;
-    using Configurations;
-
-    internal class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand, User>
+    internal class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand, Entities.User>
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<Entities.User> _userManager;
         private readonly IdentityConfiguration _identityConfiguration;
 
         public SignUpUserCommandHandler(
-            UserManager<User> userManager,
+            UserManager<Entities.User> userManager,
             IOptions<IdentityConfiguration> identityConfiguration)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _identityConfiguration = identityConfiguration.Value ?? throw new ArgumentNullException(nameof(identityConfiguration));
         }
 
-        public async Task<User> Handle(SignUpUserCommand request, CancellationToken cancellationToken)
+        public async Task<Entities.User> Handle(SignUpUserCommand request, CancellationToken cancellationToken)
         {
 
             IdentityResult result = await _userManager.CreateAsync(request.User, request.Password);

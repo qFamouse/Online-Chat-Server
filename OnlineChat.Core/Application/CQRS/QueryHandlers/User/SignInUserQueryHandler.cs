@@ -6,23 +6,21 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using Application.CQRS.Queries.User;
+using Configurations;
+using Contracts.Views;
 using Hellang.Middleware.ProblemDetails;
 using Resources;
 
 namespace Application.CQRS.QueryHandlers.User
 {
-    using Application.CQRS.Queries.User;
-    using Application.Entities;
-    using Configurations;
-    using Contracts.Views;
-
     internal class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAuthorizationView>
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<Entities.User> _userManager;
         private readonly IdentityConfiguration _identityConfiguration;
 
         public SignInUserQueryHandler(
-            UserManager<User> userManager,
+            UserManager<Entities.User> userManager,
             IOptions<IdentityConfiguration> identityConfiguration)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));

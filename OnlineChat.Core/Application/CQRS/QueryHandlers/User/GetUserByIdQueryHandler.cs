@@ -6,19 +6,16 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using Application.CQRS.Queries.User;
+using Contracts.Views;
 
 namespace Application.CQRS.QueryHandlers.User
 {
-    using Application.CQRS.Queries.User;
-    using Application.Entities;
-    using Configurations;
-    using Contracts.Views;
-
     internal class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserView>
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<Entities.User> _userManager;
 
-        public GetUserByIdQueryHandler(UserManager<User> userManager)
+        public GetUserByIdQueryHandler(UserManager<Entities.User> userManager)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
