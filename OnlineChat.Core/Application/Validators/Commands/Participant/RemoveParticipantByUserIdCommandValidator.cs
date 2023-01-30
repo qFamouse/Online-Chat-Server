@@ -51,7 +51,7 @@ namespace Application.Validators.Commands.Participant
         private async Task<bool> MustBeOwnerOfConversation(int conversationId, CancellationToken cancellationToken)
         {
             var currentUserId = _identityService.GetUserId();
-            var conversation = await _conversationRepository.GetByIdAsync(conversationId);
+            var conversation = await _conversationRepository.GetByIdAsync(conversationId, cancellationToken);
 
             return conversation.OwnerId == currentUserId;
         }
