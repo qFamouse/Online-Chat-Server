@@ -26,8 +26,8 @@ namespace Application.CQRS.CommandHandlers.Participant
                 UserId = request.UsertId
             };
 
-            await _participantRepository.InsertAsync(participant);
-            await _participantRepository.Save();
+            await _participantRepository.InsertAsync(participant, cancellationToken);
+            await _participantRepository.Save(cancellationToken);
 
             return participant;
         }

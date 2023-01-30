@@ -21,8 +21,8 @@ namespace Application.CQRS.CommandHandlers.Participant
 
         public async Task<Unit> Handle(RemoveParticipantByUserIdCommand request, CancellationToken cancellationToken)
         {
-            await _participantRepository.DeleteByIdAsync(request.ConversationId);
-            await _participantRepository.Save();
+            await _participantRepository.DeleteByIdAsync(request.ConversationId, cancellationToken);
+            await _participantRepository.Save(cancellationToken);
 
             return Unit.Value;
         }

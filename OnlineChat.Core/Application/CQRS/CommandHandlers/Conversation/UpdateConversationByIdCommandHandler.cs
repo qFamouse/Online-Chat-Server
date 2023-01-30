@@ -20,12 +20,12 @@ namespace Application.CQRS.CommandHandlers.Conversation
 
         public async Task<Entities.Conversation> Handle(UpdateConversationByIdCommand request, CancellationToken cancellationToken)
         {
-            var conversation = await _conversationRepository.GetByIdAsync(request.ConversationId);
+            var conversation = await _conversationRepository.GetByIdAsync(request.ConversationId, cancellationToken);
 
             conversation.Title = request.Title ?? conversation.Title;
             conversation.OwnerId = request.OwnerId ?? conversation.OwnerId;
 
-            await _conversationRepository.Save();
+            await _conversationRepository.Save(cancellationToken);
 
             return conversation;
         }

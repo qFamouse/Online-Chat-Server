@@ -15,8 +15,8 @@ namespace Application.CQRS.CommandHandlers.Conversation
 
         public async Task<Unit> Handle(DeleteConversationByIdCommand request, CancellationToken cancellationToken)
         {
-            await _conversationRepository.DeleteByIdAsync(request.ConversationId);
-            await _conversationRepository.Save();
+            await _conversationRepository.DeleteByIdAsync(request.ConversationId, cancellationToken);
+            await _conversationRepository.Save(cancellationToken);
 
             return Unit.Value;
         }

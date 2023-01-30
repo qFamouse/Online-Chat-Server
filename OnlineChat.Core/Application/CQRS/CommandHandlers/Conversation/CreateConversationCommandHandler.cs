@@ -29,8 +29,8 @@ namespace Application.CQRS.CommandHandlers.Conversation
                 OwnerId = _identityService.GetUserId()
             };
 
-            await _conversationRepository.InsertAsync(conversation);
-            await _conversationRepository.Save();
+            await _conversationRepository.InsertAsync(conversation, cancellationToken);
+            await _conversationRepository.Save(cancellationToken);
 
             return conversation;
         }

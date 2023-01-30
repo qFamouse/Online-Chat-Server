@@ -26,8 +26,8 @@ namespace Application.CQRS.CommandHandlers.DirectMessage
                 Message = request.Message,
             };
 
-            directMessage = await _directMessageRepository.InsertAsync(directMessage);
-            await _directMessageRepository.Save();
+            directMessage = await _directMessageRepository.InsertAsync(directMessage, cancellationToken);
+            await _directMessageRepository.Save(cancellationToken);
 
             return directMessage;
         }

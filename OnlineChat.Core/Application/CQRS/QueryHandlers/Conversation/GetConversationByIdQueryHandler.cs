@@ -20,7 +20,7 @@ namespace Application.CQRS.QueryHandlers.Conversation
 
         public async Task<Entities.Conversation> Handle(GetConversationByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _conversationRepository.GetByIdAsync(request.Id);
+            return await _conversationRepository.GetByIdAsync(request.Id, cancellationToken);
         }
     }
 }
