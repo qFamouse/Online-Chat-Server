@@ -28,15 +28,15 @@ namespace Application.Validators.Commands.Participant
 
 
             RuleFor(x => x)
-                .MustAsync(MustNotBePartisipantOfConversation).WithMessage(Messages.AlreadyExists);
+                .MustAsync(MustNotBeParticipantOfConversation).WithMessage(Messages.AlreadyExists);
 
             RuleFor(x => x.ConversationId)
                 .NotEmpty()
                 .MustAsync(_conversationRepository.ExistsAsync).WithMessage(Messages.NotFound)
-                .MustAsync(MustBePartisipantOfConversation).WithMessage(Messages.AccessDenied);
+                .MustAsync(MustBeParticipantOfConversation).WithMessage(Messages.AccessDenied);
         }
 
-        private async Task<bool> MustBePartisipantOfConversation(int conversationId, CancellationToken cancellationToken)
+        private async Task<bool> MustBeParticipantOfConversation(int conversationId, CancellationToken cancellationToken)
         {
             var currentUserId = _identityService.GetUserId();
             var participant = await _participantRepository.GetByQueryAsync(new ParticipantQuery()
@@ -48,7 +48,7 @@ namespace Application.Validators.Commands.Participant
             return participant != null;
         }
 
-        private async Task<bool> MustNotBePartisipantOfConversation(AddParticipantByUserIdCommand command, CancellationToken cancellationToken)
+        private async Task<bool> MustNotBeParticipantOfConversation(AddParticipantByUserIdCommand command, CancellationToken cancellationToken)
         {
             var participant = await _participantRepository.GetByQueryAsync(new ParticipantQuery()
             {
