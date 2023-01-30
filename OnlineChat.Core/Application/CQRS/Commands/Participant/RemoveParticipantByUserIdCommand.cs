@@ -11,12 +11,12 @@ namespace Application.CQRS.Commands.Participant
     public class RemoveParticipantByUserIdCommand : IRequest<Unit>
     {
         public int ConversationId { get; set; }
-        public int UsertId { get; set; }
+        public int UserId { get; set; }
 
         public RemoveParticipantByUserIdCommand(RemoveParticipantByUserIdRequest request)
         {
             ConversationId = request.ConversationId;
-            UsertId = request.UsertId;
+            UserId = request.UserId;
         }
     }
 }

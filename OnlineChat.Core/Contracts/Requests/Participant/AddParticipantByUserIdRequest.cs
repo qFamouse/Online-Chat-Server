@@ -9,6 +9,6 @@ namespace Contracts.Requests.Participant
     public class AddParticipantByUserIdRequest
     {
         public int ConversationId { get; set; }
-        public int UsertId { get; set; }
+        public int UserId { get; set; }
     }
 }

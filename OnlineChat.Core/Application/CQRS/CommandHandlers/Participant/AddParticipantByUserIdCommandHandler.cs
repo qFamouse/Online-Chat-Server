@@ -23,7 +23,7 @@ namespace Application.CQRS.CommandHandlers.Participant
             var participant = new Entities.Participant()
             {
                 ConversationId = request.ConversationId,
-                UserId = request.UsertId
+                UserId = request.UserId
             };
 
             await _participantRepository.InsertAsync(participant, cancellationToken);

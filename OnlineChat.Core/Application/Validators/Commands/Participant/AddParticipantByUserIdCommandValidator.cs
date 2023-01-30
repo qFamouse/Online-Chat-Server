@@ -28,7 +28,7 @@ namespace Application.Validators.Participant
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
 
-            RuleFor(x => x.UsertId)
+            RuleFor(x => x.UserId)
                 .NotEmpty()
                 .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(Messages.NotFound);
 
@@ -59,7 +59,7 @@ namespace Application.Validators.Participant
             var participant = await _participantRepository.GetByQueryAsync(new ParticipantQuery()
             {
                 ConversationId = command.ConversationId,
-                UserId = command.UsertId
+                UserId = command.UserId
             });
 
             return participant == null;
