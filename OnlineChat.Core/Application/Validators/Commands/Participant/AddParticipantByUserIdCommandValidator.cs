@@ -1,27 +1,21 @@
 ﻿using Application.CQRS.Commands.Participant;
-using Application.Entities;
 using Application.Interfaces.Repositories;
 using Application.Queries;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Resources;
 using Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.Validators.Participant
+namespace Application.Validators.Commands.Participant
 {
     internal sealed class AddParticipantByUserIdCommandValidator : AbstractValidator<AddParticipantByUserIdCommand>
     {
         private readonly IParticipantRepository _participantRepository;
         private readonly IConversationRepository _conversationRepository;
         private readonly IIdentityService _identityService;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<Entities.User> _userManager;
 
-        public AddParticipantByUserIdCommandValidator(IConversationRepository conversationRepository, IParticipantRepository participantRepository, IIdentityService identityService, UserManager<User> userManager)
+        public AddParticipantByUserIdCommandValidator(IConversationRepository conversationRepository, IParticipantRepository participantRepository, IIdentityService identityService, UserManager<Entities.User> userManager)
         {
             _participantRepository = participantRepository ?? throw new ArgumentNullException(nameof(participantRepository));
             _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
