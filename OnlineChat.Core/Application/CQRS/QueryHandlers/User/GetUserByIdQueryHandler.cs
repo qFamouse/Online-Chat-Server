@@ -13,7 +13,6 @@ namespace Application.CQRS.QueryHandlers.User
     using Application.Entities;
     using Configurations;
     using Contracts.Views;
-    using Exceptions;
 
     internal class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserView>
     {

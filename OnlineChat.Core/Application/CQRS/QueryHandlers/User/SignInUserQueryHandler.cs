@@ -6,6 +6,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using Hellang.Middleware.ProblemDetails;
+using Resources;
 
 namespace Application.CQRS.QueryHandlers.User
 {
@@ -13,7 +15,6 @@ namespace Application.CQRS.QueryHandlers.User
     using Application.Entities;
     using Configurations;
     using Contracts.Views;
-    using Exceptions;
 
     internal class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAuthorizationView>
     {
@@ -34,12 +35,12 @@ namespace Application.CQRS.QueryHandlers.User
 
             if (user is null)
             {
-                throw new HttpStatusCodeException(HttpStatusCode.NotFound, "User not found");
+                throw new ProblemDetailsException((int)HttpStatusCode.NotFound, Exceptions.UserNotFound);
             }
 
             if (!await _userManager.CheckPasswordAsync(user, request.Password))
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, "Incorrect password");
+                throw new ProblemDetailsException((int)HttpStatusCode.BadRequest, Exceptions.IncorrectPassword);
             }
 
             var roles = await _userManager.GetRolesAsync(user);

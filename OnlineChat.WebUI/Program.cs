@@ -12,15 +12,21 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineChat.WebUI.Hubs;
-using OnlineChat.WebUI.Middleware;
 using OnlineChat.WebUI.Services;
 using Repositories;
 using Services.Interfaces;
 using Shared;
 using System.Reflection;
 using System.Text;
+using Hellang.Middleware.ProblemDetails;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddProblemDetails(setup =>
+{
+    setup.IncludeExceptionDetails = (context, exception) =>
+        builder.Environment.IsDevelopment() || builder.Environment.IsStaging();
+});
 
 // Add services to the container.
 
@@ -146,6 +152,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -155,7 +162,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseMiddleware<ExceptionHandlerMiddleware>();
+app.UseProblemDetails();
 
 app.UseCors("CorsPolicy");
 

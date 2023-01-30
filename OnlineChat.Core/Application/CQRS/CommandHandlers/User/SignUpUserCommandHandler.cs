@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Net;
+using Hellang.Middleware.ProblemDetails;
 
 namespace Application.CQRS.CommandHandlers.User
 {
     using Application.CQRS.Commands.User;
     using Application.Entities;
     using Configurations;
-    using Exceptions;
 
     internal class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand, User>
     {
@@ -30,14 +30,14 @@ namespace Application.CQRS.CommandHandlers.User
 
             if (!result.Succeeded)
             {
-                throw new HttpStatusCodeException(HttpStatusCode.BadRequest, result.Errors.First().Description);
+                throw new ProblemDetailsException((int)HttpStatusCode.BadRequest, result.Errors.First().Description);
             }
 
             result = await _userManager.AddToRoleAsync(request.User, _identityConfiguration.DefaultRole);
 
             if (!result.Succeeded)
             {
-                throw new HttpStatusCodeException(HttpStatusCode.InternalServerError, result.Errors.First().Description);
+                throw new ProblemDetailsException((int)HttpStatusCode.InternalServerError, result.Errors.First().Description);
             }
 
             return request.User;
