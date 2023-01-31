@@ -66,7 +66,7 @@ builder.Services.AddScoped<IIdentityService, IdentityService>();
 builder.Services.TryAddSingleton<HubConnectionService>();
 
 // Context
-builder.Services.AddSqlServerDbContext((builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddSqlServerDbContext(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 builder.Services.AddCors(options =>
 {
