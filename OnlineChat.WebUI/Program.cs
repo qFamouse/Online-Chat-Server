@@ -18,6 +18,9 @@ using Services.Interfaces;
 using Shared;
 using System.Reflection;
 using System.Text;
+using Application.Services.Abstractions;
+using Application.Services.Implementations;
+using Azure.Storage.Blobs;
 using Hellang.Middleware.ProblemDetails;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,7 +47,7 @@ builder.Services.AddSwaggerGen();
 ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Identity"));
-
+builder.Services.Configure<AzureBlobConfiguration>(configuration.GetSection("AzureBlob"));
 
 builder.Services.AddMediatR(typeof(SignUpUserCommand));
 
@@ -55,6 +58,8 @@ builder.Services.AddScoped<IParticipantRepository, ParticipantRepository>();
 builder.Services.AddScoped<IConversationMessagesRepository, ConversationMessagesRepository>();
 builder.Services.AddScoped<IAttachmentRepository, AttachmentRepository>();
 
+builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobConnection")));
+builder.Services.AddScoped<IBlobService, BlobService>();
 
 // AddCoreDependencies - some services
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
