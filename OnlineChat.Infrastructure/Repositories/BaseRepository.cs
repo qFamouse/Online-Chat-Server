@@ -1,5 +1,7 @@
-﻿using Application.Interfaces.Entities;
+﻿using System.Net;
+using Application.Interfaces.Entities;
 using Application.Interfaces.Repositories;
+using Hellang.Middleware.ProblemDetails;
 using Microsoft.EntityFrameworkCore;
 using Shared;
 
@@ -24,7 +26,8 @@ namespace Repositories
 
         public async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.FindAsync(id, cancellationToken);
+            return await _dbSet.SingleOrDefaultAsync(e => e.Id == id, cancellationToken) 
+                   ?? throw new ProblemDetailsException((int)HttpStatusCode.NotFound);
         }
 
         public async Task<T> InsertAsync(T entity, CancellationToken cancellationToken = default)
@@ -35,7 +38,9 @@ namespace Repositories
 
         public async Task DeleteByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            var entity = await _dbSet.FindAsync(id, cancellationToken);
+            var entity = await _dbSet.SingleOrDefaultAsync(e => e.Id == id, cancellationToken) 
+                         ?? throw new ProblemDetailsException((int) HttpStatusCode.NotFound);
+
             _dbSet.Remove(entity);
         }
 
@@ -51,7 +56,7 @@ namespace Repositories
 
         public async Task<bool> ExistsAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.FindAsync(id, cancellationToken) != null;
+            return await _dbSet.FirstOrDefaultAsync(e => e.Id == id, cancellationToken) != null;
         }
     }
 }
