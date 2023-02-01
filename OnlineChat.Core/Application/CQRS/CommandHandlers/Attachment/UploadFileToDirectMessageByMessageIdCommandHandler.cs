@@ -11,6 +11,7 @@ using Configurations;
 using Contracts.Requests.DirectMessage;
 using Contracts.Views;
 using MediatR;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 
 namespace Application.CQRS.CommandHandlers.Attachment
@@ -34,16 +35,19 @@ namespace Application.CQRS.CommandHandlers.Attachment
         {
             var message = await _directMessageRepository.GetByIdAsync(request.MessageId, cancellationToken);
 
-            string storageFileName = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
-            string storageFilePath = $"{message.Id}/{message.ReceiverId}";
+            string fileName = $"{DateTimeOffset.Now.ToUnixTimeSeconds()}/{Path.GetExtension(request.FileName)}";
+            string filePath = $"{message.Id}/{message.ReceiverId}";
 
-            await _blobService.UploadFileBlobAsync(_azureBlobConfiguration.DirectMessagesContainer, request.FilePath, $"{storageFilePath}/{storageFileName}");
+            string blobContainer = _azureBlobConfiguration.DirectMessagesContainer;
+            string blobFileName = $"{filePath}/{fileName}";
+
+            await _blobService.UploadFileBlobAsync(blobContainer, request.FilePath, blobFileName);
 
             var attachment = new Entities.Attachment()
             {
                 OriginalName = request.FileName,
-                TimestampName = storageFileName,
-                Path = storageFilePath,
+                TimestampName = fileName,
+                Path = filePath,
                 DirectMessageId = message.Id
             };
 

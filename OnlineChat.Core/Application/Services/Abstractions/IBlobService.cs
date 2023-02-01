@@ -11,7 +11,7 @@ namespace Application.Services.Abstractions
     {
         Task<BlobDownloadInfo> GetBlobAsync(string name);
         Task<IEnumerable<string>> ListBlobsAsync();
-        Task UploadFileBlobAsync(string containerName, string filePath, string fileName);
+        Task UploadFileBlobAsync(string containerName, string clientFilePath, string blobFileName);
         Task UploadContentBlobAsync(string content, string fileName);
         Task DeleteBlobAsync(string name);
     }

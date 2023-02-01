@@ -42,20 +42,20 @@ namespace Application.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task UploadFileBlobAsync(string containerName, string filePath, string fileName)
+        public async Task UploadFileBlobAsync(string containerName, string clientFilePath, string blobFileName)
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
 
-            var blobClient = containerClient.GetBlobClient(fileName);
+            var blobClient = containerClient.GetBlobClient(blobFileName);
 
-            FileExtensionContentTypeProvider provider = new FileExtensionContentTypeProvider();
+            var provider = new FileExtensionContentTypeProvider();
 
-            if (!provider.TryGetContentType(fileName, out var contentType))
+            if (!provider.TryGetContentType(blobFileName, out var contentType))
             {
                 contentType = "application/octet-stream";
             }
 
-            await blobClient.UploadAsync(filePath, new BlobHttpHeaders{ContentType = contentType});
+            await blobClient.UploadAsync(clientFilePath, new BlobHttpHeaders{ContentType = contentType});
         }
     }
 }
