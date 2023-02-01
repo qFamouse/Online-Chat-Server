@@ -7,7 +7,7 @@ using Contracts.Requests.DirectMessage;
 using Contracts.Views;
 using MediatR;
 
-namespace Application.CQRS.Commands.DirectMessage
+namespace Application.CQRS.Commands.Attachment
 {
     public class UploadFileToDirectMessageByMessageIdCommand : IRequest<AttachmentDetailView>
     {

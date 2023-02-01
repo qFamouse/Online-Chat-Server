@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.CQRS.Commands.DirectMessage;
+using Application.CQRS.Commands.Attachment;
 using Application.Entities;
 using Application.Interfaces.Repositories;
 using Application.Services.Abstractions;
@@ -13,7 +13,7 @@ using Contracts.Views;
 using MediatR;
 using Microsoft.Extensions.Options;
 
-namespace Application.CQRS.CommandHandlers.DirectMessage
+namespace Application.CQRS.CommandHandlers.Attachment
 {
     internal class UploadFileToDirectMessageByMessageIdCommandHandler : IRequestHandler<UploadFileToDirectMessageByMessageIdCommand, AttachmentDetailView>
     {
@@ -39,7 +39,7 @@ namespace Application.CQRS.CommandHandlers.DirectMessage
 
             await _blobService.UploadFileBlobAsync(_azureBlobConfiguration.DirectMessagesContainer, request.FilePath, $"{storageFilePath}/{storageFileName}");
 
-            var attachment = new Attachment()
+            var attachment = new Entities.Attachment()
             {
                 OriginalName = request.FileName,
                 TimestampName = storageFileName,

@@ -13,7 +13,6 @@ namespace OnlineChat.WebUI.Controllers
     public class DirectMessagesController : ControllerBase
     {
         private readonly ISender _sender;
-
         public DirectMessagesController(ISender sender)
         {
             _sender = sender ?? throw new ArgumentNullException(nameof(sender));
@@ -35,12 +34,6 @@ namespace OnlineChat.WebUI.Controllers
         public async Task<ActionResult> GetInterlocutorsAsync()
         {
             return Ok(await _sender.Send(new GetInterlocutorsByUserIdQuery()));
-        }
-
-        [HttpPost("file")]
-        public async Task<ActionResult> UploadFile([FromBody] UploadFileToDirectMessageByMessageIdRequest toDirectMessageByMessageIdRequest)
-        {
-            return Ok(await _sender.Send(new UploadFileToDirectMessageByMessageIdCommand(toDirectMessageByMessageIdRequest)));
         }
     }
 }
