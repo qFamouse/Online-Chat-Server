@@ -36,5 +36,11 @@ namespace OnlineChat.WebUI.Controllers
         {
             return Ok(await _sender.Send(new GetInterlocutorsByUserIdQuery()));
         }
+
+        [HttpPost("file")]
+        public async Task<ActionResult> UploadFile([FromBody] UploadFileToDirectMessageByMessageIdRequest toDirectMessageByMessageIdRequest)
+        {
+            return Ok(await _sender.Send(new UploadFileToDirectMessageByMessageIdCommand(toDirectMessageByMessageIdRequest)));
+        }
     }
 }
