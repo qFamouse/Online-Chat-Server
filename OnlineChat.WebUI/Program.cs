@@ -53,6 +53,7 @@ builder.Services.AddScoped<IDirectMessageRepository, DirectMessageRepository>();
 builder.Services.AddScoped<IConversationRepository, ConversationRepository>();
 builder.Services.AddScoped<IParticipantRepository, ParticipantRepository>();
 builder.Services.AddScoped<IConversationMessagesRepository, ConversationMessagesRepository>();
+builder.Services.AddScoped<IAttachmentRepository, AttachmentRepository>();
 
 
 // AddCoreDependencies - some services

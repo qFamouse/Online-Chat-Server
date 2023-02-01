@@ -12,6 +12,6 @@ namespace Application.Entities
         public string Message { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        // TODO: Add attachment
+        public List<Attachment> Attachments { get; set; }
     }
 }

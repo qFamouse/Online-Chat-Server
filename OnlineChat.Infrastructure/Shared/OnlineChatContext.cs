@@ -13,6 +13,7 @@ namespace Shared
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<ConversationMessage> ConversationMessages { get; set; }
         public DbSet<Participant> Participants { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
 
         public OnlineChatContext(DbContextOptions<OnlineChatContext> options) : base(options) { }
 
