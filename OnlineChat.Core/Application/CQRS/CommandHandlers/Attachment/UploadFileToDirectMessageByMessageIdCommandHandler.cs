@@ -35,7 +35,7 @@ namespace Application.CQRS.CommandHandlers.Attachment
         {
             var message = await _directMessageRepository.GetByIdAsync(request.MessageId, cancellationToken);
 
-            string fileName = $"{DateTimeOffset.Now.ToUnixTimeSeconds()}/{Path.GetExtension(request.FileName)}";
+            string fileName = $"{DateTimeOffset.Now.ToUnixTimeSeconds()}{Path.GetExtension(request.FileName)}";
             string filePath = $"{message.Id}/{message.ReceiverId}";
 
             string blobContainer = _azureBlobConfiguration.DirectMessagesContainer;
