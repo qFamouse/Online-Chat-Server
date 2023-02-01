@@ -25,10 +25,10 @@ namespace Application.Services.Implementations
             throw new NotImplementedException();
         }
 
-        public async Task<BlobDownloadInfo> GetBlobAsync(string name)
+        public async Task<BlobDownloadInfo> GetBlobAsync(string containerName, string fileName)
         {
-            var containerClient = _blobServiceClient.GetBlobContainerClient("direct");
-            var blobClient = containerClient.GetBlobClient(name);
+            var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+            var blobClient = containerClient.GetBlobClient(fileName);
             return await blobClient.DownloadAsync();
         }
 

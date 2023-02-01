@@ -9,7 +9,7 @@ namespace Application.Services.Abstractions
 {
     public interface IBlobService
     {
-        Task<BlobDownloadInfo> GetBlobAsync(string name);
+        Task<BlobDownloadInfo> GetBlobAsync(string containerName, string fileName);
         Task<IEnumerable<string>> ListBlobsAsync();
         Task UploadFileBlobAsync(string containerName, string clientFilePath, string blobFileName);
         Task UploadContentBlobAsync(string content, string fileName);
