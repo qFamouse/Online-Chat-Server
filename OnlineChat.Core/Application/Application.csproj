@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -10,6 +10,7 @@
     <PackageReference Include="Azure.Storage.Blobs" Version="12.14.1" />
     <PackageReference Include="FluentValidation" Version="11.4.0" />
     <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
+    <PackageReference Include="Mapster.Core" Version="1.2.0" />
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.11" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.11" />
@@ -30,4 +31,15 @@
     <Folder Include="Validators\Commands\ConversationMessage\" />
   </ItemGroup>
 
+	<Target Name="Mapster" AfterTargets="AfterBuild">
+		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore" />
+		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot; -p -n Application.Mappers" />
+	</Target>
+
+	<ItemGroup>
+		<Generated Include="**\*.g.cs" />
+	</ItemGroup>
+	<Target Name="CleanGenerated">
+		<Delete Files="@(Generated)" />
+	</Target>
 </Project>

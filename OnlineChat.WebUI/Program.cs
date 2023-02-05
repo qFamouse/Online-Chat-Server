@@ -22,6 +22,8 @@ using Application.Services.Abstractions;
 using Application.Services.Implementations;
 using Azure.Storage.Blobs;
 using Hellang.Middleware.ProblemDetails;
+using Application.Interfaces.Mappers;
+using Application.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +50,9 @@ ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Identity"));
 builder.Services.Configure<AzureBlobConfiguration>(configuration.GetSection("AzureBlob"));
+
+// Automappers
+builder.Services.AddSingleton<IDirectMessageMapper, DirectMessageMapper>();
 
 builder.Services.AddMediatR(typeof(SignUpUserCommand));
 

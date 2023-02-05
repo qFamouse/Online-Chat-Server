@@ -1,4 +1,5 @@
 ﻿using Application.CQRS.Queries.DirectMessage;
+using Application.Interfaces.Mappers;
 using Application.Interfaces.Repositories;
 using Contracts.Views;
 using MediatR;
@@ -11,11 +12,13 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
     {
         private readonly IDirectMessageRepository _directMessageRepository;
         private readonly IIdentityService _identityService;
+        private readonly IDirectMessageMapper _directMessageMapper;
 
-        public GetDirectChatByReceiverIdQueryHandler(IDirectMessageRepository directMessageRepository, IIdentityService identityService)
+        public GetDirectChatByReceiverIdQueryHandler(IDirectMessageRepository directMessageRepository, IIdentityService identityService, IDirectMessageMapper directMessageMapper)
         {
             _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+            _directMessageMapper = directMessageMapper ?? throw new ArgumentNullException(nameof(directMessageMapper));
         }
 
         public async Task<IEnumerable<ChatMessageDetailView>> Handle(GetDirectChatByReceiverIdQuery request, CancellationToken cancellationToken)
@@ -25,23 +28,7 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
             var directMessages = await _directMessageRepository
                 .GetDetailDirectMessagesByUsersIdAsync(currentUserId, request.ReceiverId, cancellationToken);
 
-            var messages = directMessages.Select(dm => new ChatMessageDetailView()
-            {
-                Id = dm.Id,
-                SenderId = dm.SenderId,
-                Message = dm.Message,
-                Time = dm.CreatedAt,
-                Attachments = dm.Attachments.Select(a => new AttachmentView
-                {
-                    Id = a.Id,
-                    OriginalName = a.OriginalName,
-                    TimestampName = a.TimestampName,
-                    Path = a.Path,
-                    DirectMessageId = a.DirectMessageId,
-                    CreatedAt = a.CreatedAt,
-                    UpdatedAt = a.UpdatedAt
-                }).ToList()
-            });
+            var messages = _directMessageMapper.Map(directMessages);
 
             return messages;
         }
