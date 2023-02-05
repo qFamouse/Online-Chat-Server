@@ -9,15 +9,27 @@ namespace Repositories
     {
         public DirectMessageRepository(OnlineChatContext context) : base(context) { }
 
-        public async Task<IEnumerable<DirectMessage>> GetDirectMessagesByUsersIdAsync(int senderId, int receiverId)
+        private IQueryable<DirectMessage> GetDirectMessagesByUsersId(int senderId, int receiverId)
         {
             var fromSender = DbContext.DirectMessages.Where(dm => dm.SenderId == senderId && dm.ReceiverId == receiverId);
             var fromReceiver = DbContext.DirectMessages.Where(dm => dm.SenderId == receiverId && dm.ReceiverId == senderId);
 
-            return await fromSender.Union(fromReceiver).ToListAsync();
+            return fromSender.Union(fromReceiver);
         }
 
-        public async Task<IEnumerable<User>> GetInterlocutorsByUserIdAsync(int userId)
+        public async Task<IEnumerable<DirectMessage>> GetDirectMessagesByUsersIdAsync(int senderId, int receiverId, CancellationToken cancellationToken = default)
+        {
+            return await GetDirectMessagesByUsersId(senderId, receiverId).ToListAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<DirectMessage>> GetDetailDirectMessagesByUsersIdAsync(int senderId, int receiverId, CancellationToken cancellationToken = default)
+        {
+            return await GetDirectMessagesByUsersId(senderId, receiverId)
+                .Include(dm => dm.Attachments)
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<User>> GetInterlocutorsByUserIdAsync(int userId, CancellationToken cancellationToken = default)
         {
             var senders = DbContext.DirectMessages
                 .Where(dm => dm.ReceiverId == userId)
@@ -27,7 +39,7 @@ namespace Repositories
                 .Where(dm => dm.SenderId == userId)
                 .Select(dm => dm.Receiver);
 
-            return await senders.Union(receivers).Distinct().ToListAsync();
+            return await senders.Union(receivers).Distinct().ToListAsync(cancellationToken);
         }
     }
 }

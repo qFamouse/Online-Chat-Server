@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.CQRS.Queries.DirectMessage
 {
-    public class GetDirectChatByReceiverIdQuery : IRequest<IEnumerable<ChatMessageView>>
+    public class GetDirectChatByReceiverIdQuery : IRequest<IEnumerable<ChatMessageDetailView>>
     {
         public int ReceiverId { get; set; }
 

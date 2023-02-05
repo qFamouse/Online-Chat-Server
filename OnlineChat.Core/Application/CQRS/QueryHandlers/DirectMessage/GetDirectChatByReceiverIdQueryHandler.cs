@@ -7,7 +7,7 @@ using Services.Interfaces;
 namespace Application.CQRS.QueryHandlers.DirectMessage
 {
     internal class GetDirectChatByReceiverIdQueryHandler :
-        IRequestHandler<GetDirectChatByReceiverIdQuery, IEnumerable<ChatMessageView>>
+        IRequestHandler<GetDirectChatByReceiverIdQuery, IEnumerable<ChatMessageDetailView>>
     {
         private readonly IDirectMessageRepository _directMessageRepository;
         private readonly IIdentityService _identityService;
@@ -18,17 +18,29 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
         }
 
-        public async Task<IEnumerable<ChatMessageView>> Handle(GetDirectChatByReceiverIdQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ChatMessageDetailView>> Handle(GetDirectChatByReceiverIdQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<Entities.DirectMessage> directMessages = await _directMessageRepository
-                .GetDirectMessagesByUsersIdAsync(_identityService.GetUserId(), request.ReceiverId);
+            int currentUserId = _identityService.GetUserId();
 
-            var messages = directMessages.Select(x => new ChatMessageView()
+            var directMessages = await _directMessageRepository
+                .GetDetailDirectMessagesByUsersIdAsync(currentUserId, request.ReceiverId, cancellationToken);
+
+            var messages = directMessages.Select(dm => new ChatMessageDetailView()
             {
-                Id = x.Id,
-                SenderId = x.SenderId,
-                Message = x.Message,
-                Time = x.CreatedAt,
+                Id = dm.Id,
+                SenderId = dm.SenderId,
+                Message = dm.Message,
+                Time = dm.CreatedAt,
+                Attachments = dm.Attachments.Select(a => new AttachmentView
+                {
+                    Id = a.Id,
+                    OriginalName = a.OriginalName,
+                    TimestampName = a.TimestampName,
+                    Path = a.Path,
+                    DirectMessageId = a.DirectMessageId,
+                    CreatedAt = a.CreatedAt,
+                    UpdatedAt = a.UpdatedAt
+                }).ToList()
             });
 
             return messages;
