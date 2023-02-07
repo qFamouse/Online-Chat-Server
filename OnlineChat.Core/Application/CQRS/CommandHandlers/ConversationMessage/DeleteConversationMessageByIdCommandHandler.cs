@@ -14,7 +14,10 @@ namespace Application.CQRS.CommandHandlers.ConversationMessage
     {
         private readonly IConversationMessagesRepository _conversationMessagesRepository;
 
-        public DeleteConversationMessageByIdCommandHandler(IConversationMessagesRepository conversationMessagesRepository)
+        public DeleteConversationMessageByIdCommandHandler
+        (
+            IConversationMessagesRepository conversationMessagesRepository
+        )
         {
             _conversationMessagesRepository = conversationMessagesRepository ?? throw new ArgumentNullException(nameof(conversationMessagesRepository));
         }

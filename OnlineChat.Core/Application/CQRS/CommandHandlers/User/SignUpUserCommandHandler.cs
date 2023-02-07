@@ -13,9 +13,11 @@ namespace Application.CQRS.CommandHandlers.User
         private readonly UserManager<Entities.User> _userManager;
         private readonly IdentityConfiguration _identityConfiguration;
 
-        public SignUpUserCommandHandler(
+        public SignUpUserCommandHandler
+        (
             UserManager<Entities.User> userManager,
-            IOptions<IdentityConfiguration> identityConfiguration)
+            IOptions<IdentityConfiguration> identityConfiguration
+        )
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _identityConfiguration = identityConfiguration.Value ?? throw new ArgumentNullException(nameof(identityConfiguration));

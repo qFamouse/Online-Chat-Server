@@ -19,7 +19,12 @@ namespace Application.CQRS.CommandHandlers.Attachment
         private readonly IBlobService _blobService;
         private readonly AzureBlobConfiguration _blobConfiguration;
 
-        public GetFileFromAttachmentByIdCommandHandler(IAttachmentRepository attachmentRepository, IBlobService blobService, IOptions<AzureBlobConfiguration> azureBlobOptions)
+        public GetFileFromAttachmentByIdCommandHandler
+        (
+            IAttachmentRepository attachmentRepository,
+            IBlobService blobService,
+            IOptions<AzureBlobConfiguration> azureBlobOptions
+        )
         {
             _attachmentRepository = attachmentRepository ?? throw new ArgumentNullException(nameof(attachmentRepository));
             _blobService = blobService ?? throw new ArgumentNullException(nameof(blobService));

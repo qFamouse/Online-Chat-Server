@@ -13,7 +13,10 @@ namespace Application.CQRS.CommandHandlers.Conversation
     {
         private readonly IConversationRepository _conversationRepository;
 
-        public UpdateConversationByIdCommandHandler(IConversationRepository conversationRepository)
+        public UpdateConversationByIdCommandHandler
+        (
+            IConversationRepository conversationRepository
+        )
         {
             _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
         }

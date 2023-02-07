@@ -19,7 +19,9 @@ namespace Application.CQRS.QueryHandlers.User
 
         public GetUserByIdQueryHandler
         (
-            UserManager<Entities.User> userManager, IUserMapper userMapper)
+            UserManager<Entities.User> userManager, 
+            IUserMapper userMapper
+        )
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _userMapper = userMapper ?? throw new ArgumentNullException(nameof(userMapper));

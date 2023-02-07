@@ -14,7 +14,10 @@ namespace Application.CQRS.CommandHandlers.Participant
     {
         private readonly IParticipantRepository _participantRepository;
 
-        public RemoveParticipantByUserIdCommandHandler(IParticipantRepository participantRepository)
+        public RemoveParticipantByUserIdCommandHandler
+        (
+            IParticipantRepository participantRepository
+        )
         {
             _participantRepository = participantRepository ?? throw new ArgumentNullException(nameof(participantRepository));
         }

@@ -7,14 +7,18 @@ using Services.Interfaces;
 
 namespace Application.CQRS.QueryHandlers.DirectMessage
 {
-    internal class GetDirectChatByReceiverIdQueryHandler :
-        IRequestHandler<GetDirectChatByReceiverIdQuery, IEnumerable<ChatMessageDetailView>>
+    internal class GetDirectChatByReceiverIdQueryHandler : IRequestHandler<GetDirectChatByReceiverIdQuery, IEnumerable<ChatMessageDetailView>>
     {
         private readonly IDirectMessageRepository _directMessageRepository;
         private readonly IIdentityService _identityService;
         private readonly IDirectMessageMapper _directMessageMapper;
 
-        public GetDirectChatByReceiverIdQueryHandler(IDirectMessageRepository directMessageRepository, IIdentityService identityService, IDirectMessageMapper directMessageMapper)
+        public GetDirectChatByReceiverIdQueryHandler
+        (
+            IDirectMessageRepository directMessageRepository,
+            IIdentityService identityService,
+            IDirectMessageMapper directMessageMapper
+        )
         {
             _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));

@@ -15,7 +15,11 @@ namespace Application.CQRS.CommandHandlers.Conversation
         private readonly IConversationRepository _conversationRepository;
         private readonly IIdentityService _identityService;
 
-        public CreateConversationCommandHandler(IConversationRepository conversationRepository, IIdentityService identityService)
+        public CreateConversationCommandHandler
+        (
+            IConversationRepository conversationRepository, 
+            IIdentityService identityService
+        )
         {
             _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));

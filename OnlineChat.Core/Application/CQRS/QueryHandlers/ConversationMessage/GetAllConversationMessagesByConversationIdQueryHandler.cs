@@ -13,7 +13,10 @@ namespace Application.CQRS.QueryHandlers.ConversationMessage
     {
         private readonly IConversationMessagesRepository _conversationMessagesRepository;
 
-        public GetAllConversationMessagesByConversationIdQueryHandler(IConversationMessagesRepository conversationMessagesRepository)
+        public GetAllConversationMessagesByConversationIdQueryHandler
+        (
+            IConversationMessagesRepository conversationMessagesRepository
+        )
         {
             _conversationMessagesRepository = conversationMessagesRepository;
         }

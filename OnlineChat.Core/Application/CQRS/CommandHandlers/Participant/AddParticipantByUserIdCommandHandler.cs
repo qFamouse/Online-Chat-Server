@@ -13,7 +13,10 @@ namespace Application.CQRS.CommandHandlers.Participant
     {
         private readonly IParticipantRepository _participantRepository;
 
-        public AddParticipantByUserIdCommandHandler(IParticipantRepository participantRepository)
+        public AddParticipantByUserIdCommandHandler
+        (
+            IParticipantRepository participantRepository
+        )
         {
             _participantRepository = participantRepository ?? throw new ArgumentNullException(nameof(participantRepository));
         }

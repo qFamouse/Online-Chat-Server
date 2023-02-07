@@ -7,11 +7,14 @@ namespace Application.CQRS.CommandHandlers.DirectMessage
 {
     internal class SendDirectMessageByReceiverIdCommandHandler : IRequestHandler<SendDirectMessageByReceiverIdCommand, Entities.DirectMessage>
     {
-        // identity service
         private readonly IDirectMessageRepository _directMessageRepository;
         private readonly IIdentityService _identityService;
 
-        public SendDirectMessageByReceiverIdCommandHandler(IDirectMessageRepository directMessageRepository, IIdentityService identityService)
+        public SendDirectMessageByReceiverIdCommandHandler
+        (
+            IDirectMessageRepository directMessageRepository, 
+            IIdentityService identityService
+        )
         {
             _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));

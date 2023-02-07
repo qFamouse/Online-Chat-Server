@@ -23,7 +23,7 @@ namespace Application.CQRS.QueryHandlers.User
             UserManager<Entities.User> userManager, 
             IIdentityService identityService, 
             IUserMapper userMapper
-            )
+        )
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));

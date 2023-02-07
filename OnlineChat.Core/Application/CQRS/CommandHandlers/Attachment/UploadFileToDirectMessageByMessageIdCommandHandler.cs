@@ -25,7 +25,8 @@ namespace Application.CQRS.CommandHandlers.Attachment
         private readonly AzureBlobConfiguration _azureBlobConfiguration;
         private readonly IAttachmentMapper _attachmentMapper;
 
-        public UploadFileToDirectMessageByMessageIdCommandHandler(
+        public UploadFileToDirectMessageByMessageIdCommandHandler
+        (
             IDirectMessageRepository directMessageRepository, 
             IBlobService blobService, 
             IAttachmentRepository attachmentRepository, 

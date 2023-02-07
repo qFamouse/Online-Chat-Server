@@ -13,7 +13,10 @@ namespace Application.CQRS.QueryHandlers.Participant
     {
         private readonly IParticipantRepository _participantRepository;
 
-        public GetAllParticipantsByConversationIdQueryHandler(IParticipantRepository participantRepository)
+        public GetAllParticipantsByConversationIdQueryHandler
+        (
+            IParticipantRepository participantRepository
+        )
         {
             _participantRepository = participantRepository ?? throw new ArgumentNullException(nameof(participantRepository));
         }

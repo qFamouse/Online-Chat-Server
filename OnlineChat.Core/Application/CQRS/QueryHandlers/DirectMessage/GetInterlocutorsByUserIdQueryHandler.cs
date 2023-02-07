@@ -16,7 +16,11 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
         private readonly IDirectMessageRepository _directMessageRepository;
         private readonly IIdentityService _identityService;
 
-        public GetInterlocutorsByUserIdQueryHandler(IDirectMessageRepository directMessageRepository, IIdentityService identityService)
+        public GetInterlocutorsByUserIdQueryHandler
+        (
+            IDirectMessageRepository directMessageRepository, 
+            IIdentityService identityService
+        )
         {
             _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
