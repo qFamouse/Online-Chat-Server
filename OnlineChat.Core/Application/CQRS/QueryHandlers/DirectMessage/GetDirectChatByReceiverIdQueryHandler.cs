@@ -28,7 +28,7 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
             var directMessages = await _directMessageRepository
                 .GetDetailDirectMessagesByUsersIdAsync(currentUserId, request.ReceiverId, cancellationToken);
 
-            var messages = _directMessageMapper.Map(directMessages);
+            var messages = _directMessageMapper.MapToDetailView(directMessages);
 
             return messages;
         }

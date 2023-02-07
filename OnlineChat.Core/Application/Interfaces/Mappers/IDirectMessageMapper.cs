@@ -13,7 +13,7 @@ namespace Application.Interfaces.Mappers
     [Mapper]
     public interface IDirectMessageMapper
     {
-        DirectMessageView Map(DirectMessage message);
-        IEnumerable<ChatMessageDetailView> Map(IEnumerable<DirectMessage> message);
+        DirectMessageView MapToView(DirectMessage message);
+        IEnumerable<ChatMessageDetailView> MapToDetailView(IEnumerable<DirectMessage> message);
     }
 }

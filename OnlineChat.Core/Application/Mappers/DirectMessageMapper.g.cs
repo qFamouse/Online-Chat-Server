@@ -4,7 +4,7 @@ namespace Application.Mappers
 {
     public partial class DirectMessageMapper : Application.Interfaces.Mappers.IDirectMessageMapper
     {
-        public Contracts.Views.DirectMessageView Map(Application.Entities.DirectMessage p1)
+        public Contracts.Views.DirectMessageView MapToView(Application.Entities.DirectMessage p1)
         {
             return p1 == null ? null : new Contracts.Views.DirectMessageView()
             {
@@ -14,7 +14,7 @@ namespace Application.Mappers
                 Message = p1.Message
             };
         }
-        public System.Collections.Generic.IEnumerable<Contracts.Views.ChatMessageDetailView> Map(System.Collections.Generic.IEnumerable<Application.Entities.DirectMessage> p2)
+        public System.Collections.Generic.IEnumerable<Contracts.Views.ChatMessageDetailView> MapToDetailView(System.Collections.Generic.IEnumerable<Application.Entities.DirectMessage> p2)
         {
             return p2 == null ? null : p2.Select<Application.Entities.DirectMessage, Contracts.Views.ChatMessageDetailView>(funcMain1);
         }
