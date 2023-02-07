@@ -20,7 +20,7 @@ namespace OnlineChat.WebUI.Hubs
         private readonly HubConnectionService _hubConnectionService;
         private readonly IIdentityService _identityService;
         private readonly IDirectMessageMapper _directMessageMapper;
-        private Dictionary<int, List<string>> ConnectedUsers { get => _hubConnectionService.ConnectedUsers; }
+        private Dictionary<int, List<string>> ConnectedUsers => _hubConnectionService.ConnectedUsers;
 
         public DirectMessageHub
         (
