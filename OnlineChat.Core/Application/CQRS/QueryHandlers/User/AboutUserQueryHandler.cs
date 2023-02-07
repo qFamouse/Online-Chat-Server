@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Interfaces.Mappers;
 
 namespace Application.CQRS.QueryHandlers.User
 {
@@ -15,11 +16,18 @@ namespace Application.CQRS.QueryHandlers.User
     {
         private readonly UserManager<Entities.User> _userManager;
         private readonly IIdentityService _identityService;
+        private readonly IUserMapper _userMapper;
 
-        public AboutUserQueryHandler(UserManager<Entities.User> userManager, IIdentityService identityService)
+        public AboutUserQueryHandler
+        (
+            UserManager<Entities.User> userManager, 
+            IIdentityService identityService, 
+            IUserMapper userMapper
+            )
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+            _userMapper = userMapper ?? throw new ArgumentNullException(nameof(userMapper));
         }
 
         public async Task<AboutUserView> Handle(AboutUserQuery request, CancellationToken cancellationToken)
@@ -27,12 +35,7 @@ namespace Application.CQRS.QueryHandlers.User
             int userId = _identityService.GetUserId();
             var user = await _userManager.FindByIdAsync(userId.ToString());
 
-            return new AboutUserView()
-            {
-                Id = user.Id,
-                UserName = user.UserName,
-                Email = user.Email,
-            };
+            return _userMapper.MapToAbout(user);
         }
     }
 }
