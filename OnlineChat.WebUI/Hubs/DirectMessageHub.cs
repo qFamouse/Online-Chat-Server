@@ -9,6 +9,7 @@ using OnlineChat.WebUI.Services;
 using Services.Interfaces;
 using System.Security.Claims;
 using System.Security.Principal;
+using Application.Interfaces.Mappers;
 
 namespace OnlineChat.WebUI.Hubs
 {
@@ -18,27 +19,22 @@ namespace OnlineChat.WebUI.Hubs
         private readonly ISender _sender;
         private readonly HubConnectionService _hubConnectionService;
         private readonly IIdentityService _identityService;
+        private readonly IDirectMessageMapper _directMessageMapper;
         private Dictionary<int, List<string>> ConnectedUsers { get => _hubConnectionService.ConnectedUsers; }
 
-        public DirectMessageHub(ISender sender, HubConnectionService hubConnectionService, IIdentityService identityService)
+        public DirectMessageHub(ISender sender, HubConnectionService hubConnectionService, IIdentityService identityService, IDirectMessageMapper directMessageMapper)
         {
             _sender = sender ?? throw new ArgumentNullException(nameof(sender));
             _hubConnectionService = hubConnectionService ?? throw new ArgumentNullException(nameof(hubConnectionService));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+            _directMessageMapper = directMessageMapper  ?? throw new ArgumentNullException(nameof(directMessageMapper));
         }
 
         public async Task<DirectMessageView> SendMessage(SendDirectMessageByReceiverIdRequest request)
         {
             var directMessage = await _sender.Send(new SendDirectMessageByReceiverIdCommand(request));
-            var directMessageView = new DirectMessageView()
-            {
-                Id = directMessage.Id,
-                SenderId = directMessage.SenderId,
-                ReceiverId = directMessage.ReceiverId,
-                Message = directMessage.Message,
-                Time = directMessage.CreatedAt
-            };
-
+            var directMessageView = _directMessageMapper.MapToView(directMessage);
+                
             if (ConnectedUsers.TryGetValue(request.ReceiverId, out var connections) && connections.Count > 0)
             {
                 connections.ForEach(async connectionId =>

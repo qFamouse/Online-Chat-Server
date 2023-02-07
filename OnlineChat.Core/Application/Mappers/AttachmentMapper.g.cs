@@ -42,7 +42,8 @@ namespace Application.Mappers
                     Id = p4.DirectMessage.Id,
                     SenderId = p4.DirectMessage.SenderId,
                     ReceiverId = p4.DirectMessage.ReceiverId,
-                    Message = p4.DirectMessage.Message
+                    Message = p4.DirectMessage.Message,
+                    CreatedAt = p4.DirectMessage.CreatedAt
                 },
                 CreatedAt = p4.CreatedAt,
                 UpdatedAt = p4.UpdatedAt
@@ -83,7 +84,8 @@ namespace Application.Mappers
                     Id = p6.DirectMessage.Id,
                     SenderId = p6.DirectMessage.SenderId,
                     ReceiverId = p6.DirectMessage.ReceiverId,
-                    Message = p6.DirectMessage.Message
+                    Message = p6.DirectMessage.Message,
+                    CreatedAt = p6.DirectMessage.CreatedAt
                 },
                 CreatedAt = p6.CreatedAt,
                 UpdatedAt = p6.UpdatedAt

@@ -17,7 +17,8 @@ namespace Application.Mappers
                 Id = p1.Id,
                 SenderId = p1.SenderId,
                 ReceiverId = p1.ReceiverId,
-                Message = p1.Message
+                Message = p1.Message,
+                CreatedAt = p1.CreatedAt
             };
         }
         public IEnumerable<DirectMessageView> MapToView(IEnumerable<DirectMessage> p2)
@@ -31,6 +32,7 @@ namespace Application.Mappers
                 Id = p4.Id,
                 SenderId = p4.SenderId,
                 Message = p4.Message,
+                CreatedAt = p4.CreatedAt,
                 Attachments = funcMain2(p4.Attachments)
             };
         }
@@ -46,17 +48,18 @@ namespace Application.Mappers
                 Id = p3.Id,
                 SenderId = p3.SenderId,
                 ReceiverId = p3.ReceiverId,
-                Message = p3.Message
+                Message = p3.Message,
+                CreatedAt = p3.CreatedAt
             };
         }
         
-        private List<AttachmentView> funcMain2(List<Attachment> p5)
+        private List<AttachmentChatView> funcMain2(List<Attachment> p5)
         {
             if (p5 == null)
             {
                 return null;
             }
-            List<AttachmentView> result = new List<AttachmentView>(p5.Count);
+            List<AttachmentChatView> result = new List<AttachmentChatView>(p5.Count);
             
             int i = 0;
             int len = p5.Count;
@@ -64,16 +67,12 @@ namespace Application.Mappers
             while (i < len)
             {
                 Attachment item = p5[i];
-                result.Add(item == null ? null : new AttachmentView()
+                result.Add(item == null ? null : new AttachmentChatView()
                 {
                     Id = item.Id,
                     OriginalName = item.OriginalName,
-                    BlobName = item.BlobName,
-                    BlobPath = item.BlobPath,
                     ContentType = item.ContentType,
-                    DirectMessageId = item.DirectMessageId,
-                    CreatedAt = item.CreatedAt,
-                    UpdatedAt = item.UpdatedAt
+                    ContentLength = item.ContentLength
                 });
                 i++;
             }
@@ -93,17 +92,18 @@ namespace Application.Mappers
                 Id = p8.Id,
                 SenderId = p8.SenderId,
                 Message = p8.Message,
+                CreatedAt = p8.CreatedAt,
                 Attachments = funcMain5(p8.Attachments)
             };
         }
         
-        private List<AttachmentView> funcMain5(List<Attachment> p9)
+        private List<AttachmentChatView> funcMain5(List<Attachment> p9)
         {
             if (p9 == null)
             {
                 return null;
             }
-            List<AttachmentView> result = new List<AttachmentView>(p9.Count);
+            List<AttachmentChatView> result = new List<AttachmentChatView>(p9.Count);
             
             int i = 0;
             int len = p9.Count;
@@ -111,16 +111,12 @@ namespace Application.Mappers
             while (i < len)
             {
                 Attachment item = p9[i];
-                result.Add(item == null ? null : new AttachmentView()
+                result.Add(item == null ? null : new AttachmentChatView()
                 {
                     Id = item.Id,
                     OriginalName = item.OriginalName,
-                    BlobName = item.BlobName,
-                    BlobPath = item.BlobPath,
                     ContentType = item.ContentType,
-                    DirectMessageId = item.DirectMessageId,
-                    CreatedAt = item.CreatedAt,
-                    UpdatedAt = item.UpdatedAt
+                    ContentLength = item.ContentLength
                 });
                 i++;
             }
