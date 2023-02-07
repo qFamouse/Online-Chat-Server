@@ -11,8 +11,9 @@ namespace Application.Entities
     {
         public int Id { get; set; }
         public string OriginalName { get; set; }
-        public string TimestampName { get; set; }
-        public string Path { get; set; }
+        public string BlobName { get; set; }
+        public string BlobPath { get; set; }
+        public string ContentType { get; set; }
         public int DirectMessageId { get; set; }
         public DirectMessage DirectMessage { get; set; }
         public DateTime CreatedAt { get; set; }

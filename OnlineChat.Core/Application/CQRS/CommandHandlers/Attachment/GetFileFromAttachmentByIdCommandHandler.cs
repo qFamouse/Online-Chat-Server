@@ -36,7 +36,7 @@ namespace Application.CQRS.CommandHandlers.Attachment
             var attachment = await _attachmentRepository.GetByIdAsync(request.Id, cancellationToken);
 
             string containerName = _blobConfiguration.DirectMessagesContainer;
-            string fileName = $"{attachment.Path}/{attachment.TimestampName}";
+            string fileName = $"{attachment.BlobPath}/{attachment.BlobName}";
 
             var downloadInfo = await _blobService.GetBlobAsync(containerName, fileName);
 

@@ -14,8 +14,9 @@ namespace Application.Mappers
             {
                 Id = p1.Id,
                 OriginalName = p1.OriginalName,
-                TimestampName = p1.TimestampName,
-                Path = p1.Path,
+                BlobName = p1.BlobName,
+                BlobPath = p1.BlobPath,
+                ContentType = p1.ContentType,
                 DirectMessageId = p1.DirectMessageId,
                 CreatedAt = p1.CreatedAt,
                 UpdatedAt = p1.UpdatedAt
@@ -31,8 +32,9 @@ namespace Application.Mappers
             {
                 Id = p4.Id,
                 OriginalName = p4.OriginalName,
-                TimestampName = p4.TimestampName,
-                Path = p4.Path,
+                BlobName = p4.BlobName,
+                BlobPath = p4.BlobPath,
+                ContentType = p4.ContentType,
                 DirectMessageId = p4.DirectMessageId,
                 DirectMessage = p4.DirectMessage == null ? null : new DirectMessageView()
                 {
@@ -56,8 +58,9 @@ namespace Application.Mappers
             {
                 Id = p3.Id,
                 OriginalName = p3.OriginalName,
-                TimestampName = p3.TimestampName,
-                Path = p3.Path,
+                BlobName = p3.BlobName,
+                BlobPath = p3.BlobPath,
+                ContentType = p3.ContentType,
                 DirectMessageId = p3.DirectMessageId,
                 CreatedAt = p3.CreatedAt,
                 UpdatedAt = p3.UpdatedAt
@@ -70,8 +73,9 @@ namespace Application.Mappers
             {
                 Id = p6.Id,
                 OriginalName = p6.OriginalName,
-                TimestampName = p6.TimestampName,
-                Path = p6.Path,
+                BlobName = p6.BlobName,
+                BlobPath = p6.BlobPath,
+                ContentType = p6.ContentType,
                 DirectMessageId = p6.DirectMessageId,
                 DirectMessage = p6.DirectMessage == null ? null : new DirectMessageView()
                 {

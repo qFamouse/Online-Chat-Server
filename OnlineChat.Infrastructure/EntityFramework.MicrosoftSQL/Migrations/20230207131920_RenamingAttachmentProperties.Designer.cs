@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shared;
 
@@ -11,9 +12,10 @@ using Shared;
 namespace EntityFramework.MicrosoftSQL.Migrations
 {
     [DbContext(typeof(OnlineChatContext))]
-    partial class OnlineChatContextModelSnapshot : ModelSnapshot
+    [Migration("20230207131920_RenamingAttachmentProperties")]
+    partial class RenamingAttachmentProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

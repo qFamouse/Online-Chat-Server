@@ -66,8 +66,9 @@ namespace Application.Mappers
                 {
                     Id = item.Id,
                     OriginalName = item.OriginalName,
-                    TimestampName = item.TimestampName,
-                    Path = item.Path,
+                    BlobName = item.BlobName,
+                    BlobPath = item.BlobPath,
+                    ContentType = item.ContentType,
                     DirectMessageId = item.DirectMessageId,
                     CreatedAt = item.CreatedAt,
                     UpdatedAt = item.UpdatedAt
@@ -112,8 +113,9 @@ namespace Application.Mappers
                 {
                     Id = item.Id,
                     OriginalName = item.OriginalName,
-                    TimestampName = item.TimestampName,
-                    Path = item.Path,
+                    BlobName = item.BlobName,
+                    BlobPath = item.BlobPath,
+                    ContentType = item.ContentType,
                     DirectMessageId = item.DirectMessageId,
                     CreatedAt = item.CreatedAt,
                     UpdatedAt = item.UpdatedAt

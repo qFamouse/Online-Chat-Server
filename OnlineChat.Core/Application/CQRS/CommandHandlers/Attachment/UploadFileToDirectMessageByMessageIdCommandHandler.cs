@@ -56,8 +56,8 @@ namespace Application.CQRS.CommandHandlers.Attachment
             var attachment = new Entities.Attachment()
             {
                 OriginalName = request.FileName,
-                TimestampName = fileName,
-                Path = filePath,
+                BlobName = fileName,
+                BlobPath = filePath,
                 DirectMessageId = message.Id
             };
 
