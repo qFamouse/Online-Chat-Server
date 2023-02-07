@@ -51,13 +51,15 @@ namespace Application.CQRS.CommandHandlers.Attachment
             string blobContainer = _azureBlobConfiguration.DirectMessagesContainer;
             string blobFileName = $"{filePath}/{fileName}";
 
-            await _blobService.UploadFileBlobAsync(blobContainer, request.FilePath, blobFileName);
+            var properties = await _blobService.UploadFileBlobAsync(blobContainer, request.FilePath, blobFileName, cancellationToken);
 
             var attachment = new Entities.Attachment()
             {
                 OriginalName = request.FileName,
                 BlobName = fileName,
                 BlobPath = filePath,
+                ContentType = properties.ContentType,
+                ContentLength = properties.ContentLength,
                 DirectMessageId = message.Id
             };
 
