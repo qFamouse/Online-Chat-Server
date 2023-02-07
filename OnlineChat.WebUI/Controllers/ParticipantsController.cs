@@ -24,14 +24,14 @@ namespace OnlineChat.WebUI.Controllers
 
         [Authorize(Roles = "User")]
         [HttpPost]
-        public async Task<ActionResult> AddPartisipantAsync([FromBody] AddParticipantByUserIdRequest request)
+        public async Task<ActionResult> AddParticipantAsync([FromBody] AddParticipantByUserIdRequest request)
         {
             return Ok(await _sender.Send(new AddParticipantByUserIdCommand(request)));
         }
 
         [Authorize(Roles = "User")]
         [HttpDelete]
-        public async Task<ActionResult> RemovePartisipantAsync(RemoveParticipantByUserIdRequest request)
+        public async Task<ActionResult> RemoveParticipantAsync(RemoveParticipantByUserIdRequest request)
         {
             return Ok(await _sender.Send(new RemoveParticipantByUserIdCommand(request)));
         }
