@@ -14,6 +14,9 @@ namespace Application.Interfaces.Mappers
     public interface IDirectMessageMapper
     {
         DirectMessageView MapToView(DirectMessage message);
+        IEnumerable<DirectMessageView> MapToView(IEnumerable<DirectMessage> message);
+
+        ChatMessageDetailView MapToDetailView(DirectMessage message);
         IEnumerable<ChatMessageDetailView> MapToDetailView(IEnumerable<DirectMessage> message);
     }
 }
