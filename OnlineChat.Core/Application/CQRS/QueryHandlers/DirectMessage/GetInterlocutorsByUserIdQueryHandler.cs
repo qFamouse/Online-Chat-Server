@@ -29,7 +29,7 @@ namespace Application.CQRS.QueryHandlers.DirectMessage
         public async Task<IEnumerable<UserInterlocutorView>> Handle(GetInterlocutorsByUserIdQuery request, CancellationToken cancellationToken)
         {
             int userId = _identityService.GetUserId();
-            IEnumerable<Entities.User> interlocutors = await _directMessageRepository.GetInterlocutorsByUserIdAsync(userId);
+            IEnumerable<Entities.User> interlocutors = await _directMessageRepository.GetInterlocutorsByUserIdAsync(userId, cancellationToken);
 
             var interlocutorsView = interlocutors.Select(i => new UserInterlocutorView()
             {
