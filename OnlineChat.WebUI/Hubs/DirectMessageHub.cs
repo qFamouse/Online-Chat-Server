@@ -22,7 +22,13 @@ namespace OnlineChat.WebUI.Hubs
         private readonly IDirectMessageMapper _directMessageMapper;
         private Dictionary<int, List<string>> ConnectedUsers { get => _hubConnectionService.ConnectedUsers; }
 
-        public DirectMessageHub(ISender sender, HubConnectionService hubConnectionService, IIdentityService identityService, IDirectMessageMapper directMessageMapper)
+        public DirectMessageHub
+        (
+            ISender sender, 
+            HubConnectionService hubConnectionService,
+            IIdentityService identityService, 
+            IDirectMessageMapper directMessageMapper
+        )
         {
             _sender = sender ?? throw new ArgumentNullException(nameof(sender));
             _hubConnectionService = hubConnectionService ?? throw new ArgumentNullException(nameof(hubConnectionService));
