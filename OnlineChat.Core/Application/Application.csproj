@@ -33,7 +33,7 @@
 
 	<Target Name="Mapster" AfterTargets="AfterBuild">
 		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore" />
-		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot; -p -n Application.Mappers" />
+		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot; -n Application.Mappers" />
 	</Target>
 
 	<ItemGroup>
