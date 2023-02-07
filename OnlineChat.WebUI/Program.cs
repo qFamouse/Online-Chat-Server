@@ -53,6 +53,7 @@ builder.Services.Configure<AzureBlobConfiguration>(configuration.GetSection("Azu
 
 // Automappers
 builder.Services.AddSingleton<IDirectMessageMapper, DirectMessageMapper>();
+builder.Services.AddSingleton<IAttachmentMapper, AttachmentMapper>();
 
 builder.Services.AddMediatR(typeof(SignUpUserCommand));
 

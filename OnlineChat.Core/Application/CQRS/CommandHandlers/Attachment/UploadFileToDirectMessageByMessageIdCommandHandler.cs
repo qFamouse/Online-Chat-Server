@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.CQRS.Commands.Attachment;
 using Application.Entities;
+using Application.Interfaces.Mappers;
 using Application.Interfaces.Repositories;
 using Application.Services.Abstractions;
 using Configurations;
@@ -22,13 +23,21 @@ namespace Application.CQRS.CommandHandlers.Attachment
         private readonly IAttachmentRepository _attachmentRepository;
         private readonly IBlobService _blobService;
         private readonly AzureBlobConfiguration _azureBlobConfiguration;
+        private readonly IAttachmentMapper _attachmentMapper;
 
-        public UploadFileToDirectMessageByMessageIdCommandHandler(IDirectMessageRepository directMessageRepository, IBlobService blobService, IAttachmentRepository attachmentRepository, IOptions<AzureBlobConfiguration> azureBlobOptions)
+        public UploadFileToDirectMessageByMessageIdCommandHandler(
+            IDirectMessageRepository directMessageRepository, 
+            IBlobService blobService, 
+            IAttachmentRepository attachmentRepository, 
+            IOptions<AzureBlobConfiguration> azureBlobOptions,
+            IAttachmentMapper attachmentMapper
+            )
         {
             _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
             _blobService = blobService ?? throw new ArgumentNullException(nameof(blobService));
             _attachmentRepository = attachmentRepository ?? throw new ArgumentNullException(nameof(attachmentRepository));
             _azureBlobConfiguration = azureBlobOptions.Value ?? throw new ArgumentNullException(nameof(azureBlobOptions));
+            _attachmentMapper = attachmentMapper ?? throw new ArgumentNullException(nameof(attachmentMapper));
         }
 
         public async Task<AttachmentDetailView> Handle(UploadFileToDirectMessageByMessageIdCommand request, CancellationToken cancellationToken)
@@ -54,24 +63,7 @@ namespace Application.CQRS.CommandHandlers.Attachment
             await _attachmentRepository.InsertAsync(attachment, cancellationToken);
             await _attachmentRepository.Save(cancellationToken);
 
-            return new AttachmentDetailView()
-            {
-                Id = attachment.Id,
-                OriginalName = attachment.OriginalName,
-                TimestampName = attachment.TimestampName,
-                Path = attachment.Path,
-                DirectMessageId = attachment.DirectMessageId,
-                DirectMessage = new DirectMessageView()
-                {
-                    Id = message.Id,
-                    Message = message.Message,
-                    ReceiverId = message.ReceiverId,
-                    SenderId = message.SenderId,
-                    Time = message.UpdatedAt
-                },
-                CreatedAt = attachment.CreatedAt,
-                UpdatedAt = attachment.UpdatedAt
-            };
+            return _attachmentMapper.MapToDetailView(attachment);
         }
     }
 }
