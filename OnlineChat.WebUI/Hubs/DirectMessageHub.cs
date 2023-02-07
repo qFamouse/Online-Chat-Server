@@ -43,7 +43,7 @@ namespace OnlineChat.WebUI.Hubs
 
             if (ConnectedUsers.TryGetValue(request.ReceiverId, out var connections) && connections.Count > 0)
             {
-                foreach (var client in connections.Select(connectionId => Clients.Client(connectionId)).Where(client => client != null))
+                foreach (var client in connections.Select(connectionId => Clients.Client(connectionId)))
                 {
                     await client.SendAsync("ReceiveMessage", directMessage);
                 }
