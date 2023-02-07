@@ -20,29 +20,14 @@ namespace Application.Services.Implementations
             _blobServiceClient = blobServiceClient ?? throw new ArgumentNullException(nameof(blobServiceClient));
         }
 
-        public Task DeleteBlobAsync(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<BlobDownloadInfo> GetBlobAsync(string containerName, string fileName)
+        public async Task<BlobDownloadInfo> GetBlobAsync(string containerName, string fileName, CancellationToken cancellationToken = default)
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
             var blobClient = containerClient.GetBlobClient(fileName);
-            return await blobClient.DownloadAsync();
+            return await blobClient.DownloadAsync(cancellationToken);
         }
 
-        public Task<IEnumerable<string>> ListBlobsAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UploadContentBlobAsync(string content, string fileName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task UploadFileBlobAsync(string containerName, string clientFilePath, string blobFileName)
+        public async Task<BlobProperties> UploadFileBlobAsync(string containerName, string clientFilePath, string blobFileName, CancellationToken cancellationToken = default)
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
 
@@ -55,7 +40,11 @@ namespace Application.Services.Implementations
                 contentType = "application/octet-stream";
             }
 
-            await blobClient.UploadAsync(clientFilePath, new BlobHttpHeaders{ContentType = contentType});
+            await blobClient.UploadAsync(clientFilePath, new BlobHttpHeaders{ContentType = contentType}, cancellationToken: cancellationToken);
+
+            // TODO: GetPropertiesAsync has BlobRequestConditions. May for performance we need use it
+            var properties = await blobClient.GetPropertiesAsync(cancellationToken: cancellationToken);
+            return properties.Value;
         }
     }
 }
