@@ -40,17 +40,13 @@ namespace OnlineChat.WebUI.Hubs
         {
             var directMessage = await _sender.Send(new SendDirectMessageByReceiverIdCommand(request));
             var directMessageView = _directMessageMapper.MapToView(directMessage);
-                
+
             if (ConnectedUsers.TryGetValue(request.ReceiverId, out var connections) && connections.Count > 0)
             {
-                connections.ForEach(async connectionId =>
+                foreach (var client in connections.Select(connectionId => Clients.Client(connectionId)).Where(client => client != null))
                 {
-                    var client = Clients.Client(connectionId);
-                    if (client is not null)
-                    {
-                        await client.SendAsync("ReceiveMessage", directMessage);
-                    }
-                });
+                    await client.SendAsync("ReceiveMessage", directMessage);
+                }
             }
 
             return directMessageView;
