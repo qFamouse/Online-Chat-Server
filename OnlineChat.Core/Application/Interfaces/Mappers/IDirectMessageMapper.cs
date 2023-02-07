@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Entities;
 using Contracts.Views;
+using Contracts.Views.DirectMessage;
 using Mapster;
 
 namespace Application.Interfaces.Mappers

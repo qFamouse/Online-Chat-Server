@@ -1,5 +1,5 @@
 ﻿using Contracts.Requests.User;
-using Contracts.Views;
+using Contracts.Views.User;
 using MediatR;
 
 namespace Application.CQRS.Queries.User

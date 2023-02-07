@@ -1,6 +1,6 @@
 ﻿using Application.CQRS.Queries.DirectMessage;
 using Application.Interfaces.Repositories;
-using Contracts.Views;
+using Contracts.Views.User;
 using MediatR;
 using Services.Interfaces;
 using System;

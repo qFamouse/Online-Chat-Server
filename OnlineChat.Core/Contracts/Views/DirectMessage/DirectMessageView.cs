@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contracts.Views
+namespace Contracts.Views.DirectMessage
 {
     public class DirectMessageView
     {

@@ -1,6 +1,6 @@
 ﻿using Application.CQRS.Commands.DirectMessage;
 using Contracts.Requests.DirectMessage;
-using Contracts.Views;
+using Contracts.Views.DirectMessage;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

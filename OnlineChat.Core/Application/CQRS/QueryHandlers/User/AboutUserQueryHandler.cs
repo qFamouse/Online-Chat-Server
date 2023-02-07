@@ -1,5 +1,4 @@
 ﻿using Application.CQRS.Queries.User;
-using Contracts.Views;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Services.Interfaces;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces.Mappers;
+using Contracts.Views.User;
 
 namespace Application.CQRS.QueryHandlers.User
 {

@@ -8,9 +8,9 @@ using System.Security.Claims;
 using System.Text;
 using Application.CQRS.Queries.User;
 using Configurations;
-using Contracts.Views;
 using Hellang.Middleware.ProblemDetails;
 using Resources;
+using Contracts.Views.User;
 
 namespace Application.CQRS.QueryHandlers.User
 {

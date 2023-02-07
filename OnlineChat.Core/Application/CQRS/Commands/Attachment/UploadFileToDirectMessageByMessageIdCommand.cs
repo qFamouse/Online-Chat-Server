@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Contracts.Requests.DirectMessage;
-using Contracts.Views;
+using Contracts.Views.Attachment;
 using MediatR;
 
 namespace Application.CQRS.Commands.Attachment

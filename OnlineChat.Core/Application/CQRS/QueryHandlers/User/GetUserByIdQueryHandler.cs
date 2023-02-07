@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using Application.CQRS.Queries.User;
 using Application.Interfaces.Mappers;
-using Contracts.Views;
+using Contracts.Views.User;
 
 namespace Application.CQRS.QueryHandlers.User
 {

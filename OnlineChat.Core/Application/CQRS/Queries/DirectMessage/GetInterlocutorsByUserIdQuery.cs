@@ -1,4 +1,4 @@
-﻿using Contracts.Views;
+﻿using Contracts.Views.User;
 using MediatR;
 using System;
 using System.Collections.Generic;

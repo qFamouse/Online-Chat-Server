@@ -10,7 +10,7 @@ using Application.Interfaces.Repositories;
 using Application.Services.Abstractions;
 using Configurations;
 using Contracts.Requests.DirectMessage;
-using Contracts.Views;
+using Contracts.Views.Attachment;
 using MediatR;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;

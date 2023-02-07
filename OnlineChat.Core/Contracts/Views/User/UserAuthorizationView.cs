@@ -1,4 +1,4 @@
-﻿namespace Contracts.Views
+﻿namespace Contracts.Views.User
 {
     public class UserAuthorizationView
     {

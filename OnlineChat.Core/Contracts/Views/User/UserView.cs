@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contracts.Views
+namespace Contracts.Views.User
 {
-    public class UserInterlocutorView
+    public class UserView
     {
         public int Id { get; set; }
         public string UserName { get; set; }
+        public string Email { get; set; }
     }
 }

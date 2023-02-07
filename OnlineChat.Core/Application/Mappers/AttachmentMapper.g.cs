@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Application.Entities;
 using Application.Interfaces.Mappers;
-using Contracts.Views;
+using Contracts.Views.Attachment;
+using Contracts.Views.DirectMessage;
 
 namespace Application.Mappers
 {
