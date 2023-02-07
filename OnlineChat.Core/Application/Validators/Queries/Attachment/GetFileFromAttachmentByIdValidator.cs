@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.CQRS.Commands.Attachment;
+using Application.CQRS.Queries.Attachment;
 using Application.Interfaces.Repositories;
 using FluentValidation;
 using Resources;
 using Services.Interfaces;
 
-namespace Application.Validators.Commands.Attachment
+namespace Application.Validators.Queries.Attachment
 {
     public class GetFileFromAttachmentByIdValidator : AbstractValidator<GetFileFromAttachmentByIdCommand>
     {

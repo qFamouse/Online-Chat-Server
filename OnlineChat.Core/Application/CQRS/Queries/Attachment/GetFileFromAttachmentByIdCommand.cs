@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Azure.Storage.Blobs.Models;
 using MediatR;
 
-namespace Application.CQRS.Commands.Attachment
+namespace Application.CQRS.Queries.Attachment
 {
     public class GetFileFromAttachmentByIdCommand : IRequest<BlobDownloadInfo>
     {

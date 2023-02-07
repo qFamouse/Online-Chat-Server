@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.CQRS.Commands.Attachment;
+using Application.CQRS.Queries.Attachment;
 using Application.Interfaces.Repositories;
 using Application.Services.Abstractions;
 using Azure.Storage.Blobs.Models;
@@ -11,7 +11,7 @@ using Configurations;
 using MediatR;
 using Microsoft.Extensions.Options;
 
-namespace Application.CQRS.CommandHandlers.Attachment
+namespace Application.CQRS.QueryHandlers.Attachment
 {
     internal class GetFileFromAttachmentByIdCommandHandler : IRequestHandler<GetFileFromAttachmentByIdCommand, BlobDownloadInfo>
     {
