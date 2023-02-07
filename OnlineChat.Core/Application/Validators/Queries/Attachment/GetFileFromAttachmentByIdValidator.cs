@@ -24,8 +24,8 @@ namespace Application.Validators.Queries.Attachment
             RuleFor(x => x.Id)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
-                .MustAsync(_attachmentRepository.ExistsAsync).WithMessage(Messages.NotFound);
-            //.MustAsync(MustBeMessageSenderOrMessageReceiverAsync).WithMessage(Messages.AccessDenied);
+                .MustAsync(_attachmentRepository.ExistsAsync).WithMessage(Messages.NotFound)
+                .MustAsync(MustBeMessageSenderOrMessageReceiverAsync).WithMessage(Messages.AccessDenied);
         }
 
         private async Task<bool> MustBeMessageSenderOrMessageReceiverAsync(int attachmentId, CancellationToken cancellationToken)
