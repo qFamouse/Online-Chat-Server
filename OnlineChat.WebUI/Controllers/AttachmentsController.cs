@@ -18,7 +18,7 @@ namespace OnlineChat.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> UploadFileToDirectMessageByMessageIdAsync([FromBody] UploadFileToDirectMessageByMessageIdRequest request)
+        public async Task<ActionResult> UploadFileToDirectMessageByMessageIdAsync([FromForm] UploadFileToDirectMessageByMessageIdRequest request)
         {
             return Ok(await _sender.Send(new UploadFileToDirectMessageByMessageIdCommand(request)));
         }

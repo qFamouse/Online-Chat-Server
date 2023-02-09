@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Contracts.Requests.DirectMessage;
+using Contracts.Requests.Attachment;
 using Contracts.Views.Attachment;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.CQRS.Commands.Attachment
 {
-    public class UploadFileToDirectMessageByMessageIdCommand : IRequest<AttachmentDetailView>
+    public class UploadFileToDirectMessageByMessageIdCommand : IRequest<List<AttachmentChatView>>
     {
-        public string FilePath { get; set; }
-        public string FileName { get; set; }
         public int MessageId { get; set; }
+        public IFormFileCollection Files { get; set; }
 
         public UploadFileToDirectMessageByMessageIdCommand(UploadFileToDirectMessageByMessageIdRequest request)
         {
-            FilePath = request.FilePath;
-            FileName = request.FileName;
             MessageId = request.MessageId;
+            Files = request.Files;
         }
+
     }
 }

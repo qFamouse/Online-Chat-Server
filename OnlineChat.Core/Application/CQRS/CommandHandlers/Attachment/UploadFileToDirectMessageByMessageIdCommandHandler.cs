@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Application.CQRS.Commands.Attachment;
@@ -12,12 +13,13 @@ using Configurations;
 using Contracts.Requests.DirectMessage;
 using Contracts.Views.Attachment;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 
 namespace Application.CQRS.CommandHandlers.Attachment
 {
-    internal class UploadFileToDirectMessageByMessageIdCommandHandler : IRequestHandler<UploadFileToDirectMessageByMessageIdCommand, AttachmentDetailView>
+    internal class UploadFileToDirectMessageByMessageIdCommandHandler : IRequestHandler<UploadFileToDirectMessageByMessageIdCommand, List<AttachmentChatView>>
     {
         private readonly IDirectMessageRepository _directMessageRepository;
         private readonly IAttachmentRepository _attachmentRepository;
@@ -41,32 +43,43 @@ namespace Application.CQRS.CommandHandlers.Attachment
             _attachmentMapper = attachmentMapper ?? throw new ArgumentNullException(nameof(attachmentMapper));
         }
 
-        public async Task<AttachmentDetailView> Handle(UploadFileToDirectMessageByMessageIdCommand request, CancellationToken cancellationToken)
+        public async Task<List<AttachmentChatView>> Handle(UploadFileToDirectMessageByMessageIdCommand request, CancellationToken cancellationToken)
         {
             var message = await _directMessageRepository.GetByIdAsync(request.MessageId, cancellationToken);
-
-            string fileName = $"{DateTimeOffset.Now.ToUnixTimeSeconds()}{Path.GetExtension(request.FileName)}";
-            string filePath = $"{message.Id}/{message.ReceiverId}";
-
             string blobContainer = _azureBlobConfiguration.DirectMessagesContainer;
-            string blobFileName = $"{filePath}/{fileName}";
 
-            var properties = await _blobService.UploadFileBlobAsync(blobContainer, request.FilePath, blobFileName, cancellationToken);
+            var attachments = new List<Entities.Attachment>();
 
-            var attachment = new Entities.Attachment()
+            foreach (IFormFile file in request.Files)
             {
-                OriginalName = request.FileName,
-                BlobName = fileName,
-                BlobPath = filePath,
-                ContentType = properties.ContentType,
-                ContentLength = properties.ContentLength,
-                DirectMessageId = message.Id
-            };
+                string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                string filePath = $"{message.Id}/{message.ReceiverId}";
 
-            await _attachmentRepository.InsertAsync(attachment, cancellationToken);
-            await _attachmentRepository.Save(cancellationToken);
+                string blobFileName = $"{filePath}/{uniqueFileName}";
 
-            return _attachmentMapper.MapToDetailView(attachment);
+                await using (var stream = file.OpenReadStream())
+                {
+                    var properties = await _blobService.UploadFileBlobAsync(blobContainer, stream, blobFileName, file.ContentType, cancellationToken);
+
+                    var attachment = new Entities.Attachment()
+                    {
+                        OriginalName = file.FileName, // TODO: Check FileName and Name 
+                        BlobName = uniqueFileName,
+                        BlobPath = filePath,
+                        ContentType = properties.ContentType,
+                        ContentLength = properties.ContentLength,
+                        DirectMessageId = message.Id
+                    };
+
+                    await _attachmentRepository.InsertAsync(attachment, cancellationToken);
+                    await _attachmentRepository.Save(cancellationToken); // TODO: Save after all loading? - No because we can get exception
+                    attachments.Add(attachment);
+                }
+            }
+
+            var result = _attachmentMapper.MapToChatView(attachments).ToList();
+
+            return result;
         }
     }
 }
