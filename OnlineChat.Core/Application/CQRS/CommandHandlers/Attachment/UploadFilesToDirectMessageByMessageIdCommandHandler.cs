@@ -19,7 +19,7 @@ using Microsoft.Extensions.Options;
 
 namespace Application.CQRS.CommandHandlers.Attachment
 {
-    internal class UploadFileToDirectMessageByMessageIdCommandHandler : IRequestHandler<UploadFileToDirectMessageByMessageIdCommand, List<AttachmentChatView>>
+    internal class UploadFilesToDirectMessageByMessageIdCommandHandler : IRequestHandler<UploadFilesToDirectMessageByMessageIdCommand, List<AttachmentChatView>>
     {
         private readonly IDirectMessageRepository _directMessageRepository;
         private readonly IAttachmentRepository _attachmentRepository;
@@ -27,7 +27,7 @@ namespace Application.CQRS.CommandHandlers.Attachment
         private readonly AzureBlobConfiguration _azureBlobConfiguration;
         private readonly IAttachmentMapper _attachmentMapper;
 
-        public UploadFileToDirectMessageByMessageIdCommandHandler
+        public UploadFilesToDirectMessageByMessageIdCommandHandler
         (
             IDirectMessageRepository directMessageRepository, 
             IBlobService blobService, 
@@ -43,7 +43,7 @@ namespace Application.CQRS.CommandHandlers.Attachment
             _attachmentMapper = attachmentMapper ?? throw new ArgumentNullException(nameof(attachmentMapper));
         }
 
-        public async Task<List<AttachmentChatView>> Handle(UploadFileToDirectMessageByMessageIdCommand request, CancellationToken cancellationToken)
+        public async Task<List<AttachmentChatView>> Handle(UploadFilesToDirectMessageByMessageIdCommand request, CancellationToken cancellationToken)
         {
             var message = await _directMessageRepository.GetByIdAsync(request.MessageId, cancellationToken);
             string blobContainer = _azureBlobConfiguration.DirectMessagesContainer;

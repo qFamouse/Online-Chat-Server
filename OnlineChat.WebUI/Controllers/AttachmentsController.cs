@@ -1,6 +1,6 @@
 ﻿using Application.CQRS.Commands.Attachment;
 using Application.CQRS.Queries.Attachment;
-using Contracts.Requests.DirectMessage;
+using Contracts.Requests.Attachment;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +18,9 @@ namespace OnlineChat.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> UploadFileToDirectMessageByMessageIdAsync([FromForm] UploadFileToDirectMessageByMessageIdRequest request)
+        public async Task<ActionResult> UploadFilesToDirectMessageByMessageIdAsync([FromForm] UploadFilesToDirectMessageByMessageIdRequest request)
         {
-            return Ok(await _sender.Send(new UploadFileToDirectMessageByMessageIdCommand(request)));
+            return Ok(await _sender.Send(new UploadFilesToDirectMessageByMessageIdCommand(request)));
         }
 
         [HttpGet("{id:int}")]

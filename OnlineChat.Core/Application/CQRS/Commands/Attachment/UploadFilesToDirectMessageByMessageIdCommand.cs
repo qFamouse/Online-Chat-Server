@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.CQRS.Commands.Attachment
 {
-    public class UploadFileToDirectMessageByMessageIdCommand : IRequest<List<AttachmentChatView>>
+    public class UploadFilesToDirectMessageByMessageIdCommand : IRequest<List<AttachmentChatView>>
     {
         public int MessageId { get; set; }
         public IFormFileCollection Files { get; set; }
 
-        public UploadFileToDirectMessageByMessageIdCommand(UploadFileToDirectMessageByMessageIdRequest request)
+        public UploadFilesToDirectMessageByMessageIdCommand(UploadFilesToDirectMessageByMessageIdRequest request)
         {
             MessageId = request.MessageId;
             Files = request.Files;

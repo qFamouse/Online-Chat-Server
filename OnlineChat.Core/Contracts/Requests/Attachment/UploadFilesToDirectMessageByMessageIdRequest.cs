@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Contracts.Requests.Attachment
 {
-    public class UploadFileToDirectMessageByMessageIdRequest
+    public class UploadFilesToDirectMessageByMessageIdRequest
     {
         public int MessageId { get; set; }
         public IFormFileCollection Files { get; set; }

@@ -11,7 +11,7 @@ using Services.Interfaces;
 
 namespace Application.Validators.Commands.Attachment
 {
-    public class UploadFileToDirectMessageByMessageIdValidator : AbstractValidator<UploadFileToDirectMessageByMessageIdCommand>
+    public class UploadFileToDirectMessageByMessageIdValidator : AbstractValidator<UploadFilesToDirectMessageByMessageIdCommand>
     {
         private readonly IDirectMessageRepository _directMessageRepository;
         private readonly IIdentityService _identityService;
