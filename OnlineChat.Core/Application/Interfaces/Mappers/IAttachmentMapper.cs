@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,9 @@ namespace Application.Interfaces.Mappers
     [Mapper]
     public interface IAttachmentMapper
     {
-        AttachmentView MapToView(Attachment message);   
+        AttachmentChatView MapToChatView(Attachment attachment);
+        IEnumerable<AttachmentChatView> MapToChatView(IEnumerable<Attachment> attachments);
+            AttachmentView MapToView(Attachment message);   
         IEnumerable<AttachmentView> MapToView(IEnumerable<Attachment> message);
 
         AttachmentDetailView MapToDetailView(Attachment message);
