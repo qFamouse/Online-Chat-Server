@@ -53,7 +53,7 @@ namespace Application.CQRS.CommandHandlers.Attachment
             foreach (IFormFile file in request.Files)
             {
                 string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-                string filePath = $"{message.Id}/{message.ReceiverId}";
+                string filePath = $"{message.SenderId}/{message.ReceiverId}";
 
                 string blobFileName = $"{filePath}/{uniqueFileName}";
 
@@ -63,7 +63,7 @@ namespace Application.CQRS.CommandHandlers.Attachment
 
                     var attachment = new Entities.Attachment()
                     {
-                        OriginalName = file.FileName, // TODO: Check FileName and Name 
+                        OriginalName = file.FileName,
                         BlobName = uniqueFileName,
                         BlobPath = filePath,
                         ContentType = properties.ContentType,
