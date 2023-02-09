@@ -25,20 +25,32 @@ namespace Application.Mappers
         {
             return p2 == null ? null : p2.Select<DirectMessage, DirectMessageView>(funcMain1);
         }
-        public ChatMessageDetailView MapToDetailView(DirectMessage p4)
+        public ChatMessageView MapToChatMessageView(DirectMessage p4)
         {
-            return p4 == null ? null : new ChatMessageDetailView()
+            return p4 == null ? null : new ChatMessageView()
             {
                 Id = p4.Id,
                 SenderId = p4.SenderId,
+                ReceiverId = p4.ReceiverId,
                 Message = p4.Message,
-                CreatedAt = p4.CreatedAt,
-                Attachments = funcMain2(p4.Attachments)
+                CreatedAt = p4.CreatedAt
             };
         }
-        public IEnumerable<ChatMessageDetailView> MapToDetailView(IEnumerable<DirectMessage> p6)
+        public ChatMessageDetailView MapToDetailView(DirectMessage p5)
         {
-            return p6 == null ? null : p6.Select<DirectMessage, ChatMessageDetailView>(funcMain3);
+            return p5 == null ? null : new ChatMessageDetailView()
+            {
+                Id = p5.Id,
+                SenderId = p5.SenderId,
+                ReceiverId = p5.ReceiverId,
+                Message = p5.Message,
+                CreatedAt = p5.CreatedAt,
+                Attachments = funcMain2(p5.Attachments)
+            };
+        }
+        public IEnumerable<ChatMessageDetailView> MapToDetailView(IEnumerable<DirectMessage> p7)
+        {
+            return p7 == null ? null : p7.Select<DirectMessage, ChatMessageDetailView>(funcMain3);
         }
         
         private DirectMessageView funcMain1(DirectMessage p3)
@@ -53,20 +65,20 @@ namespace Application.Mappers
             };
         }
         
-        private List<AttachmentChatView> funcMain2(List<Attachment> p5)
+        private List<AttachmentChatView> funcMain2(List<Attachment> p6)
         {
-            if (p5 == null)
+            if (p6 == null)
             {
                 return null;
             }
-            List<AttachmentChatView> result = new List<AttachmentChatView>(p5.Count);
+            List<AttachmentChatView> result = new List<AttachmentChatView>(p6.Count);
             
             int i = 0;
-            int len = p5.Count;
+            int len = p6.Count;
             
             while (i < len)
             {
-                Attachment item = p5[i];
+                Attachment item = p6[i];
                 result.Add(item == null ? null : new AttachmentChatView()
                 {
                     Id = item.Id,
@@ -80,37 +92,38 @@ namespace Application.Mappers
             
         }
         
-        private ChatMessageDetailView funcMain3(DirectMessage p7)
+        private ChatMessageDetailView funcMain3(DirectMessage p8)
         {
-            return funcMain4(p7);
+            return funcMain4(p8);
         }
         
-        private ChatMessageDetailView funcMain4(DirectMessage p8)
+        private ChatMessageDetailView funcMain4(DirectMessage p9)
         {
-            return p8 == null ? null : new ChatMessageDetailView()
+            return p9 == null ? null : new ChatMessageDetailView()
             {
-                Id = p8.Id,
-                SenderId = p8.SenderId,
-                Message = p8.Message,
-                CreatedAt = p8.CreatedAt,
-                Attachments = funcMain5(p8.Attachments)
+                Id = p9.Id,
+                SenderId = p9.SenderId,
+                ReceiverId = p9.ReceiverId,
+                Message = p9.Message,
+                CreatedAt = p9.CreatedAt,
+                Attachments = funcMain5(p9.Attachments)
             };
         }
         
-        private List<AttachmentChatView> funcMain5(List<Attachment> p9)
+        private List<AttachmentChatView> funcMain5(List<Attachment> p10)
         {
-            if (p9 == null)
+            if (p10 == null)
             {
                 return null;
             }
-            List<AttachmentChatView> result = new List<AttachmentChatView>(p9.Count);
+            List<AttachmentChatView> result = new List<AttachmentChatView>(p10.Count);
             
             int i = 0;
-            int len = p9.Count;
+            int len = p10.Count;
             
             while (i < len)
             {
-                Attachment item = p9[i];
+                Attachment item = p10[i];
                 result.Add(item == null ? null : new AttachmentChatView()
                 {
                     Id = item.Id,

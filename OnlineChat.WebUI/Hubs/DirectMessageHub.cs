@@ -1,15 +1,13 @@
 ﻿using Application.CQRS.Commands.DirectMessage;
 using Contracts.Requests.DirectMessage;
-using Contracts.Views.DirectMessage;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using OnlineChat.WebUI.Services;
 using Services.Interfaces;
 using System.Security.Claims;
-using System.Security.Principal;
 using Application.Interfaces.Mappers;
+using Contracts.Views;
 
 namespace OnlineChat.WebUI.Hubs
 {
@@ -36,10 +34,10 @@ namespace OnlineChat.WebUI.Hubs
             _directMessageMapper = directMessageMapper  ?? throw new ArgumentNullException(nameof(directMessageMapper));
         }
 
-        public async Task<DirectMessageView> SendMessage(SendDirectMessageByReceiverIdRequest request)
+        public async Task<ChatMessageView> SendMessage(SendDirectMessageByReceiverIdRequest request)
         {
             var directMessage = await _sender.Send(new SendDirectMessageByReceiverIdCommand(request));
-            var directMessageView = _directMessageMapper.MapToView(directMessage);
+            var directMessageView = _directMessageMapper.MapToChatMessageView(directMessage);
 
             if (ConnectedUsers.TryGetValue(request.ReceiverId, out var connections) && connections.Count > 0)
             {
