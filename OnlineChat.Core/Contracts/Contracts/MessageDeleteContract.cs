@@ -1,6 +1,6 @@
-﻿namespace OnlineChat.Cron.Contracts
+﻿namespace Contracts.Contracts
 {
-    public record MessageAutoDelete
+    public record MessageDeleteContract
     {
         public int MessageId { get; set; }
         public TimeSpan Delay { get; set; }

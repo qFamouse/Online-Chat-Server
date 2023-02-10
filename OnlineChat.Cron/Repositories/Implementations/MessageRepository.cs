@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using OnlineChat.Cron.Entities;
 using OnlineChat.Cron.Repositories.Abstractions;
 
 namespace OnlineChat.Cron.Repositories.Implementations
@@ -10,6 +11,16 @@ namespace OnlineChat.Cron.Repositories.Implementations
         public MessageRepository(DapperContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
+        public async Task<Message> GetByIdAsync(int id)
+        {
+            var query = "SELECT Id, SenderId, ReceiverId FROM DirectMessages WHERE Id = @Id";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var message = await connection.QuerySingleAsync<Message>(query, new { id });
+                return message;
+            }
         }
 
         public async Task DeleteMessageByIdAsync(int id)
