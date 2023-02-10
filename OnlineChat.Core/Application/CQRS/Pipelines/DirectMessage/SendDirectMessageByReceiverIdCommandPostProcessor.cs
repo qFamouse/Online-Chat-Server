@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.CQRS.Commands.DirectMessage;
 using Contracts;
-using Contracts.Crone;
 using MassTransit;
 using MediatR.Pipeline;
+using OnlineChat.Cron.Contracts;
 
 namespace Application.CQRS.Pipelines.DirectMessage
 {
@@ -30,7 +30,7 @@ namespace Application.CQRS.Pipelines.DirectMessage
                 return;
             }
 
-            var autoDelete = new AutoMessageDelete()
+            var autoDelete = new MessageAutoDelete()
             {
                 MessageId = response.Id,
                 Delay = TimeSpan.FromSeconds(request.TimeToLife.Value)
