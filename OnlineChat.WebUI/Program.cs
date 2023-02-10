@@ -24,6 +24,7 @@ using Azure.Storage.Blobs;
 using Hellang.Middleware.ProblemDetails;
 using Application.Interfaces.Mappers;
 using Application.Mappers;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,9 +69,37 @@ builder.Services.AddScoped<IAttachmentRepository, AttachmentRepository>();
 builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobConnection")));
 builder.Services.AddScoped<IBlobService, BlobService>();
 
+// Masstransit
+builder.Services.AddMassTransit(x =>
+{
+    x.SetKebabCaseEndpointNameFormatter();
+
+    // By default, sagas are in-memory, but should be changed to a durable
+    // saga repository.
+    x.SetInMemorySagaRepositoryProvider();
+
+    var entryAssembly = Assembly.GetEntryAssembly();
+
+    //x.AddConsumers(entryAssembly);
+    //x.AddSagaStateMachines(entryAssembly);
+    //x.AddSagas(entryAssembly);
+    //x.AddActivities(entryAssembly);
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        cfg.ConfigureEndpoints(context);
+    });
+});
+
 // AddCoreDependencies - some services
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
+//builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>));
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(ValidationBehavior<,>)));
 // AddWebUiDependencies
