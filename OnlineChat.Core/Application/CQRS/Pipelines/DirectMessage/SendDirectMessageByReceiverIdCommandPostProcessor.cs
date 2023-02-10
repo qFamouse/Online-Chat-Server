@@ -25,7 +25,7 @@ namespace Application.CQRS.Pipelines.DirectMessage
 
         public async Task Process(SendDirectMessageByReceiverIdCommand request, Entities.DirectMessage response, CancellationToken cancellationToken)
         {
-            if (!request.TimeToLife.HasValue)
+            if (!request.TimeToLive.HasValue)
             {
                 return;
             }
@@ -33,7 +33,7 @@ namespace Application.CQRS.Pipelines.DirectMessage
             var autoDelete = new MessageAutoDelete()
             {
                 MessageId = response.Id,
-                Delay = TimeSpan.FromSeconds(request.TimeToLife.Value)
+                Delay = TimeSpan.FromSeconds(request.TimeToLive.Value)
             };
 
             await _bus.Publish(autoDelete, cancellationToken);

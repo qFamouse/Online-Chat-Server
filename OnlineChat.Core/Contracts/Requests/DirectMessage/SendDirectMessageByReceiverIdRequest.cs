@@ -6,6 +6,6 @@ namespace Contracts.Requests.DirectMessage
     {
         public int ReceiverId { get; set; }
         public string Message { get; set; }
-        public int? TimeToLife { get; set; }
+        public int? TimeToLive { get; set; }
     }
 }

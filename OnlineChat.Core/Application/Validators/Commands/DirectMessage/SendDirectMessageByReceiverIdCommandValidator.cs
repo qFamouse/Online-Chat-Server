@@ -30,7 +30,7 @@ namespace Application.Validators.Commands.DirectMessage
                 .NotEmpty()
                 .MustAsync(UserMustBeExists).WithMessage(Messages.NotFound);
 
-            RuleFor(x => x.TimeToLife)
+            RuleFor(x => x.TimeToLive)
                 .GreaterThan(5)
                 .LessThan(60);
         }
