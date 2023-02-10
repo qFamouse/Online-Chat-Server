@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Online.Chat.Crone.Repositories.Abstractions;
+using Online.Chat.Crone.Repositories.Implementations;
 
 namespace Online.Chat.Crone
 {
@@ -45,6 +48,9 @@ namespace Online.Chat.Crone
                             cfg.ConfigureEndpoints(context);
                         });
                     });
+
+                    services.AddSingleton<DapperContext>();
+                    services.AddTransient<IMessageRepository, MessageRepository>();
                 });
     }
 }
