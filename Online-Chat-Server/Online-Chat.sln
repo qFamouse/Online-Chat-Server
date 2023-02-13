@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "OnlineChat.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "OnlineChat.Infrastructure\Shared\Shared.csproj", "{EBE7FA54-F4AB-466B-B453-12ADDC62719F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "Resources\Resources.csproj", "{38192777-79A7-4091-9690-E19F5199FC09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "OnlineChat.Core\Resources\Resources.csproj", "{38192777-79A7-4091-9690-E19F5199FC09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
