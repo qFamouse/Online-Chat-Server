@@ -16,11 +16,11 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.11" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.11" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.25.1" />
+    <PackageReference Include="OnlineChat.MassTransit" Version="1.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OnlineChat.Cron\OnlineChat.Cron.csproj" />
     <ProjectReference Include="..\..\Resources\Resources.csproj" />
     <ProjectReference Include="..\Configurations\Configurations.csproj" />
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
