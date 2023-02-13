@@ -1,4 +1,11 @@
+using System.Net.Mime;
+using System.Reflection;
+using Application.Consumers;
+using Application.Interfaces;
 using Hangfire;
+using MassTransit;
+using Repositories;
+using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +16,36 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<DapperContext>();
+builder.Services.AddTransient<IMessageRepository, MessageRepository>();
+
+builder.Services.AddMassTransit(x =>
+{
+    x.SetKebabCaseEndpointNameFormatter();
+
+    // By default, sagas are in-memory, but should be changed to a durable
+    // saga repository.
+    x.SetInMemorySagaRepositoryProvider();
+
+    var entryAssembly = Assembly.GetEntryAssembly();
+    var applicationAssembly = Assembly.GetAssembly(typeof(Application.Application));
+
+    x.AddConsumers(applicationAssembly);
+    x.AddSagaStateMachines(entryAssembly);
+    x.AddSagas(entryAssembly);
+    x.AddActivities(entryAssembly);
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", hc =>
+        {
+            hc.Username("guest");
+            hc.Password("guest");
+        });
+
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 builder.Services.AddHangfire(x =>
 {

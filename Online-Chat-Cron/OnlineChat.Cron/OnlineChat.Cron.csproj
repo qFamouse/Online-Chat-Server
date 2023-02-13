@@ -7,8 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hangfire" Version="1.7.33" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.33" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.33" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineChatCron.Domain\Application\Application.csproj" />
+    <ProjectReference Include="..\OnlineChatCron.Infrastructure\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\OnlineChatCron.Infrastructure\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>
