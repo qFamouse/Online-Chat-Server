@@ -38,9 +38,24 @@ namespace Application.Consumers
 
             var message = await _messageRepository.GetByIdAsync(context.Message.MessageId);
 
-            var whenDeleted = _backgroundJobClient.Schedule(() =>
-                _messageRepository.DeleteMessageByIdAsync(context.Message.MessageId), context.Message.Delay);
-            //_backgroundJobClient.ContinueJobWith(whenDeleted, () => _bus.Publish());
+            var deletedMessage = new MessageHasBeenDeletedContract
+            {
+                MessageId = message.Id,
+                SenderId = message.SenderId,
+                ReceiverId = message.ReceiverId
+            };
+
+            var whenDeleted = _backgroundJobClient
+                .Schedule(() => _messageRepository
+                    .DeleteMessageByIdAsync(context.Message.MessageId), context.Message.Delay);
+
+            _backgroundJobClient                                // TODO: Maybe temp solution
+                .ContinueJobWith(whenDeleted,  () => MessageHasBeenDeleted(deletedMessage));
+        }
+
+        public async Task MessageHasBeenDeleted(MessageHasBeenDeletedContract deletedMessage)
+        {
+            await _bus.Publish(deletedMessage);
         }
     }
 }
