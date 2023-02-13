@@ -80,10 +80,10 @@ builder.Services.AddMassTransit(x =>
 
     var entryAssembly = Assembly.GetEntryAssembly();
 
-    //x.AddConsumers(entryAssembly);
-    //x.AddSagaStateMachines(entryAssembly);
-    //x.AddSagas(entryAssembly);
-    //x.AddActivities(entryAssembly);
+    x.AddConsumers(entryAssembly);
+    x.AddSagaStateMachines(entryAssembly);
+    x.AddSagas(entryAssembly);
+    x.AddActivities(entryAssembly);
 
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -191,6 +191,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 #endregion
+
 
 var app = builder.Build();
 
