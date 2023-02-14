@@ -1,4 +1,5 @@
 ﻿using Application.Entities;
+using Application.Functions;
 using Application.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Shared;
@@ -40,6 +41,16 @@ namespace Repositories
                 .Select(dm => dm.Receiver);
 
             return await senders.Union(receivers).Distinct().ToListAsync(cancellationToken);
+        }
+
+        public async Task<DirectMessageStatistics> GetDirectMessageStatisticsByUserIdAsync(int userId, CancellationToken cancellationToken = default)
+        {
+            var statistics = await DbContext
+                .Set<DirectMessageStatistics>()
+                .FromSqlRaw($"SELECT * FROM GetStatisticByUserId({userId})")
+                .FirstAsync(cancellationToken);
+
+            return statistics;
         }
     }
 }

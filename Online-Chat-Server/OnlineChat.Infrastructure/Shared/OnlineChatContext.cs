@@ -1,4 +1,5 @@
 ﻿using Application.Entities;
+using Application.Functions;
 using Application.Interfaces.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -46,6 +47,10 @@ namespace Shared
                 .HasOne(p => p.Conversation)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<DirectMessageStatistics>()
+                .ToFunction("GetStatisticByUserId")
+                .HasNoKey();
 
             base.OnModelCreating(builder);
         }
