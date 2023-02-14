@@ -33,20 +33,6 @@ namespace EntityFramework.MicrosoftSQL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.UpdateData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "ConcurrencyStamp",
-                value: "114845f6-832f-4431-8538-5af249f0a161");
-
-            migrationBuilder.UpdateData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "ConcurrencyStamp",
-                value: "5b98b53d-2571-4a74-a6e3-a0a53764dd0b");
-
             migrationBuilder.CreateIndex(
                 name: "IX_Attachments_DirectMessageId",
                 table: "Attachments",
@@ -57,20 +43,6 @@ namespace EntityFramework.MicrosoftSQL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Attachments");
-
-            migrationBuilder.UpdateData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: 1,
-                column: "ConcurrencyStamp",
-                value: "d9494898-f3f8-4ea9-93d6-2e1a3a5059ac");
-
-            migrationBuilder.UpdateData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: 2,
-                column: "ConcurrencyStamp",
-                value: "7d04420b-1e0c-4592-9d98-8321feb2a46f");
         }
     }
 }

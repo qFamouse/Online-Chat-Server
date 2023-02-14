@@ -26,12 +26,14 @@ namespace Shared
                         Id = 1,
                         Name = Resources.Roles.User,
                         NormalizedName = Resources.Roles.UserNormalized,
+                        ConcurrencyStamp = "d9494898-f3f8-4ea9-93d6-2e1a3a5059ac"
                     },
                     new IdentityRole<int>
                     {
                         Id = 2,
                         Name = Resources.Roles.Admin,
                         NormalizedName = Resources.Roles.AdminNormalized,
+                        ConcurrencyStamp = "7d04420b-1e0c-4592-9d98-8321feb2a46f"
                     }
                 );
 

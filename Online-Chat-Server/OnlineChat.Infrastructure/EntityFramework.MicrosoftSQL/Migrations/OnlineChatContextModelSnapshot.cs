@@ -295,14 +295,14 @@ namespace EntityFramework.MicrosoftSQL.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "c8fc6e3b-f924-447c-bf59-5b6252e6ecab",
+                            ConcurrencyStamp = "d9494898-f3f8-4ea9-93d6-2e1a3a5059ac",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "4ea9713d-a979-4e21-9144-b70192dd40c6",
+                            ConcurrencyStamp = "7d04420b-1e0c-4592-9d98-8321feb2a46f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
