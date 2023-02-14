@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace Application.Functions
 {
-    public class DirectMessageStatistics
+    public class DirectMessageStatistics : IRequest<Unit>
     {
         public int TotalMessages { get; set; }
         public int TotalSent { get; set; }

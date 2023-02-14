@@ -35,5 +35,11 @@ namespace OnlineChat.WebUI.Controllers
         {
             return Ok(await _sender.Send(new GetInterlocutorsByUserIdQuery()));
         }
+
+        [HttpGet("statistics")]
+        public async Task<ActionResult> GetMessageStatisticsAsync()
+        {
+            return Ok(await _sender.Send(new GetDirectMessageStatisticsQuery()));
+        }
     }
 }
