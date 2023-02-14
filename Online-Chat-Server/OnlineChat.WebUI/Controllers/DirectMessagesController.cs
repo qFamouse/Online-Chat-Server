@@ -39,7 +39,10 @@ namespace OnlineChat.WebUI.Controllers
         [HttpGet("statistics")]
         public async Task<ActionResult> GetMessageStatisticsAsync()
         {
-            return Ok(await _sender.Send(new GetDirectMessageStatisticsQuery()));
+            var pdfStream = await _sender.Send(new GetDirectMessageStatisticsQuery());
+
+            return File(pdfStream, "application/pdf", "statistics");
+
         }
     }
 }

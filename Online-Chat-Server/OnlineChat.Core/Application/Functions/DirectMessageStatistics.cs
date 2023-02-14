@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Functions
 {
-    public class DirectMessageStatistics : IRequest<Unit>
+    public class DirectMessageStatistics
     {
         public int TotalMessages { get; set; }
         public int TotalSent { get; set; }

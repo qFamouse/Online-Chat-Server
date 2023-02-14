@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.CQRS.Queries.DirectMessage
 {
-    public class GetDirectMessageStatisticsQuery : IRequest<DirectMessageStatistics>
+    public class GetDirectMessageStatisticsQuery : IRequest<Stream>
     {
         public GetDirectMessageStatisticsQuery() { }
     }
