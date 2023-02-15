@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces.Repositories;
-using Application.Queries;
 using Data.Entities;
+using Data.Queries;
 using Microsoft.EntityFrameworkCore;
 using Shared;
 

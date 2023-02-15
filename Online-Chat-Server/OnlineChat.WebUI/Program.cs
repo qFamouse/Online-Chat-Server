@@ -24,6 +24,7 @@ using Hellang.Middleware.ProblemDetails;
 using Application.Interfaces.Mappers;
 using Application.Mappers;
 using Data.Entities;
+using EntityFramework.SqlServer;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);

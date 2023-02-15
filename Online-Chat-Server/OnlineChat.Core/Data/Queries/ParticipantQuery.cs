@@ -1,4 +1,4 @@
-﻿namespace Application.Queries;
+﻿namespace Data.Queries;
 
 public class ParticipantQuery
 {

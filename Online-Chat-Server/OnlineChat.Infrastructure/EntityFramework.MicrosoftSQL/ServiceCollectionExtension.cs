@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Shared;
-using System.Reflection;
 
-namespace EntityFramework.MicrosoftSQL
+namespace EntityFramework.SqlServer
 {
     public static class ServiceCollectionExtension
     {
