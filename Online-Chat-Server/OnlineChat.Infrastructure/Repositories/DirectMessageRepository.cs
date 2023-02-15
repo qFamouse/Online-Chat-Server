@@ -1,6 +1,6 @@
-﻿using Application.Functions;
-using Application.Interfaces.Repositories;
+﻿using Application.Interfaces.Repositories;
 using Data.Entities;
+using Data.Functions;
 using Microsoft.EntityFrameworkCore;
 using Shared;
 

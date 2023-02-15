@@ -1,5 +1,5 @@
-﻿using Application.Functions;
-using Data.Entities;
+﻿using Data.Entities;
+using Data.Functions;
 
 namespace Application.Interfaces.Repositories;
 

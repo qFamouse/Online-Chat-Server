@@ -1,5 +1,5 @@
-﻿using Application.Functions;
-using Data.Entities;
+﻿using Data.Entities;
+using Data.Functions;
 using Data.Interfaces.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
