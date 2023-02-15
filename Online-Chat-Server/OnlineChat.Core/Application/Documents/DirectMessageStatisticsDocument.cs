@@ -26,7 +26,7 @@ public class DirectMessageStatisticsDocument : IDocument
 
                 page.Header().Element(ComposeHeader);
                 page.Content().Element(ComposeTable);
-                //page.Footer().Element(ComposeFooter);
+                page.Footer().Element(ComposeFooter);
             });
     }
 
@@ -90,10 +90,8 @@ public class DirectMessageStatisticsDocument : IDocument
     {
         container
             .Height(50)
-            .Background(Colors.Red.Darken1)
             .AlignCenter()
             .AlignBottom()
-            .Text("Copyright © 2023 Online Chat")
-            .FontColor(Colors.White);
+            .Text("Copyright © 2023 Online Chat");
     }
 }
