@@ -1,5 +1,4 @@
 using Application.CQRS.Commands.User;
-using Application.Entities;
 using Application.Interfaces.Repositories;
 using Application.Validators;
 using Configurations;
@@ -24,6 +23,7 @@ using Azure.Storage.Blobs;
 using Hellang.Middleware.ProblemDetails;
 using Application.Interfaces.Mappers;
 using Application.Mappers;
+using Data.Entities;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);

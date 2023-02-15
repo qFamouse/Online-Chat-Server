@@ -1,6 +1,6 @@
-using Application.Entities;
 using Application.Interfaces.Mappers;
 using Contracts.Views.User;
+using Data.Entities;
 
 namespace Application.Mappers
 {

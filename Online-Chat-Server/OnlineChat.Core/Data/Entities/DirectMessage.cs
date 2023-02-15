@@ -1,6 +1,6 @@
-﻿using Application.Interfaces.Entities;
+﻿using Data.Interfaces.Entities;
 
-namespace Application.Entities
+namespace Data.Entities
 {
     public class DirectMessage : IEntity
     {

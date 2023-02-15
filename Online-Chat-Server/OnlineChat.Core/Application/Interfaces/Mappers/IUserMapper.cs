@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Entities;
-using Contracts.Views.User;
+﻿using Contracts.Views.User;
+using Data.Entities;
 using Mapster;
 
-namespace Application.Interfaces.Mappers
+namespace Application.Interfaces.Mappers;
+
+[Mapper]
+public interface IUserMapper
 {
-    [Mapper]
-    public interface IUserMapper
-    {
-        AboutUserView MapToAbout(User user);
-        UserView MapToView(User user);
-    }
+    AboutUserView MapToAbout(User user);
+    UserView MapToView(User user);
 }

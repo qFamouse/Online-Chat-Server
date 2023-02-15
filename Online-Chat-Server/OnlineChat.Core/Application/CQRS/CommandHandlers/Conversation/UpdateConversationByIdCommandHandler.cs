@@ -1,36 +1,30 @@
 ﻿using Application.CQRS.Commands.Conversation;
 using Application.Interfaces.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.CQRS.CommandHandlers.Conversation
+namespace Application.CQRS.CommandHandlers.Conversations;
+
+internal class UpdateConversationByIdCommandHandler : IRequestHandler<UpdateConversationByIdCommand, Data.Entities.Conversation>
 {
-    internal class UpdateConversationByIdCommandHandler : IRequestHandler<UpdateConversationByIdCommand, Entities.Conversation>
+    private readonly IConversationRepository _conversationRepository;
+
+    public UpdateConversationByIdCommandHandler
+    (
+        IConversationRepository conversationRepository
+    )
     {
-        private readonly IConversationRepository _conversationRepository;
+        _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
+    }
 
-        public UpdateConversationByIdCommandHandler
-        (
-            IConversationRepository conversationRepository
-        )
-        {
-            _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
-        }
+    public async Task<Data.Entities.Conversation> Handle(UpdateConversationByIdCommand request, CancellationToken cancellationToken)
+    {
+        var conversation = await _conversationRepository.GetByIdAsync(request.ConversationId, cancellationToken);
 
-        public async Task<Entities.Conversation> Handle(UpdateConversationByIdCommand request, CancellationToken cancellationToken)
-        {
-            var conversation = await _conversationRepository.GetByIdAsync(request.ConversationId, cancellationToken);
+        conversation.Title = request.Title ?? conversation.Title;
+        conversation.OwnerId = request.OwnerId ?? conversation.OwnerId;
 
-            conversation.Title = request.Title ?? conversation.Title;
-            conversation.OwnerId = request.OwnerId ?? conversation.OwnerId;
+        await _conversationRepository.Save(cancellationToken);
 
-            await _conversationRepository.Save(cancellationToken);
-
-            return conversation;
-        }
+        return conversation;
     }
 }

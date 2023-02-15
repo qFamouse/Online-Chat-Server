@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Application.Entities;
 using Application.Interfaces.Mappers;
 using Contracts.Views.Attachment;
 using Contracts.Views.DirectMessage;
+using Data.Entities;
 
 namespace Application.Mappers
 {

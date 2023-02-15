@@ -1,15 +1,9 @@
-﻿using Application.Entities;
-using Application.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Queries;
+using Data.Entities;
 
-namespace Application.Interfaces.Repositories
+namespace Application.Interfaces.Repositories;
+
+public interface IParticipantRepository : IBaseRepository<Participant>
 {
-    public interface IParticipantRepository : IBaseRepository<Participant>
-    {
-        Task<Participant?> GetByQueryAsync(ParticipantQuery query);
-    }
+    Task<Participant?> GetByQueryAsync(ParticipantQuery query);
 }

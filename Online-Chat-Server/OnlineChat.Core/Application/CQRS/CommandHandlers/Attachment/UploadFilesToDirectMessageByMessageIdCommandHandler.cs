@@ -1,85 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using Application.CQRS.Commands.Attachment;
-using Application.Entities;
+﻿using Application.CQRS.Commands.Attachment;
 using Application.Interfaces.Mappers;
 using Application.Interfaces.Repositories;
 using Application.Services.Abstractions;
 using Configurations;
-using Contracts.Requests.DirectMessage;
 using Contracts.Views.Attachment;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 
-namespace Application.CQRS.CommandHandlers.Attachment
+namespace Application.CQRS.CommandHandlers.Attachment;
+
+internal class UploadFilesToDirectMessageByMessageIdCommandHandler : IRequestHandler<UploadFilesToDirectMessageByMessageIdCommand, List<AttachmentChatView>>
 {
-    internal class UploadFilesToDirectMessageByMessageIdCommandHandler : IRequestHandler<UploadFilesToDirectMessageByMessageIdCommand, List<AttachmentChatView>>
+    private readonly IDirectMessageRepository _directMessageRepository;
+    private readonly IAttachmentRepository _attachmentRepository;
+    private readonly IBlobService _blobService;
+    private readonly AzureBlobConfiguration _azureBlobConfiguration;
+    private readonly IAttachmentMapper _attachmentMapper;
+
+    public UploadFilesToDirectMessageByMessageIdCommandHandler
+    (
+        IDirectMessageRepository directMessageRepository, 
+        IBlobService blobService, 
+        IAttachmentRepository attachmentRepository, 
+        IOptions<AzureBlobConfiguration> azureBlobOptions,
+        IAttachmentMapper attachmentMapper
+    )
     {
-        private readonly IDirectMessageRepository _directMessageRepository;
-        private readonly IAttachmentRepository _attachmentRepository;
-        private readonly IBlobService _blobService;
-        private readonly AzureBlobConfiguration _azureBlobConfiguration;
-        private readonly IAttachmentMapper _attachmentMapper;
+        _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
+        _blobService = blobService ?? throw new ArgumentNullException(nameof(blobService));
+        _attachmentRepository = attachmentRepository ?? throw new ArgumentNullException(nameof(attachmentRepository));
+        _azureBlobConfiguration = azureBlobOptions.Value ?? throw new ArgumentNullException(nameof(azureBlobOptions));
+        _attachmentMapper = attachmentMapper ?? throw new ArgumentNullException(nameof(attachmentMapper));
+    }
 
-        public UploadFilesToDirectMessageByMessageIdCommandHandler
-        (
-            IDirectMessageRepository directMessageRepository, 
-            IBlobService blobService, 
-            IAttachmentRepository attachmentRepository, 
-            IOptions<AzureBlobConfiguration> azureBlobOptions,
-            IAttachmentMapper attachmentMapper
-            )
+    public async Task<List<AttachmentChatView>> Handle(UploadFilesToDirectMessageByMessageIdCommand request, CancellationToken cancellationToken)
+    {
+        var message = await _directMessageRepository.GetByIdAsync(request.MessageId, cancellationToken);
+        string blobContainer = _azureBlobConfiguration.DirectMessagesContainer;
+
+        var attachments = new List<Data.Entities.Attachment>();
+
+        foreach (IFormFile file in request.Files)
         {
-            _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
-            _blobService = blobService ?? throw new ArgumentNullException(nameof(blobService));
-            _attachmentRepository = attachmentRepository ?? throw new ArgumentNullException(nameof(attachmentRepository));
-            _azureBlobConfiguration = azureBlobOptions.Value ?? throw new ArgumentNullException(nameof(azureBlobOptions));
-            _attachmentMapper = attachmentMapper ?? throw new ArgumentNullException(nameof(attachmentMapper));
-        }
+            string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+            string filePath = $"{message.SenderId}/{message.ReceiverId}";
 
-        public async Task<List<AttachmentChatView>> Handle(UploadFilesToDirectMessageByMessageIdCommand request, CancellationToken cancellationToken)
-        {
-            var message = await _directMessageRepository.GetByIdAsync(request.MessageId, cancellationToken);
-            string blobContainer = _azureBlobConfiguration.DirectMessagesContainer;
+            string blobFileName = $"{filePath}/{uniqueFileName}";
 
-            var attachments = new List<Entities.Attachment>();
-
-            foreach (IFormFile file in request.Files)
+            await using (var stream = file.OpenReadStream())
             {
-                string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-                string filePath = $"{message.SenderId}/{message.ReceiverId}";
+                var properties = await _blobService.UploadFileBlobAsync(blobContainer, stream, blobFileName, file.ContentType, cancellationToken);
 
-                string blobFileName = $"{filePath}/{uniqueFileName}";
-
-                await using (var stream = file.OpenReadStream())
+                var attachment = new Data.Entities.Attachment()
                 {
-                    var properties = await _blobService.UploadFileBlobAsync(blobContainer, stream, blobFileName, file.ContentType, cancellationToken);
+                    OriginalName = file.FileName,
+                    BlobName = uniqueFileName,
+                    BlobPath = filePath,
+                    ContentType = properties.ContentType,
+                    ContentLength = properties.ContentLength,
+                    DirectMessageId = message.Id
+                };
 
-                    var attachment = new Entities.Attachment()
-                    {
-                        OriginalName = file.FileName,
-                        BlobName = uniqueFileName,
-                        BlobPath = filePath,
-                        ContentType = properties.ContentType,
-                        ContentLength = properties.ContentLength,
-                        DirectMessageId = message.Id
-                    };
-
-                    await _attachmentRepository.InsertAsync(attachment, cancellationToken);
-                    await _attachmentRepository.Save(cancellationToken); // TODO: Save after all loading? - No because we can get exception
-                    attachments.Add(attachment);
-                }
+                await _attachmentRepository.InsertAsync(attachment, cancellationToken);
+                await _attachmentRepository.Save(cancellationToken); // TODO: Save after all loading? - No because we can get exception
+                attachments.Add(attachment);
             }
-
-            var result = _attachmentMapper.MapToChatView(attachments).ToList();
-
-            return result;
         }
+
+        var result = _attachmentMapper.MapToChatView(attachments).ToList();
+
+        return result;
     }
 }

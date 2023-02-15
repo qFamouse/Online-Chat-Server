@@ -2,26 +2,25 @@
 using Application.Interfaces.Repositories;
 using MediatR;
 
-namespace Application.CQRS.CommandHandlers.Conversation
+namespace Application.CQRS.CommandHandlers.Conversation;
+
+internal class DeleteConversationByIdCommandHandler : IRequestHandler<DeleteConversationByIdCommand, Unit>
 {
-    internal class DeleteConversationByIdCommandHandler : IRequestHandler<DeleteConversationByIdCommand, Unit>
+    private readonly IConversationRepository _conversationRepository;
+
+    public DeleteConversationByIdCommandHandler
+    (
+        IConversationRepository conversationRepository
+    )
     {
-        private readonly IConversationRepository _conversationRepository;
+        _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
+    }
 
-        public DeleteConversationByIdCommandHandler
-        (
-            IConversationRepository conversationRepository
-        )
-        {
-            _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
-        }
+    public async Task<Unit> Handle(DeleteConversationByIdCommand request, CancellationToken cancellationToken)
+    {
+        await _conversationRepository.DeleteByIdAsync(request.ConversationId, cancellationToken);
+        await _conversationRepository.Save(cancellationToken);
 
-        public async Task<Unit> Handle(DeleteConversationByIdCommand request, CancellationToken cancellationToken)
-        {
-            await _conversationRepository.DeleteByIdAsync(request.ConversationId, cancellationToken);
-            await _conversationRepository.Save(cancellationToken);
-
-            return Unit.Value;
-        }
+        return Unit.Value;
     }
 }

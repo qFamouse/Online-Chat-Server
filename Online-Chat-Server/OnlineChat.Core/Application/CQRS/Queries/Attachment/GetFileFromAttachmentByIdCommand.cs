@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 using Azure.Storage.Blobs.Models;
 using MediatR;
 
-namespace Application.CQRS.Queries.Attachment
-{
-    public class GetFileFromAttachmentByIdCommand : IRequest<BlobDownloadInfo>
-    {
-        public int Id { get; set; }
+namespace Application.CQRS.Queries.Attachment;
 
-        public GetFileFromAttachmentByIdCommand(int id)
-        {
-            Id = id;
-        }
+public class GetFileFromAttachmentByIdCommand : IRequest<BlobDownloadInfo>
+{
+    public int Id { get; set; }
+
+    public GetFileFromAttachmentByIdCommand(int id)
+    {
+        Id = id;
     }
 }

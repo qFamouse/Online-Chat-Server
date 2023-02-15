@@ -6,57 +6,56 @@ using Microsoft.AspNetCore.Identity;
 using Resources;
 using Services.Interfaces;
 
-namespace Application.Validators.Commands.Participant
+namespace Application.Validators.Commands.Participant;
+
+internal sealed class AddParticipantByUserIdCommandValidator : AbstractValidator<AddParticipantByUserIdCommand>
 {
-    internal sealed class AddParticipantByUserIdCommandValidator : AbstractValidator<AddParticipantByUserIdCommand>
+    private readonly IParticipantRepository _participantRepository;
+    private readonly IConversationRepository _conversationRepository;
+    private readonly IIdentityService _identityService;
+    private readonly UserManager<Data.Entities.User> _userManager;
+
+    public AddParticipantByUserIdCommandValidator(IConversationRepository conversationRepository, IParticipantRepository participantRepository, IIdentityService identityService, UserManager<Data.Entities.User> userManager)
     {
-        private readonly IParticipantRepository _participantRepository;
-        private readonly IConversationRepository _conversationRepository;
-        private readonly IIdentityService _identityService;
-        private readonly UserManager<Entities.User> _userManager;
+        _participantRepository = participantRepository ?? throw new ArgumentNullException(nameof(participantRepository));
+        _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
+        _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+        _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
 
-        public AddParticipantByUserIdCommandValidator(IConversationRepository conversationRepository, IParticipantRepository participantRepository, IIdentityService identityService, UserManager<Entities.User> userManager)
+        RuleFor(x => x.UserId)
+            .NotEmpty()
+            .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(Messages.NotFound);
+
+
+        RuleFor(x => x)
+            .MustAsync(MustNotBeParticipantOfConversation).WithMessage(Messages.AlreadyExists);
+
+        RuleFor(x => x.ConversationId)
+            .NotEmpty()
+            .MustAsync(_conversationRepository.ExistsAsync).WithMessage(Messages.NotFound)
+            .MustAsync(MustBeParticipantOfConversation).WithMessage(Messages.AccessDenied);
+    }
+
+    private async Task<bool> MustBeParticipantOfConversation(int conversationId, CancellationToken cancellationToken)
+    {
+        var currentUserId = _identityService.GetUserId();
+        var participant = await _participantRepository.GetByQueryAsync(new ParticipantQuery()
         {
-            _participantRepository = participantRepository ?? throw new ArgumentNullException(nameof(participantRepository));
-            _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
-            _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
-            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            ConversationId = conversationId,
+            UserId = currentUserId
+        });
 
-            RuleFor(x => x.UserId)
-                .NotEmpty()
-                .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(Messages.NotFound);
+        return participant != null;
+    }
 
-
-            RuleFor(x => x)
-                .MustAsync(MustNotBeParticipantOfConversation).WithMessage(Messages.AlreadyExists);
-
-            RuleFor(x => x.ConversationId)
-                .NotEmpty()
-                .MustAsync(_conversationRepository.ExistsAsync).WithMessage(Messages.NotFound)
-                .MustAsync(MustBeParticipantOfConversation).WithMessage(Messages.AccessDenied);
-        }
-
-        private async Task<bool> MustBeParticipantOfConversation(int conversationId, CancellationToken cancellationToken)
+    private async Task<bool> MustNotBeParticipantOfConversation(AddParticipantByUserIdCommand command, CancellationToken cancellationToken)
+    {
+        var participant = await _participantRepository.GetByQueryAsync(new ParticipantQuery()
         {
-            var currentUserId = _identityService.GetUserId();
-            var participant = await _participantRepository.GetByQueryAsync(new ParticipantQuery()
-            {
-                ConversationId = conversationId,
-                UserId = currentUserId
-            });
+            ConversationId = command.ConversationId,
+            UserId = command.UserId
+        });
 
-            return participant != null;
-        }
-
-        private async Task<bool> MustNotBeParticipantOfConversation(AddParticipantByUserIdCommand command, CancellationToken cancellationToken)
-        {
-            var participant = await _participantRepository.GetByQueryAsync(new ParticipantQuery()
-            {
-                ConversationId = command.ConversationId,
-                UserId = command.UserId
-            });
-
-            return participant == null;
-        }
+        return participant == null;
     }
 }

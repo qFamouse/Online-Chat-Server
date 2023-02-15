@@ -1,10 +1,9 @@
-﻿using Application.Entities;
-using Application.Functions;
-using Application.Interfaces.Entities;
+﻿using Application.Functions;
+using Data.Entities;
+using Data.Interfaces.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Resources;
 
 namespace Shared
 {

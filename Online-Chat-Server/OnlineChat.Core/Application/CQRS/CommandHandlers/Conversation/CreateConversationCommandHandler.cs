@@ -2,41 +2,35 @@
 using Application.Interfaces.Repositories;
 using MediatR;
 using Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.CQRS.CommandHandlers.Conversation
+namespace Application.CQRS.CommandHandlers.Conversation;
+
+internal class CreateConversationCommandHandler : IRequestHandler<CreateConversationCommand, Data.Entities.Conversation>
 {
-    internal class CreateConversationCommandHandler : IRequestHandler<CreateConversationCommand, Entities.Conversation>
+    private readonly IConversationRepository _conversationRepository;
+    private readonly IIdentityService _identityService;
+
+    public CreateConversationCommandHandler
+    (
+        IConversationRepository conversationRepository, 
+        IIdentityService identityService
+    )
     {
-        private readonly IConversationRepository _conversationRepository;
-        private readonly IIdentityService _identityService;
+        _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
+        _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+    }
 
-        public CreateConversationCommandHandler
-        (
-            IConversationRepository conversationRepository, 
-            IIdentityService identityService
-        )
+    public async Task<Data.Entities.Conversation> Handle(CreateConversationCommand request, CancellationToken cancellationToken)
+    {
+        var conversation = new Data.Entities.Conversation()
         {
-            _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
-            _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
-        }
+            Title = request.Title,
+            OwnerId = _identityService.GetUserId()
+        };
 
-        public async Task<Entities.Conversation> Handle(CreateConversationCommand request, CancellationToken cancellationToken)
-        {
-            var conversation = new Entities.Conversation()
-            {
-                Title = request.Title,
-                OwnerId = _identityService.GetUserId()
-            };
+        await _conversationRepository.InsertAsync(conversation, cancellationToken);
+        await _conversationRepository.Save(cancellationToken);
 
-            await _conversationRepository.InsertAsync(conversation, cancellationToken);
-            await _conversationRepository.Save(cancellationToken);
-
-            return conversation;
-        }
+        return conversation;
     }
 }

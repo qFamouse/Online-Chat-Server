@@ -1,6 +1,6 @@
 ﻿using System.Net;
-using Application.Interfaces.Entities;
 using Application.Interfaces.Repositories;
+using Data.Interfaces.Entities;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.EntityFrameworkCore;
 using Shared;

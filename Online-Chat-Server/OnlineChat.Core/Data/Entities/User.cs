@@ -1,7 +1,7 @@
-﻿using Application.Interfaces.Entities;
+﻿using Data.Interfaces.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace Application.Entities
+namespace Data.Entities
 {
     public class User : IdentityUser<int>, IEntity
     {

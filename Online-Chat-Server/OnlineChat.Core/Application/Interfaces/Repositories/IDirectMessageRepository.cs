@@ -1,13 +1,12 @@
-﻿using Application.Entities;
-using Application.Functions;
+﻿using Application.Functions;
+using Data.Entities;
 
-namespace Application.Interfaces.Repositories
+namespace Application.Interfaces.Repositories;
+
+public interface IDirectMessageRepository : IBaseRepository<DirectMessage>
 {
-    public interface IDirectMessageRepository : IBaseRepository<DirectMessage>
-    {
-        Task<IEnumerable<DirectMessage>> GetDirectMessagesByUsersIdAsync(int senderId, int receiverId, CancellationToken cancellationToken = default);
-        Task<IEnumerable<DirectMessage>> GetDetailDirectMessagesByUsersIdAsync(int senderId, int receiverId, CancellationToken cancellationToken = default);
-        Task<IEnumerable<User>> GetInterlocutorsByUserIdAsync(int userId, CancellationToken cancellationToken = default);
-        Task<DirectMessageStatistics> GetDirectMessageStatisticsByUserIdAsync(int userId, CancellationToken cancellationToken = default);
-    }
+    Task<IEnumerable<DirectMessage>> GetDirectMessagesByUsersIdAsync(int senderId, int receiverId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<DirectMessage>> GetDetailDirectMessagesByUsersIdAsync(int senderId, int receiverId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<User>> GetInterlocutorsByUserIdAsync(int userId, CancellationToken cancellationToken = default);
+    Task<DirectMessageStatistics> GetDirectMessageStatisticsByUserIdAsync(int userId, CancellationToken cancellationToken = default);
 }

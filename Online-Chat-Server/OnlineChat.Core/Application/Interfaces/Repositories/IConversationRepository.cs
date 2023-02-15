@@ -1,13 +1,7 @@
-﻿using Application.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Data.Entities;
 
-namespace Application.Interfaces.Repositories
+namespace Application.Interfaces.Repositories;
+
+public interface IConversationRepository : IBaseRepository<Conversation>
 {
-    public interface IConversationRepository : IBaseRepository<Conversation>
-    {
-    }
 }

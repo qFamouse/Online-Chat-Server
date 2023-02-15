@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using Application.Functions;
 using MediatR;
 
-namespace Application.CQRS.Queries.DirectMessage
+namespace Application.CQRS.Queries.DirectMessage;
+
+public class GetDirectMessageStatisticsQuery : IRequest<Stream>
 {
-    public class GetDirectMessageStatisticsQuery : IRequest<Stream>
-    {
-        public GetDirectMessageStatisticsQuery() { }
-    }
+    public GetDirectMessageStatisticsQuery() { }
 }

@@ -6,41 +6,40 @@ using Application.CQRS.Commands.User;
 using Configurations;
 using Hellang.Middleware.ProblemDetails;
 
-namespace Application.CQRS.CommandHandlers.User
+namespace Application.CQRS.CommandHandlers.User;
+
+internal class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand, Data.Entities.User>
 {
-    internal class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand, Entities.User>
+    private readonly UserManager<Data.Entities.User> _userManager;
+    private readonly IdentityConfiguration _identityConfiguration;
+
+    public SignUpUserCommandHandler
+    (
+        UserManager<Data.Entities.User> userManager,
+        IOptions<IdentityConfiguration> identityConfiguration
+    )
     {
-        private readonly UserManager<Entities.User> _userManager;
-        private readonly IdentityConfiguration _identityConfiguration;
+        _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+        _identityConfiguration = identityConfiguration.Value ?? throw new ArgumentNullException(nameof(identityConfiguration));
+    }
 
-        public SignUpUserCommandHandler
-        (
-            UserManager<Entities.User> userManager,
-            IOptions<IdentityConfiguration> identityConfiguration
-        )
+    public async Task<Data.Entities.User> Handle(SignUpUserCommand request, CancellationToken cancellationToken)
+    {
+
+        IdentityResult result = await _userManager.CreateAsync(request.User, request.Password);
+
+        if (!result.Succeeded)
         {
-            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-            _identityConfiguration = identityConfiguration.Value ?? throw new ArgumentNullException(nameof(identityConfiguration));
+            throw new ProblemDetailsException((int)HttpStatusCode.BadRequest, result.Errors.First().Description);
         }
 
-        public async Task<Entities.User> Handle(SignUpUserCommand request, CancellationToken cancellationToken)
+        result = await _userManager.AddToRoleAsync(request.User, _identityConfiguration.DefaultRole);
+
+        if (!result.Succeeded)
         {
-
-            IdentityResult result = await _userManager.CreateAsync(request.User, request.Password);
-
-            if (!result.Succeeded)
-            {
-                throw new ProblemDetailsException((int)HttpStatusCode.BadRequest, result.Errors.First().Description);
-            }
-
-            result = await _userManager.AddToRoleAsync(request.User, _identityConfiguration.DefaultRole);
-
-            if (!result.Succeeded)
-            {
-                throw new ProblemDetailsException((int)HttpStatusCode.InternalServerError, result.Errors.First().Description);
-            }
-
-            return request.User;
+            throw new ProblemDetailsException((int)HttpStatusCode.InternalServerError, result.Errors.First().Description);
         }
+
+        return request.User;
     }
 }

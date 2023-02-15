@@ -1,12 +1,6 @@
-﻿using Application.Interfaces.Entities;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Data.Interfaces.Entities;
 
-namespace Application.Entities
+namespace Data.Entities
 {
     public class ConversationMessage : IEntity
     {

@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "OnlineChat.Infras
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "OnlineChat.Core\Resources\Resources.csproj", "{38192777-79A7-4091-9690-E19F5199FC09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "OnlineChat.Core\Data\Data.csproj", "{EBBC2DE0-5E7C-4796-B061-B3651728661A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{38192777-79A7-4091-9690-E19F5199FC09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38192777-79A7-4091-9690-E19F5199FC09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38192777-79A7-4091-9690-E19F5199FC09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBBC2DE0-5E7C-4796-B061-B3651728661A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBBC2DE0-5E7C-4796-B061-B3651728661A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBBC2DE0-5E7C-4796-B061-B3651728661A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBBC2DE0-5E7C-4796-B061-B3651728661A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{E889EA16-F890-4279-B503-B3FF23DD3E18} = {44E62F0E-CFFC-4867-9679-77D9914A81F0}
 		{EBE7FA54-F4AB-466B-B453-12ADDC62719F} = {E8572336-949C-4C05-86F5-4806498BD619}
 		{38192777-79A7-4091-9690-E19F5199FC09} = {44E62F0E-CFFC-4867-9679-77D9914A81F0}
+		{EBBC2DE0-5E7C-4796-B061-B3651728661A} = {44E62F0E-CFFC-4867-9679-77D9914A81F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {43991A9B-EBEF-4904-AABF-9719D0C96D88}

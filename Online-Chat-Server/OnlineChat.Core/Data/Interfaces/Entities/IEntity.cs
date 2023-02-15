@@ -1,4 +1,4 @@
-﻿namespace Application.Interfaces.Entities
+﻿namespace Data.Interfaces.Entities
 {
     public interface IEntity
     {

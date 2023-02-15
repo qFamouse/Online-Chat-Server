@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.CQRS.Queries.DirectMessage
+namespace Application.CQRS.Queries.DirectMessage;
+
+public class GetInterlocutorsByUserIdQuery : IRequest<IEnumerable<UserInterlocutorView>>
 {
-    public class GetInterlocutorsByUserIdQuery : IRequest<IEnumerable<UserInterlocutorView>>
-    {
-        public GetInterlocutorsByUserIdQuery() { }
-    }
+    public GetInterlocutorsByUserIdQuery() { }
 }
