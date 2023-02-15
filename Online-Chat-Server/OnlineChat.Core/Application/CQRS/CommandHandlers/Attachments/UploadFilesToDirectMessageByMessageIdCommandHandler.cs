@@ -64,7 +64,7 @@ internal class UploadFilesToDirectMessageByMessageIdCommandHandler : IRequestHan
                 };
 
                 await _attachmentRepository.InsertAsync(attachment, cancellationToken);
-                await _attachmentRepository.Save(cancellationToken); // TODO: Save after all loading? - No because we can get exception
+                await _attachmentRepository.Save(cancellationToken);
                 attachments.Add(attachment);
             }
         }
