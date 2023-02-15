@@ -1,5 +1,5 @@
-﻿using Application.CQRS.Commands.User;
-using Application.CQRS.Queries.User;
+﻿using Application.CQRS.Commands.Users;
+using Application.CQRS.Queries.Users;
 using Contracts.Requests.User;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

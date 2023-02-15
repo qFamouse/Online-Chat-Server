@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces.Repositories;
-using Shared;
 using Data.Entities;
+using Shared;
 
 namespace Repositories
 {

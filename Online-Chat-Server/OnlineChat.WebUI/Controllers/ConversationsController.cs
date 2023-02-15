@@ -1,5 +1,4 @@
-﻿using Application.CQRS.Commands.Conversation;
-using Application.CQRS.Commands.DirectMessage;
+﻿using Application.CQRS.Commands.Conversations;
 using Contracts.Requests.Conversation;
 using Contracts.Requests.DirectMessage;
 using MediatR;

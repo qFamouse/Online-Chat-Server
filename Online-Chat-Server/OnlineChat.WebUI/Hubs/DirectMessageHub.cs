@@ -1,11 +1,11 @@
-﻿using Application.CQRS.Commands.DirectMessage;
-using Contracts.Requests.DirectMessage;
+﻿using Contracts.Requests.DirectMessage;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using OnlineChat.WebUI.Services;
 using Services.Interfaces;
 using System.Security.Claims;
+using Application.CQRS.Commands.DirectMessages;
 using Application.Interfaces.Mappers;
 using Contracts.Views;
 

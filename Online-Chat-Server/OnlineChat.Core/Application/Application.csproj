@@ -29,12 +29,6 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Validators\Queries\ConversationMessage\" />
-    <Folder Include="Validators\Queries\Participant\" />
-    <Folder Include="Validators\Commands\ConversationMessage\" />
-  </ItemGroup>
-
 	<Target Name="Mapster" AfterTargets="AfterBuild">
 		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet tool restore" />
 		<Exec WorkingDirectory="$(ProjectDir)" Command="dotnet mapster mapper -a &quot;$(TargetDir)$(ProjectName).dll&quot; -n Application.Mappers" />
@@ -42,6 +36,21 @@
 
 	<ItemGroup>
 		<Generated Include="**\*.g.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Validators\Commands\ConversationMessage\**" />
+	  <Compile Remove="Validators\Queries\ConversationMessage\**" />
+	  <Compile Remove="Validators\Queries\Participant\**" />
+	  <EmbeddedResource Remove="Validators\Commands\ConversationMessage\**" />
+	  <EmbeddedResource Remove="Validators\Queries\ConversationMessage\**" />
+	  <EmbeddedResource Remove="Validators\Queries\Participant\**" />
+	  <Generated Remove="Validators\Commands\ConversationMessage\**" />
+	  <Generated Remove="Validators\Queries\ConversationMessage\**" />
+	  <Generated Remove="Validators\Queries\Participant\**" />
+	  <None Remove="Validators\Commands\ConversationMessage\**" />
+	  <None Remove="Validators\Queries\ConversationMessage\**" />
+	  <None Remove="Validators\Queries\Participant\**" />
 	</ItemGroup>
 	<Target Name="CleanGenerated">
 		<Delete Files="@(Generated)" />

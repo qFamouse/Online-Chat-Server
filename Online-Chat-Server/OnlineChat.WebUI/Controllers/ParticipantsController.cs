@@ -1,6 +1,4 @@
-﻿using Application.CQRS.Commands.Conversation;
-using Application.CQRS.Commands.DirectMessage;
-using Application.CQRS.Commands.Participant;
+﻿using Application.CQRS.Commands.Participants;
 using Contracts.Requests.Conversation;
 using Contracts.Requests.DirectMessage;
 using Contracts.Requests.Participant;

@@ -1,5 +1,5 @@
-﻿using Application.CQRS.Commands.Attachment;
-using Application.CQRS.Queries.Attachment;
+﻿using Application.CQRS.Commands.Attachments;
+using Application.CQRS.Queries.Attachments;
 using Contracts.Requests.Attachment;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

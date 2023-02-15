@@ -1,8 +1,8 @@
 ﻿using Application.Interfaces.Repositories;
 using Application.Queries;
+using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared;
-using Data.Entities;
 
 namespace Repositories
 {

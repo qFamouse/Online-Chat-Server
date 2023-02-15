@@ -1,5 +1,5 @@
-﻿using Application.CQRS.Commands.DirectMessage;
-using Application.CQRS.Queries.DirectMessage;
+﻿using Application.CQRS.Commands.DirectMessages;
+using Application.CQRS.Queries.DirectMessages;
 using Contracts.Requests.DirectMessage;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

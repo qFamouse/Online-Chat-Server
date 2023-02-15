@@ -1,4 +1,3 @@
-using Application.CQRS.Commands.User;
 using Application.Interfaces.Repositories;
 using Application.Validators;
 using Configurations;
@@ -17,6 +16,7 @@ using Services.Interfaces;
 using Shared;
 using System.Reflection;
 using System.Text;
+using Application.CQRS.Commands.Users;
 using Application.Services.Abstractions;
 using Application.Services.Implementations;
 using Azure.Storage.Blobs;
