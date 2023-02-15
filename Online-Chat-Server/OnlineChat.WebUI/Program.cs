@@ -1,31 +1,17 @@
-using Application.Interfaces.Repositories;
-using Application.Validators;
 using Configurations;
-using EntityFramework.MicrosoftSQL;
-using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineChat.WebUI.Hubs;
-using OnlineChat.WebUI.Services;
-using Repositories;
-using Services.Interfaces;
 using Shared;
-using System.Reflection;
 using System.Text;
 using Application.CQRS.Commands.Users;
-using Application.Services.Abstractions;
-using Application.Services.Implementations;
-using Azure.Storage.Blobs;
 using Hellang.Middleware.ProblemDetails;
-using Application.Interfaces.Mappers;
-using Application.Mappers;
 using Data.Entities;
 using EntityFramework.SqlServer;
-using MassTransit;
+using OnlineChat.WebUI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,80 +21,35 @@ builder.Services.AddProblemDetails(setup =>
         builder.Environment.IsDevelopment() || builder.Environment.IsStaging();
 });
 
-// Add services to the container.
-
-builder.Services.AddSignalR();
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 #region Custom Services
-// 
 ConfigurationManager configuration = builder.Configuration;
-
 builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Identity"));
 builder.Services.Configure<AzureBlobConfiguration>(configuration.GetSection("AzureBlob"));
 
-// Automappers
-builder.Services.AddSingleton<IDirectMessageMapper, DirectMessageMapper>();
-builder.Services.AddSingleton<IAttachmentMapper, AttachmentMapper>();
-builder.Services.AddSingleton<IUserMapper, UserMapper>();
+builder.Services.AddSignalR();
+
+builder.Services.AddAutoMappers();
 
 builder.Services.AddMediatR(typeof(SignUpUserCommand));
 
-// AddInfrastructureDependencies
-builder.Services.AddScoped<IDirectMessageRepository, DirectMessageRepository>();
-builder.Services.AddScoped<IConversationRepository, ConversationRepository>();
-builder.Services.AddScoped<IParticipantRepository, ParticipantRepository>();
-builder.Services.AddScoped<IConversationMessagesRepository, ConversationMessagesRepository>();
-builder.Services.AddScoped<IAttachmentRepository, AttachmentRepository>();
+builder.Services.AddRepositories();
 
-builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobConnection")));
-builder.Services.AddScoped<IBlobService, BlobService>();
+builder.Services.AddAzureBlobStorage(builder.Configuration.GetConnectionString("AzureBlobConnection"));
 
-// Masstransit
-builder.Services.AddMassTransit(x =>
-{
-    x.SetKebabCaseEndpointNameFormatter();
+builder.Services.AddMassTransit();
 
-    // By default, sagas are in-memory, but should be changed to a durable
-    // saga repository.
-    x.SetInMemorySagaRepositoryProvider();
+builder.Services.AddValidators();
 
-    var entryAssembly = Assembly.GetEntryAssembly();
-
-    x.AddConsumers(entryAssembly);
-    x.AddSagaStateMachines(entryAssembly);
-    x.AddSagas(entryAssembly);
-    x.AddActivities(entryAssembly);
-
-    x.UsingRabbitMq((context, cfg) =>
-    {
-        cfg.Host("localhost", "/", h =>
-        {
-            h.Username("guest");
-            h.Password("guest");
-        });
-
-        cfg.ConfigureEndpoints(context);
-    });
-});
-
-// AddCoreDependencies - some services
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-//builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPostProcessorBehavior<,>));
-
-builder.Services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(ValidationBehavior<,>)));
-// AddWebUiDependencies
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped<IIdentityService, IdentityService>();
-builder.Services.TryAddSingleton<HubConnectionService>();
 
-// Context
+builder.Services.AddServices();
+
 builder.Services.AddSqlServerDbContext(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 builder.Services.AddCors(options =>
@@ -193,9 +134,7 @@ builder.Services.AddSwaggerGen(c =>
 
 #endregion
 
-
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
