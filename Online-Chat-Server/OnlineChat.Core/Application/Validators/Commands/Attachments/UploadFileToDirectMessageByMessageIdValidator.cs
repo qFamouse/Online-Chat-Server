@@ -1,7 +1,9 @@
 ﻿using Application.CQRS.Commands.Attachments;
 using Application.Interfaces.Repositories;
 using FluentValidation;
+using MassTransit.Monitoring.Performance;
 using Resources;
+using Resources.Messages;
 using Services.Interfaces;
 
 namespace Application.Validators.Commands.Attachments;
@@ -19,8 +21,8 @@ public class UploadFileToDirectMessageByMessageIdValidator : AbstractValidator<U
         RuleFor(x => x.MessageId)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
-            .MustAsync(_directMessageRepository.ExistsAsync).WithMessage(Messages.MessageNotFound)
-            .MustAsync(MustBeMessageOwner).WithMessage(Messages.AccessDenied);
+            .MustAsync(_directMessageRepository.ExistsAsync).WithMessage(ChatMessages.MessageNotFound)
+            .MustAsync(MustBeMessageOwner).WithMessage(BaseMessages.AccessDenied);
     }
 
     private async Task<bool> MustBeMessageOwner(int messageId, CancellationToken cancellationToken)

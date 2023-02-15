@@ -11,7 +11,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Resources;
+using Resources.Messages;
 
 namespace Application.CQRS.QueryHandlers.Users;
 
@@ -36,12 +36,12 @@ internal class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAut
 
         if (user is null)
         {
-            throw new ProblemDetailsException((int)HttpStatusCode.NotFound, Exceptions.UserNotFound);
+            throw new ProblemDetailsException((int)HttpStatusCode.NotFound, UserMessages.UserNotFound);
         }
 
         if (!await _userManager.CheckPasswordAsync(user, request.Password))
         {
-            throw new ProblemDetailsException((int)HttpStatusCode.BadRequest, Exceptions.IncorrectPassword);
+            throw new ProblemDetailsException((int)HttpStatusCode.BadRequest, UserMessages.IncorrectPassword);
         }
 
         var roles = await _userManager.GetRolesAsync(user);

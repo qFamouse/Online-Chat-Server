@@ -2,6 +2,7 @@
 using Application.Interfaces.Repositories;
 using FluentValidation;
 using Resources;
+using Resources.Messages;
 using Services.Interfaces;
 
 namespace Application.Validators.Commands.Conversations;
@@ -20,8 +21,8 @@ public sealed class DeleteConversationByIdCommandValidator : AbstractValidator<D
         RuleFor(x => x.ConversationId)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
-            .MustAsync(_conversationRepository.ExistsAsync).WithMessage(Messages.NotFound)
-            .MustAsync(MustBeConversationOwner).WithMessage(Messages.AccessDenied);
+            .MustAsync(_conversationRepository.ExistsAsync).WithMessage(BaseMessages.NotFound)
+            .MustAsync(MustBeConversationOwner).WithMessage(BaseMessages.AccessDenied);
     }
 
     private async Task<bool> MustBeConversationOwner(int conversationId, CancellationToken cancellationToken)

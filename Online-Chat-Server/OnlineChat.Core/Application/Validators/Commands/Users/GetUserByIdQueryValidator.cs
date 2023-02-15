@@ -3,6 +3,7 @@ using Data.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Resources;
+using Resources.Messages;
 
 namespace Application.Validators.Commands.Users;
 
@@ -16,6 +17,6 @@ internal class GetUserByIdQueryValidator : AbstractValidator<GetUserByIdQuery>
         RuleFor(x => x.Id)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
-            .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(Messages.NotFound);
+            .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(BaseMessages.NotFound);
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources {
+namespace Resources.Messages {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Exceptions {
+    public class BaseMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Exceptions() {
+        internal BaseMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.Exceptions", typeof(Exceptions).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.Messages.BaseMessages", typeof(BaseMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incorrect password.
+        ///   Looks up a localized string similar to Access Denied.
         /// </summary>
-        public static string IncorrectPassword {
+        public static string AccessDenied {
             get {
-                return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+                return ResourceManager.GetString("AccessDenied", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User not found.
+        ///   Looks up a localized string similar to Already Exists.
         /// </summary>
-        public static string UserNotFound {
+        public static string AlreadyExists {
             get {
-                return ResourceManager.GetString("UserNotFound", resourceCulture);
+                return ResourceManager.GetString("AlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Found.
+        /// </summary>
+        public static string NotFound {
+            get {
+                return ResourceManager.GetString("NotFound", resourceCulture);
             }
         }
     }

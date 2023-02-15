@@ -2,6 +2,7 @@
 using Data.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
+using Resources.Messages;
 using Services.Interfaces;
 
 namespace Application.Validators.Queries.Users;
@@ -19,7 +20,7 @@ public sealed class AboutUserQueryValidator : AbstractValidator<AboutUserQuery>
 
         RuleFor(x => _identityService.GetUserId())
             .NotEmpty()
-            .MustAsync(MustBeExists);
+            .MustAsync(MustBeExists).WithMessage(UserMessages.UserNotFound);
     }
 
     private async Task<bool> MustBeExists(int userId, CancellationToken cancellationToken)

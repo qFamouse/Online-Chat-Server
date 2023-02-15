@@ -5,6 +5,7 @@ using Data.Queries;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Resources;
+using Resources.Messages;
 using Services.Interfaces;
 
 namespace Application.Validators.Commands.Participants;
@@ -27,15 +28,15 @@ internal sealed class RemoveParticipantByUserIdCommandValidator : AbstractValida
 
         RuleFor(x => x.UserId)
             .NotEmpty()
-            .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(Messages.NotFound);
+            .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(BaseMessages.NotFound);
 
         RuleFor(x => x)
-            .MustAsync(MustBeParticipantOfConversation).WithMessage(Messages.NotFound);
+            .MustAsync(MustBeParticipantOfConversation).WithMessage(BaseMessages.NotFound);
 
         RuleFor(x => x.ConversationId)
             .NotEmpty()
-            .MustAsync(_conversationRepository.ExistsAsync).WithMessage(Messages.NotFound)
-            .MustAsync(MustBeOwnerOfConversation).WithMessage(Messages.AccessDenied);
+            .MustAsync(_conversationRepository.ExistsAsync).WithMessage(BaseMessages.NotFound)
+            .MustAsync(MustBeOwnerOfConversation).WithMessage(BaseMessages.AccessDenied);
     }
 
     private async Task<bool> MustBeParticipantOfConversation(RemoveParticipantByUserIdCommand command, CancellationToken cancellationToken)

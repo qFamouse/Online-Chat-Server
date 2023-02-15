@@ -4,7 +4,7 @@ using Data.Entities;
 using Data.Queries;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
-using Resources;
+using Resources.Messages;
 using Services.Interfaces;
 
 namespace Application.Validators.Commands.Participants;
@@ -25,16 +25,16 @@ internal sealed class AddParticipantByUserIdCommandValidator : AbstractValidator
 
         RuleFor(x => x.UserId)
             .NotEmpty()
-            .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(Messages.NotFound);
+            .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(BaseMessages.NotFound);
 
 
         RuleFor(x => x)
-            .MustAsync(MustNotBeParticipantOfConversation).WithMessage(Messages.AlreadyExists);
+            .MustAsync(MustNotBeParticipantOfConversation).WithMessage(BaseMessages.AlreadyExists);
 
         RuleFor(x => x.ConversationId)
             .NotEmpty()
-            .MustAsync(_conversationRepository.ExistsAsync).WithMessage(Messages.NotFound)
-            .MustAsync(MustBeParticipantOfConversation).WithMessage(Messages.AccessDenied);
+            .MustAsync(_conversationRepository.ExistsAsync).WithMessage(BaseMessages.NotFound)
+            .MustAsync(MustBeParticipantOfConversation).WithMessage(BaseMessages.AccessDenied);
     }
 
     private async Task<bool> MustBeParticipantOfConversation(int conversationId, CancellationToken cancellationToken)

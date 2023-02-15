@@ -1,7 +1,7 @@
 ﻿using Application.CQRS.Queries.Attachments;
 using Application.Interfaces.Repositories;
 using FluentValidation;
-using Resources;
+using Resources.Messages;
 using Services.Interfaces;
 
 namespace Application.Validators.Queries.Attachments;
@@ -19,8 +19,8 @@ public class GetFileFromAttachmentByIdValidator : AbstractValidator<GetFileFromA
         RuleFor(x => x.Id)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
-            .MustAsync(_attachmentRepository.ExistsAsync).WithMessage(Messages.NotFound)
-            .MustAsync(MustBeMessageSenderOrMessageReceiverAsync).WithMessage(Messages.AccessDenied);
+            .MustAsync(_attachmentRepository.ExistsAsync).WithMessage(BaseMessages.NotFound)
+            .MustAsync(MustBeMessageSenderOrMessageReceiverAsync).WithMessage(BaseMessages.AccessDenied);
     }
 
     private async Task<bool> MustBeMessageSenderOrMessageReceiverAsync(int attachmentId, CancellationToken cancellationToken)

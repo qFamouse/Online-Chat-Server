@@ -7,15 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Messages.Designer.cs">
+    <Compile Update="Messages\BaseMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Messages.resx</DependentUpon>
+      <DependentUpon>BaseMessages.resx</DependentUpon>
     </Compile>
-    <Compile Update="Exceptions.Designer.cs">
+    <Compile Update="Messages\ChatMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Exceptions.resx</DependentUpon>
+      <DependentUpon>ChatMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Messages\UserMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserMessages.resx</DependentUpon>
     </Compile>
     <Compile Update="Roles.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -25,13 +30,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Messages.resx">
+    <EmbeddedResource Update="Messages\BaseMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      <LastGenOutput>BaseMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Exceptions.resx">
+    <EmbeddedResource Update="Messages\ChatMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
+      <LastGenOutput>ChatMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Messages\UserMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Roles.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

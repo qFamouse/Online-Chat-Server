@@ -4,6 +4,7 @@ using Data.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Resources;
+using Resources.Messages;
 using Services.Interfaces;
 
 namespace Application.Validators.Commands.DirectMessages;
@@ -24,7 +25,7 @@ public sealed class SendDirectMessageByReceiverIdCommandValidator : AbstractVali
         RuleFor(x => x.ReceiverId)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
-            .MustAsync(UserMustBeExists).WithMessage(Messages.NotFound);
+            .MustAsync(UserMustBeExists).WithMessage(UserMessages.UserNotFound);
 
         RuleFor(x => x.TimeToLive)
             .GreaterThan(5)
