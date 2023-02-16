@@ -17,7 +17,11 @@ public sealed class AboutUserQueryValidator : AbstractValidator<AboutUserQuery>
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
 
+        BuildValidation();
+    }
 
+    private void BuildValidation()
+    {
         RuleFor(x => _identityService.GetUserId())
             .NotEmpty()
             .MustAsync(MustBeExists).WithMessage(UserMessages.UserNotFound);

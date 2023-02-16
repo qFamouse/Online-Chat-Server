@@ -24,7 +24,10 @@ internal sealed class RemoveParticipantByUserIdCommandValidator : AbstractValida
         _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+    }
 
+    private void BuildValidation()
+    {
         RuleFor(x => x.UserId)
             .NotEmpty()
             .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(BaseMessages.NotFound);

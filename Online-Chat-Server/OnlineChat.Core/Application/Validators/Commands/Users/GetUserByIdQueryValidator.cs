@@ -13,6 +13,11 @@ internal class GetUserByIdQueryValidator : AbstractValidator<GetUserByIdQuery>
     {
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
 
+        BuildValidation();
+    }
+
+    private void BuildValidation()
+    {
         RuleFor(x => x.Id)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
