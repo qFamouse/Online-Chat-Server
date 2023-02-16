@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "OnlineChat.Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "OnlineChat.Infrastructure\Repositories\Repositories.csproj", "{5BD09BD1-B11E-4222-BB76-FAF599BDC133}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFramework.SqlServer", "OnlineChat.Infrastructure\EntityFramework.MicrosoftSQL\EntityFramework.SqlServer.csproj", "{81B8BD1A-FE12-4EC9-95AD-779A5EFCF5F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFramework.SqlServer", "OnlineChat.Infrastructure\EntityFramework.SqlServer\EntityFramework.SqlServer.csproj", "{81B8BD1A-FE12-4EC9-95AD-779A5EFCF5F0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "OnlineChat.Core\Contracts\Contracts.csproj", "{E889EA16-F890-4279-B503-B3FF23DD3E18}"
 EndProject
