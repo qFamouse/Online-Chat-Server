@@ -3,7 +3,7 @@ using Contracts.Views.DirectMessage;
 using Domain.Entities;
 using Mapster;
 
-namespace Application.Interfaces.Mappers;
+namespace Application.Mappers.Abstractions;
 
 [Mapper]
 public interface IDirectMessageMapper

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Application.Interfaces.Mappers;
+using Application.Mappers.Abstractions;
 using Contracts.Views.Attachment;
 using Contracts.Views.DirectMessage;
 using Domain.Entities;

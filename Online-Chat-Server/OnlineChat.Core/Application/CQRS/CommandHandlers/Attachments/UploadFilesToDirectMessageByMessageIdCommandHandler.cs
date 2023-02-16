@@ -1,5 +1,5 @@
 ﻿using Application.CQRS.Commands.Attachments;
-using Application.Interfaces.Mappers;
+using Application.Mappers.Abstractions;
 using Application.Services.Abstractions;
 using Configurations;
 using Contracts.Views.Attachment;

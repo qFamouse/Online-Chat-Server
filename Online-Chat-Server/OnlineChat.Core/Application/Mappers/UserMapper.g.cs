@@ -1,4 +1,4 @@
-using Application.Interfaces.Mappers;
+using Application.Mappers.Abstractions;
 using Contracts.Views.User;
 using Domain.Entities;
 

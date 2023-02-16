@@ -1,5 +1,5 @@
 ﻿using Application.CQRS.Queries.DirectMessages;
-using Application.Interfaces.Mappers;
+using Application.Mappers.Abstractions;
 using Contracts.Views;
 using MediatR;
 using Repositories.Abstractions;

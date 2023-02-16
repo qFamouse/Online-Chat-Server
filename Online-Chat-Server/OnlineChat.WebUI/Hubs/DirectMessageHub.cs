@@ -6,8 +6,8 @@ using OnlineChat.WebUI.Services;
 using Services.Interfaces;
 using System.Security.Claims;
 using Application.CQRS.Commands.DirectMessages;
-using Application.Interfaces.Mappers;
 using Contracts.Views;
+using Application.Mappers.Abstractions;
 
 namespace OnlineChat.WebUI.Hubs
 {
