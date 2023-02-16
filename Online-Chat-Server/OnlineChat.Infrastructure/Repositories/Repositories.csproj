@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.11" />
+    <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OnlineChat.Core\Application\Application.csproj" />
     <ProjectReference Include="..\..\OnlineChat.Core\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\OnlineChat.Core\Repositories.Abstractions\Repositories.Abstractions.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 

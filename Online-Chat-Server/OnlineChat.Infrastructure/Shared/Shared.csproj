@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OnlineChat.Core\Application\Application.csproj" />
     <ProjectReference Include="..\..\OnlineChat.Core\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\OnlineChat.Core\Resources\Resources.csproj" />
   </ItemGroup>
 
 </Project>
