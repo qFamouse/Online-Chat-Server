@@ -3,7 +3,7 @@ using Contracts.Views.User;
 using Domain.Entities;
 using MediatR;
 using Repositories.Abstractions;
-using Services.Interfaces;
+using Services.Abstractions;
 
 namespace Application.CQRS.QueryHandlers.DirectMessages;
 

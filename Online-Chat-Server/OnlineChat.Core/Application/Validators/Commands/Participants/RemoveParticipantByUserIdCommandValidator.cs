@@ -5,7 +5,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Repositories.Abstractions;
 using Resources.Messages;
-using Services.Interfaces;
+using Services.Abstractions;
 
 namespace Application.Validators.Commands.Participants;
 

@@ -1,6 +1,4 @@
 ﻿using Application.Mappers;
-using Application.Services.Abstractions;
-using Application.Services.Implementations;
 using Azure.Storage.Blobs;
 using Repositories;
 using System.Reflection;
@@ -10,8 +8,9 @@ using FluentValidation;
 using MediatR;
 using OnlineChat.WebUI.Services;
 using Repositories.Abstractions;
-using Services.Interfaces;
 using Application.Mappers.Abstractions;
+using Infrastructure.Services;
+using Services.Abstractions;
 
 namespace OnlineChat.WebUI.Extensions
 {

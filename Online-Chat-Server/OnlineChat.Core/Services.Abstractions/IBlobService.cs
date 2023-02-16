@@ -1,6 +1,6 @@
 ﻿using Azure.Storage.Blobs.Models;
 
-namespace Application.Services.Abstractions;
+namespace Services.Abstractions;
 
 public interface IBlobService
 {

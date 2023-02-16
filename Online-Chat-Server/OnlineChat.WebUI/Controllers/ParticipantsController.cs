@@ -1,10 +1,7 @@
 ﻿using Application.CQRS.Commands.Participants;
-using Contracts.Requests.Conversation;
-using Contracts.Requests.DirectMessage;
 using Contracts.Requests.Participant;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineChat.WebUI.Controllers

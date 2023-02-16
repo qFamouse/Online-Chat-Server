@@ -3,11 +3,11 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using OnlineChat.WebUI.Services;
-using Services.Interfaces;
 using System.Security.Claims;
 using Application.CQRS.Commands.DirectMessages;
 using Contracts.Views;
 using Application.Mappers.Abstractions;
+using Services.Abstractions;
 
 namespace OnlineChat.WebUI.Hubs
 {

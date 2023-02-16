@@ -3,7 +3,7 @@ using Application.Documents;
 using MediatR;
 using QuestPDF.Fluent;
 using Repositories.Abstractions;
-using Services.Interfaces;
+using Services.Abstractions;
 
 namespace Application.CQRS.QueryHandlers.DirectMessages;
 

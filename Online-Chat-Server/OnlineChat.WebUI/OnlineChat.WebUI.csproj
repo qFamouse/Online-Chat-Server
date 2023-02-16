@@ -26,6 +26,7 @@
     <ProjectReference Include="..\OnlineChat.Core\Configurations\Configurations.csproj" />
     <ProjectReference Include="..\OnlineChat.Core\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\OnlineChat.Infrastructure\EntityFramework.SqlServer\EntityFramework.SqlServer.csproj" />
+    <ProjectReference Include="..\OnlineChat.Infrastructure\Infrastructure.Services\Infrastructure.Services.csproj" />
     <ProjectReference Include="..\OnlineChat.Infrastructure\Repositories\Repositories.csproj" />
   </ItemGroup>
 

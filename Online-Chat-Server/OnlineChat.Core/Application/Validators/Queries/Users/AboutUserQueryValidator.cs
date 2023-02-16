@@ -3,7 +3,7 @@ using Domain.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Resources.Messages;
-using Services.Interfaces;
+using Services.Abstractions;
 
 namespace Application.Validators.Queries.Users;
 

@@ -1,6 +1,5 @@
-﻿using Services.Interfaces;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
+using Services.Abstractions;
 
 namespace OnlineChat.WebUI.Services
 {

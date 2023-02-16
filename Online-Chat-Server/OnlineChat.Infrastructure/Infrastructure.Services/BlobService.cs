@@ -1,8 +1,8 @@
-﻿using Application.Services.Abstractions;
-using Azure.Storage.Blobs;
+﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using Services.Abstractions;
 
-namespace Application.Services.Implementations;
+namespace Infrastructure.Services;
 
 public class BlobService : IBlobService
 {

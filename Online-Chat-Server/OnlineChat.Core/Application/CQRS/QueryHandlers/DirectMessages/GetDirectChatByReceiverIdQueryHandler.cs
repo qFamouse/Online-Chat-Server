@@ -3,7 +3,7 @@ using Application.Mappers.Abstractions;
 using Contracts.Views;
 using MediatR;
 using Repositories.Abstractions;
-using Services.Interfaces;
+using Services.Abstractions;
 
 namespace Application.CQRS.QueryHandlers.DirectMessages;
 

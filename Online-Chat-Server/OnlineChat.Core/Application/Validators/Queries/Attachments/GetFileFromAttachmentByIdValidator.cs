@@ -2,7 +2,7 @@
 using FluentValidation;
 using Repositories.Abstractions;
 using Resources.Messages;
-using Services.Interfaces;
+using Services.Abstractions;
 
 namespace Application.Validators.Queries.Attachments;
 
