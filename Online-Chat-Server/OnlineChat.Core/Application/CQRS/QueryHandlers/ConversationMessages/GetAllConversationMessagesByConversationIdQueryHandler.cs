@@ -1,5 +1,5 @@
 ﻿using Application.CQRS.Queries.ConversationMessages;
-using Data.Entities;
+using Domain.Entities;
 using MediatR;
 using Repositories.Abstractions;
 

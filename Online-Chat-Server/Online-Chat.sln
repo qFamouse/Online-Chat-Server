@@ -25,9 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "OnlineChat.Infras
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "OnlineChat.Core\Resources\Resources.csproj", "{38192777-79A7-4091-9690-E19F5199FC09}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "OnlineChat.Core\Data\Data.csproj", "{EBBC2DE0-5E7C-4796-B061-B3651728661A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "OnlineChat.Core\Domain\Domain.csproj", "{EBBC2DE0-5E7C-4796-B061-B3651728661A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories.Abstractions", "OnlineChat.Core\Repositories.Abstractions\Repositories.Abstractions.csproj", "{4C1BA687-4933-49F6-B93D-1A60CD91E289}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories.Abstractions", "OnlineChat.Core\Repositories.Abstractions\Repositories.Abstractions.csproj", "{4C1BA687-4933-49F6-B93D-1A60CD91E289}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

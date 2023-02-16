@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Data.Interfaces.Entities;
+using Domain.Interfaces.Entities;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Abstractions;

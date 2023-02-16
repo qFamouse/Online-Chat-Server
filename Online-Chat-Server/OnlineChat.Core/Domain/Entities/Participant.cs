@@ -1,6 +1,6 @@
-﻿using Data.Interfaces.Entities;
+﻿using Domain.Interfaces.Entities;
 
-namespace Data.Entities
+namespace Domain.Entities
 {
     // ConversationUser
     public class Participant : IEntity

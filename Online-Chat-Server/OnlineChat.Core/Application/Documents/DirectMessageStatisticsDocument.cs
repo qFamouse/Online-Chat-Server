@@ -1,4 +1,4 @@
-﻿using Data.Functions;
+﻿using Domain.Functions;
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;

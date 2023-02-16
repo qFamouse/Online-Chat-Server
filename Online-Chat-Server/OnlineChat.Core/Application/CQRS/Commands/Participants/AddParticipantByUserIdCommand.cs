@@ -1,5 +1,5 @@
 ﻿using Contracts.Requests.Participant;
-using Data.Entities;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.CQRS.Commands.Participants;

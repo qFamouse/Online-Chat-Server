@@ -1,5 +1,5 @@
 ﻿using Contracts.Views.Attachment;
-using Data.Entities;
+using Domain.Entities;
 using Mapster;
 
 namespace Application.Interfaces.Mappers;

@@ -1,5 +1,5 @@
 ﻿using Application.CQRS.Commands.DirectMessages;
-using Data.Entities;
+using Domain.Entities;
 using MassTransit;
 using MediatR.Pipeline;
 using OnlineChat.MassTransit.Contracts;

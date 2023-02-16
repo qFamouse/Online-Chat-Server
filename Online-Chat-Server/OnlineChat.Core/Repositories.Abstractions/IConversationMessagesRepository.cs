@@ -1,4 +1,4 @@
-﻿using Data.Entities;
+﻿using Domain.Entities;
 
 namespace Repositories.Abstractions;
 

@@ -1,5 +1,5 @@
 ﻿using Application.CQRS.Queries.Participants;
-using Data.Entities;
+using Domain.Entities;
 using MediatR;
 using Repositories.Abstractions;
 

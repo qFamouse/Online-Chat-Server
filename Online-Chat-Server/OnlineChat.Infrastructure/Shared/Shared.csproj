@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\OnlineChat.Core\Application\Application.csproj" />
+    <ProjectReference Include="..\..\OnlineChat.Core\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

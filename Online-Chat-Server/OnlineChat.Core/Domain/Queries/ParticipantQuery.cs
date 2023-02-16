@@ -1,4 +1,4 @@
-﻿namespace Data.Queries;
+﻿namespace Domain.Queries;
 
 public class ParticipantQuery
 {

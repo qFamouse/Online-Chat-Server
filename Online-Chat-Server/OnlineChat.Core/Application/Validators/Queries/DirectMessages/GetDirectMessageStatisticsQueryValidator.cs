@@ -1,5 +1,5 @@
 ﻿using Application.CQRS.Queries.DirectMessages;
-using Data.Entities;
+using Domain.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Services.Interfaces;

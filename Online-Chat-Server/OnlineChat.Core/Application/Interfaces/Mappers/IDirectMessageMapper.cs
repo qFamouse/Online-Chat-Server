@@ -1,6 +1,6 @@
 ﻿using Contracts.Views;
 using Contracts.Views.DirectMessage;
-using Data.Entities;
+using Domain.Entities;
 using Mapster;
 
 namespace Application.Interfaces.Mappers;

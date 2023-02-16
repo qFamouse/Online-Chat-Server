@@ -3,7 +3,7 @@ using System.Linq;
 using Application.Interfaces.Mappers;
 using Contracts.Views.Attachment;
 using Contracts.Views.DirectMessage;
-using Data.Entities;
+using Domain.Entities;
 
 namespace Application.Mappers
 {

@@ -1,7 +1,7 @@
 ﻿using Application.CQRS.Queries.Users;
 using Application.Interfaces.Mappers;
 using Contracts.Views.User;
-using Data.Entities;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 

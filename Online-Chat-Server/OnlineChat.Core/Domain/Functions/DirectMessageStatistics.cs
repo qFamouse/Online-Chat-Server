@@ -1,4 +1,4 @@
-﻿namespace Data.Functions;
+﻿namespace Domain.Functions;
 
 public class DirectMessageStatistics
 {

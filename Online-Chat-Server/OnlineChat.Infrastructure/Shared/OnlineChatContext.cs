@@ -1,6 +1,6 @@
-﻿using Data.Entities;
-using Data.Functions;
-using Data.Interfaces.Entities;
+﻿using Domain.Entities;
+using Domain.Functions;
+using Domain.Interfaces.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

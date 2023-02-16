@@ -8,8 +8,8 @@ using OnlineChat.WebUI.Hubs;
 using Shared;
 using System.Text;
 using Application.CQRS.Commands.Users;
+using Domain.Entities;
 using Hellang.Middleware.ProblemDetails;
-using Data.Entities;
 using EntityFramework.SqlServer;
 using OnlineChat.WebUI.Extensions;
 

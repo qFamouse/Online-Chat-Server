@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Application.CQRS.Commands.Users;
 using Configurations;
-using Data.Entities;
+using Domain.Entities;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

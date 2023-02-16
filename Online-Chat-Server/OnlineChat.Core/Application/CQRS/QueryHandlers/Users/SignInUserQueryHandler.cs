@@ -5,7 +5,7 @@ using System.Text;
 using Application.CQRS.Queries.Users;
 using Configurations;
 using Contracts.Views.User;
-using Data.Entities;
+using Domain.Entities;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

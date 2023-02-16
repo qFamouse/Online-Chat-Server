@@ -3,7 +3,7 @@ using Application.Interfaces.Mappers;
 using Application.Services.Abstractions;
 using Configurations;
 using Contracts.Views.Attachment;
-using Data.Entities;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;

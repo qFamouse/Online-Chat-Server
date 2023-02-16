@@ -1,5 +1,5 @@
-﻿using Data.Entities;
-using Data.Queries;
+﻿using Domain.Entities;
+using Domain.Queries;
 
 namespace Repositories.Abstractions;
 
