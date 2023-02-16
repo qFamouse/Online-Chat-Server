@@ -7,6 +7,11 @@ public sealed class CreateConversationCommandValidator : AbstractValidator<Creat
 {
     public CreateConversationCommandValidator()
     {
+        BuildValidation();
+    }
+
+    private void BuildValidation()
+    {
         RuleFor(x => x.Title)
             .NotEmpty()
             .MinimumLength(3);

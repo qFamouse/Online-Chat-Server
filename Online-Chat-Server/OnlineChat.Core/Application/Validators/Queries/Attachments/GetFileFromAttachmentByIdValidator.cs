@@ -16,6 +16,11 @@ public class GetFileFromAttachmentByIdValidator : AbstractValidator<GetFileFromA
         _attachmentRepository = attachmentRepository ?? throw new ArgumentNullException(nameof(attachmentRepository));
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
 
+        BuildValidation();
+    }
+
+    private void BuildValidation()
+    {
         RuleFor(x => x.Id)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()

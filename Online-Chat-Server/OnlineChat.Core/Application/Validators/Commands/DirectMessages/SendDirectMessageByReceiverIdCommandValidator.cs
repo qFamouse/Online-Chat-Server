@@ -10,17 +10,17 @@ namespace Application.Validators.Commands.DirectMessages;
 
 public sealed class SendDirectMessageByReceiverIdCommandValidator : AbstractValidator<SendDirectMessageByReceiverIdCommand>
 {
-    private readonly IDirectMessageRepository _directMessageRepository;
-    private readonly IIdentityService _identityService;
     private readonly UserManager<User> _userManager;
 
-    public SendDirectMessageByReceiverIdCommandValidator(IDirectMessageRepository directMessageRepository, IIdentityService identityService, UserManager<User> userManager)
+    public SendDirectMessageByReceiverIdCommandValidator(UserManager<User> userManager)
     {
-        _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
-        _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
 
+        BuildValidation();;
+    }
 
+    private void BuildValidation()
+    {
         RuleFor(x => x.ReceiverId)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()

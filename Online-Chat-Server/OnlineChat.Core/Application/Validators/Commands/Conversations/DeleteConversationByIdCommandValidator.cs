@@ -16,7 +16,11 @@ public sealed class DeleteConversationByIdCommandValidator : AbstractValidator<D
         _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
 
+        BuildValidation();
+    }
 
+    private void BuildValidation()
+    {
         RuleFor(x => x.ConversationId)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()

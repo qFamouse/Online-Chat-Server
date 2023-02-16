@@ -13,9 +13,14 @@ public class UploadFileToDirectMessageByMessageIdValidator : AbstractValidator<U
 
     public UploadFileToDirectMessageByMessageIdValidator(IDirectMessageRepository directMessageRepository, IIdentityService identityService)
     {
-        _directMessageRepository = directMessageRepository;
-        _identityService = identityService;
+        _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
+        _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
 
+        BuildValidation();
+    }
+
+    private void BuildValidation()
+    {
         RuleFor(x => x.MessageId)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()

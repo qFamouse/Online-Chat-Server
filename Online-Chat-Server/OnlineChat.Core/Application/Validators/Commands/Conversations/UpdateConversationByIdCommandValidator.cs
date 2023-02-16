@@ -16,6 +16,11 @@ public sealed class UpdateConversationByIdCommandValidator : AbstractValidator<U
         _conversationRepository = conversationRepository ?? throw new ArgumentNullException(nameof(conversationRepository));
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
 
+        BuildValidation();
+    }
+
+    private void BuildValidation()
+    {
         RuleFor(x => x.ConversationId)
             .NotEmpty()
             .MustAsync(_conversationRepository.ExistsAsync).WithMessage(BaseMessages.NotFound)

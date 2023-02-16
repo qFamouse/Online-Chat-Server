@@ -23,6 +23,11 @@ internal sealed class AddParticipantByUserIdCommandValidator : AbstractValidator
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
 
+        BuildValidation();
+    }
+
+    private void BuildValidation()
+    {
         RuleFor(x => x.UserId)
             .NotEmpty()
             .MustAsync(async (id, CancellationToken) => await _userManager.FindByIdAsync(id.ToString()) != null).WithMessage(BaseMessages.NotFound);
