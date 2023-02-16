@@ -1,7 +1,7 @@
 ﻿using Application.CQRS.Commands.DirectMessages;
-using Application.Interfaces.Repositories;
 using Data.Entities;
 using MediatR;
+using Repositories.Abstractions;
 using Services.Interfaces;
 
 namespace Application.CQRS.CommandHandlers.DirectMessages;

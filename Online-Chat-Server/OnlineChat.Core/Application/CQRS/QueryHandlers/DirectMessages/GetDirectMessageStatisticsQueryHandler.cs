@@ -1,8 +1,8 @@
 ﻿using Application.CQRS.Queries.DirectMessages;
 using Application.Documents;
-using Application.Interfaces.Repositories;
 using MediatR;
 using QuestPDF.Fluent;
+using Repositories.Abstractions;
 using Services.Interfaces;
 
 namespace Application.CQRS.QueryHandlers.DirectMessages;

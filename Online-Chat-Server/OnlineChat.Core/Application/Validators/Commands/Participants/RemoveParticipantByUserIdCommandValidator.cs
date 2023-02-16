@@ -1,10 +1,9 @@
 ﻿using Application.CQRS.Commands.Participants;
-using Application.Interfaces.Repositories;
 using Data.Entities;
 using Data.Queries;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
-using Resources;
+using Repositories.Abstractions;
 using Resources.Messages;
 using Services.Interfaces;
 

@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces.Mappers;
-using Application.Interfaces.Repositories;
 using Application.Mappers;
 using Application.Services.Abstractions;
 using Application.Services.Implementations;
@@ -11,6 +10,7 @@ using Application.Validators;
 using FluentValidation;
 using MediatR;
 using OnlineChat.WebUI.Services;
+using Repositories.Abstractions;
 using Services.Interfaces;
 
 namespace OnlineChat.WebUI.Extensions

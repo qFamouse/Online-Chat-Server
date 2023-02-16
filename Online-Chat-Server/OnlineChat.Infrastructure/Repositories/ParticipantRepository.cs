@@ -1,7 +1,7 @@
-﻿using Application.Interfaces.Repositories;
-using Data.Entities;
+﻿using Data.Entities;
 using Data.Queries;
 using Microsoft.EntityFrameworkCore;
+using Repositories.Abstractions;
 using Shared;
 
 namespace Repositories

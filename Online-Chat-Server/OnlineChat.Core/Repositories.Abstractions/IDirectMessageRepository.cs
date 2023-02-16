@@ -1,7 +1,7 @@
 ﻿using Data.Entities;
 using Data.Functions;
 
-namespace Application.Interfaces.Repositories;
+namespace Repositories.Abstractions;
 
 public interface IDirectMessageRepository : IBaseRepository<DirectMessage>
 {

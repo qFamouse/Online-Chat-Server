@@ -1,6 +1,5 @@
 ﻿using Application.CQRS.Commands.Attachments;
 using Application.Interfaces.Mappers;
-using Application.Interfaces.Repositories;
 using Application.Services.Abstractions;
 using Configurations;
 using Contracts.Views.Attachment;
@@ -8,6 +7,7 @@ using Data.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using Repositories.Abstractions;
 
 namespace Application.CQRS.CommandHandlers.Attachments;
 

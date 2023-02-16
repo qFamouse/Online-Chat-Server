@@ -1,6 +1,6 @@
 ﻿using Application.CQRS.Commands.Conversations;
-using Application.Interfaces.Repositories;
 using MediatR;
+using Repositories.Abstractions;
 
 namespace Application.CQRS.CommandHandlers.Conversations;
 

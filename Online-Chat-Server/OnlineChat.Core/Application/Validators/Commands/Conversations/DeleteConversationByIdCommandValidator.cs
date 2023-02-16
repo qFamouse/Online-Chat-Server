@@ -1,7 +1,6 @@
 ﻿using Application.CQRS.Commands.Conversations;
-using Application.Interfaces.Repositories;
 using FluentValidation;
-using Resources;
+using Repositories.Abstractions;
 using Resources.Messages;
 using Services.Interfaces;
 

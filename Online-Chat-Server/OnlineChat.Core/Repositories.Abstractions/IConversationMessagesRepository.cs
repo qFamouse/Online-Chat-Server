@@ -1,6 +1,6 @@
 ﻿using Data.Entities;
 
-namespace Application.Interfaces.Repositories;
+namespace Repositories.Abstractions;
 
 public interface IConversationMessagesRepository : IBaseRepository<ConversationMessage>
 {

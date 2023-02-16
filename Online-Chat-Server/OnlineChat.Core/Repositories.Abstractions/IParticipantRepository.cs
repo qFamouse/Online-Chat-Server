@@ -1,7 +1,7 @@
 ﻿using Data.Entities;
 using Data.Queries;
 
-namespace Application.Interfaces.Repositories;
+namespace Repositories.Abstractions;
 
 public interface IParticipantRepository : IBaseRepository<Participant>
 {

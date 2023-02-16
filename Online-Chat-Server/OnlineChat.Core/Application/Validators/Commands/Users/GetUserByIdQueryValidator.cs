@@ -2,7 +2,6 @@
 using Data.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
-using Resources;
 using Resources.Messages;
 
 namespace Application.Validators.Commands.Users;

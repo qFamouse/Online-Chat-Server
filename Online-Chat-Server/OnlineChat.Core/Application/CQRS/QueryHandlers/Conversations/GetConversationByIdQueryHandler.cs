@@ -1,7 +1,7 @@
 ﻿using Application.CQRS.Queries.Conversations;
-using Application.Interfaces.Repositories;
 using Data.Entities;
 using MediatR;
+using Repositories.Abstractions;
 
 namespace Application.CQRS.QueryHandlers.Conversations;
 

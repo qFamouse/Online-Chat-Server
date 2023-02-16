@@ -1,9 +1,8 @@
 ﻿using Application.CQRS.Commands.DirectMessages;
-using Application.Interfaces.Repositories;
 using Data.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
-using Resources;
+using Repositories.Abstractions;
 using Resources.Messages;
 using Services.Interfaces;
 

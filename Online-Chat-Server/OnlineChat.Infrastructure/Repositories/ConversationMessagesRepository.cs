@@ -1,5 +1,5 @@
-﻿using Application.Interfaces.Repositories;
-using Data.Entities;
+﻿using Data.Entities;
+using Repositories.Abstractions;
 using Shared;
 
 namespace Repositories

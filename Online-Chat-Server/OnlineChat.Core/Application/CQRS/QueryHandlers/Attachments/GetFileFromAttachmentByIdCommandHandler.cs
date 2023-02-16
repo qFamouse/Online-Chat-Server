@@ -1,10 +1,10 @@
 ﻿using Application.CQRS.Queries.Attachments;
-using Application.Interfaces.Repositories;
 using Application.Services.Abstractions;
 using Azure.Storage.Blobs.Models;
 using Configurations;
 using MediatR;
 using Microsoft.Extensions.Options;
+using Repositories.Abstractions;
 
 namespace Application.CQRS.QueryHandlers.Attachments;
 

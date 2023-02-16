@@ -1,4 +1,4 @@
-﻿namespace Application.Interfaces.Repositories;
+﻿namespace Repositories.Abstractions;
 
 public interface IBaseRepository<T>
 {

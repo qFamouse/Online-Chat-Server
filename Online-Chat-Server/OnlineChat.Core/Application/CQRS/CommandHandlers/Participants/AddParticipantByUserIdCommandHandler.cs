@@ -1,7 +1,7 @@
 ﻿using Application.CQRS.Commands.Participants;
-using Application.Interfaces.Repositories;
 using Data.Entities;
 using MediatR;
+using Repositories.Abstractions;
 
 namespace Application.CQRS.CommandHandlers.Participants;
 

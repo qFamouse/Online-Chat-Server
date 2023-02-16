@@ -1,8 +1,8 @@
 ﻿using System.Net;
-using Application.Interfaces.Repositories;
 using Data.Interfaces.Entities;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.EntityFrameworkCore;
+using Repositories.Abstractions;
 using Shared;
 
 namespace Repositories

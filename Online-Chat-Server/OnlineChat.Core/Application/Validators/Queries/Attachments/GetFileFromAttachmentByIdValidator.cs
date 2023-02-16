@@ -1,6 +1,6 @@
 ﻿using Application.CQRS.Queries.Attachments;
-using Application.Interfaces.Repositories;
 using FluentValidation;
+using Repositories.Abstractions;
 using Resources.Messages;
 using Services.Interfaces;
 

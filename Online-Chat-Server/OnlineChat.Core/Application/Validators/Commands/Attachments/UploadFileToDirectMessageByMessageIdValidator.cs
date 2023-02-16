@@ -1,8 +1,6 @@
 ﻿using Application.CQRS.Commands.Attachments;
-using Application.Interfaces.Repositories;
 using FluentValidation;
-using MassTransit.Monitoring.Performance;
-using Resources;
+using Repositories.Abstractions;
 using Resources.Messages;
 using Services.Interfaces;
 

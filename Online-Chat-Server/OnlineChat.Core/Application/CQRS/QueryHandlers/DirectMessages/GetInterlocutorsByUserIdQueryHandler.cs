@@ -1,8 +1,8 @@
 ﻿using Application.CQRS.Queries.DirectMessages;
-using Application.Interfaces.Repositories;
 using Contracts.Views.User;
 using Data.Entities;
 using MediatR;
+using Repositories.Abstractions;
 using Services.Interfaces;
 
 namespace Application.CQRS.QueryHandlers.DirectMessages;
