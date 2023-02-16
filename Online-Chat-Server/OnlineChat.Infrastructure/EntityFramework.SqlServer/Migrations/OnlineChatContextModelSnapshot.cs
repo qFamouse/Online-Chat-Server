@@ -8,7 +8,7 @@ using Shared;
 
 #nullable disable
 
-namespace EntityFramework.MicrosoftSQL.Migrations
+namespace EntityFramework.SqlServer.Migrations
 {
     [DbContext(typeof(OnlineChatContext))]
     partial class OnlineChatContextModelSnapshot : ModelSnapshot

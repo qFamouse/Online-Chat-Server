@@ -9,7 +9,7 @@ using Shared;
 
 #nullable disable
 
-namespace EntityFramework.MicrosoftSQL.Migrations
+namespace EntityFramework.SqlServer.Migrations
 {
     [DbContext(typeof(OnlineChatContext))]
     [Migration("20230127150314_AddingRolesDataSeed")]

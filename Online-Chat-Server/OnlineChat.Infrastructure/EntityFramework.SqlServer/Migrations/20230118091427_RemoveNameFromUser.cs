@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace EntityFramework.MicrosoftSQL.Migrations
+namespace EntityFramework.SqlServer.Migrations
 {
     public partial class RemoveNameFromUser : Migration
     {

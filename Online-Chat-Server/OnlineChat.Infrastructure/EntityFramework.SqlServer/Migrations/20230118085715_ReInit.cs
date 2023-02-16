@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace EntityFramework.MicrosoftSQL.Migrations
+namespace EntityFramework.SqlServer.Migrations
 {
     public partial class ReInit : Migration
     {
