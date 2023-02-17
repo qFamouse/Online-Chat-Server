@@ -2,32 +2,26 @@
 using Microsoft.AspNetCore.SignalR;
 using OnlineChat.MassTransit.Contracts;
 using OnlineChat.WebUI.Hubs;
-using OnlineChat.WebUI.Services;
+using Services.Abstractions;
 
 namespace OnlineChat.WebUI.Consumers
 {
     public class MessageHasBeenDeletedConsumer : IConsumer<MessageHasBeenDeletedContract>
     {
         private readonly IHubContext<DirectMessageHub> _hubContext;
-        private readonly HubConnectionService _hubConnectionService;
+        private readonly IHubConnectionsService _hubConnectionsService;
 
-        private Dictionary<int, List<string>> ConnectedUsers => _hubConnectionService.ConnectedUsers;
 
-        public MessageHasBeenDeletedConsumer(IHubContext<DirectMessageHub> hubContext, HubConnectionService connectionService)
+        public MessageHasBeenDeletedConsumer(IHubContext<DirectMessageHub> hubContext, IHubConnectionsService hubConnectionsService)
         {
             _hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
-            _hubConnectionService = connectionService ?? throw new ArgumentNullException(nameof(connectionService));
+            _hubConnectionsService = hubConnectionsService ?? throw new ArgumentNullException(nameof(hubConnectionsService));
         }
 
         public async Task Consume(ConsumeContext<MessageHasBeenDeletedContract> context)
         {
-            var connections = ConnectedUsers
-                .Where(x => x.Key == context.Message.SenderId || x.Key == context.Message.ReceiverId)
-                .Select(x => x.Value)
-                .SelectMany(list => list)
-                .ToList();
-
-            if (connections.Count > 0)
+            if (_hubConnectionsService
+                    .TryGetValues(out var connections, context.Message.SenderId, context.Message.ReceiverId))
             {
                 foreach (var client in connections.Select(connectionId => _hubContext.Clients.Client(connectionId)))
                 {

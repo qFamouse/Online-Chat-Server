@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using OnlineChat.WebUI.Services;
 using System.Security.Claims;
 using Application.CQRS.Commands.DirectMessages;
 using Contracts.Views;
@@ -15,21 +14,20 @@ namespace OnlineChat.WebUI.Hubs
     public class DirectMessageHub : Hub
     {
         private readonly ISender _sender;
-        private readonly HubConnectionService _hubConnectionService;
+        private readonly IHubConnectionsService _hubConnectionsService;
         private readonly IIdentityService _identityService;
         private readonly IDirectMessageMapper _directMessageMapper;
-        private Dictionary<int, List<string>> ConnectedUsers => _hubConnectionService.ConnectedUsers;
 
         public DirectMessageHub
         (
-            ISender sender, 
-            HubConnectionService hubConnectionService,
+            ISender sender,
+            IHubConnectionsService hubConnectionsService,
             IIdentityService identityService, 
             IDirectMessageMapper directMessageMapper
         )
         {
             _sender = sender ?? throw new ArgumentNullException(nameof(sender));
-            _hubConnectionService = hubConnectionService ?? throw new ArgumentNullException(nameof(hubConnectionService));
+            _hubConnectionsService = hubConnectionsService ?? throw new ArgumentNullException(nameof(hubConnectionsService));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _directMessageMapper = directMessageMapper  ?? throw new ArgumentNullException(nameof(directMessageMapper));
         }
@@ -39,7 +37,7 @@ namespace OnlineChat.WebUI.Hubs
             var directMessage = await _sender.Send(new SendDirectMessageByReceiverIdCommand(request));
             var directMessageView = _directMessageMapper.MapToChatMessageView(directMessage);
 
-            if (ConnectedUsers.TryGetValue(request.ReceiverId, out var connections) && connections.Count > 0)
+            if (_hubConnectionsService.TryGetValue(request.ReceiverId, out var connections) && connections.Count > 0)
             {
                 foreach (var client in connections.Select(connectionId => Clients.Client(connectionId)))
                 {
@@ -58,14 +56,14 @@ namespace OnlineChat.WebUI.Hubs
                 string connectionID = Context.ConnectionId;
                 string userId = userIdentity.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-                if (ConnectedUsers.TryGetValue(int.Parse(userId), out var connections))
+                if (_hubConnectionsService.TryGetValue(int.Parse(userId), out var connections))
                 {
                     connections.Add(connectionID);
                 }
                 else
                 {
                     connections = new List<string>() { connectionID };
-                    ConnectedUsers.Add(int.Parse(userId), connections);
+                    _hubConnectionsService.Add(int.Parse(userId), connections);
                 }
             }
 
@@ -80,13 +78,13 @@ namespace OnlineChat.WebUI.Hubs
                 string connectionID = Context.ConnectionId;
                 string userId = userIdentity.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-                if (ConnectedUsers.TryGetValue(int.Parse(userId), out var connections))
+                if (_hubConnectionsService.TryGetValue(int.Parse(userId), out var connections))
                 {
                     connections.Remove(connectionID);
 
                     if (connections.Count == 0)
                     {
-                        ConnectedUsers.Remove(int.Parse(userId));
+                        _hubConnectionsService.Remove(int.Parse(userId));
                     }
                 }
             }

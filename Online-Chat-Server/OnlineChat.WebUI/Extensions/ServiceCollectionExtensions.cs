@@ -6,7 +6,6 @@ using MassTransit;
 using Application.Validators;
 using FluentValidation;
 using MediatR;
-using OnlineChat.WebUI.Services;
 using Repositories.Abstractions;
 using Application.Mappers.Abstractions;
 using Services;
@@ -77,7 +76,7 @@ namespace OnlineChat.WebUI.Extensions
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<IIdentityService, IdentityService>();
-            services.AddSingleton<HubConnectionService>();
+            services.AddSingleton<IHubConnectionsService, HubConnectionsService>();
         }
     }
 }
