@@ -1,7 +1,8 @@
 ﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using Services.Abstractions;
 
-namespace OnlineChat.WebUI.Services
+namespace Services
 {
     public class IdentityService : IIdentityService
     {
