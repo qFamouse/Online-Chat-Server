@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Middleware\**" />
+    <Content Remove="Middleware\**" />
+    <EmbeddedResource Remove="Middleware\**" />
+    <None Remove="Middleware\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
     <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.12" />
@@ -22,10 +29,6 @@
     <ProjectReference Include="..\OnlineChat.Infrastructure\EntityFramework.SqlServer\EntityFramework.SqlServer.csproj" />
     <ProjectReference Include="..\OnlineChat.Infrastructure\Infrastructure.Services\Infrastructure.Services.csproj" />
     <ProjectReference Include="..\OnlineChat.Infrastructure\Repositories\Repositories.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Middleware\" />
   </ItemGroup>
 
 </Project>
