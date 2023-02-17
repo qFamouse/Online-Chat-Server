@@ -2,7 +2,7 @@
 using Azure.Storage.Blobs.Models;
 using Services.Abstractions;
 
-namespace Infrastructure.Services;
+namespace Services;
 
 public class BlobService : IBlobService
 {

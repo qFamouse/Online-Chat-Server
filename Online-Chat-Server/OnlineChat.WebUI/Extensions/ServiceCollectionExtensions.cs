@@ -9,7 +9,7 @@ using MediatR;
 using OnlineChat.WebUI.Services;
 using Repositories.Abstractions;
 using Application.Mappers.Abstractions;
-using Infrastructure.Services;
+using Services;
 using Services.Abstractions;
 
 namespace OnlineChat.WebUI.Extensions

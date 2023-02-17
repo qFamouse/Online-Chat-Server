@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories.Abstractions",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Abstractions", "OnlineChat.Core\Services.Abstractions\Services.Abstractions.csproj", "{3C143834-F81A-4F72-8AEF-B17151ABADE4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Services", "OnlineChat.Infrastructure\Infrastructure.Services\Infrastructure.Services.csproj", "{673997F9-1294-4ACB-A030-C03D5F8B1D30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "OnlineChat.Infrastructure\Services\Services.csproj", "{673997F9-1294-4ACB-A030-C03D5F8B1D30}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OnlineChat.DataAccess", "OnlineChat.DataAccess", "{B5DBAF1E-BB20-4DAE-84EA-021FEEF3AB48}"
 EndProject
