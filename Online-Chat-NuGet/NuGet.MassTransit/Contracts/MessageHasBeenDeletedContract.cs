@@ -1,4 +1,4 @@
-﻿namespace OnlineChat.MassTransit.Contracts;
+﻿namespace NuGet.MassTransit.Contracts;
 
 public record MessageHasBeenDeletedContract
 {
