@@ -12,7 +12,7 @@
     <PackageReference Include="Mapster.Core" Version="1.2.0" />
     <PackageReference Include="MassTransit" Version="8.0.12" />
     <PackageReference Include="MediatR" Version="11.1.0" />
-    <PackageReference Include="NuGet.Clerk.Core" Version="1.0.0" />
+    <PackageReference Include="NuGet.Clerk.Core" Version="1.1.0" />
     <PackageReference Include="NuGet.MassTransit" Version="1.0.0" />
     <PackageReference Include="QuestPDF" Version="2022.12.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />

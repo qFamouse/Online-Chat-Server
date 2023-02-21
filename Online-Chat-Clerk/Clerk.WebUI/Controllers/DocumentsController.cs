@@ -3,11 +3,13 @@ using System.Security.AccessControl;
 using Application.CQRS.Queries.Documents;
 using Contracts.Requests.Documents;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clerk.WebUI.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class DocumentsController : ControllerBase
