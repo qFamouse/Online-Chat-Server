@@ -1,6 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.SignalR;
-using OnlineChat.MassTransit.Contracts;
+using NuGet.MassTransit.Contracts;
 using OnlineChat.WebUI.Hubs;
 using Services.Abstractions;
 

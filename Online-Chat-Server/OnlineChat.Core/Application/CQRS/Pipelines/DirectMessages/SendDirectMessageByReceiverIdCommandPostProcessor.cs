@@ -2,7 +2,7 @@
 using Domain.Entities;
 using MassTransit;
 using MediatR.Pipeline;
-using OnlineChat.MassTransit.Contracts;
+using NuGet.MassTransit.Contracts;
 
 namespace Application.CQRS.Pipelines.DirectMessages;
 
