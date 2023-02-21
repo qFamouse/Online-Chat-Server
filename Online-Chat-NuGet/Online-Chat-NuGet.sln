@@ -5,6 +5,18 @@ VisualStudioVersion = 17.5.33402.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.MassTransit", "NuGet.MassTransit\NuGet.MassTransit.csproj", "{02AADEE6-D61F-43DC-AC5F-81F927BD1F7C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet.Clerk", "NuGet.Clerk", "{7C8969D3-5F2E-48D4-8FA9-92027CEA5278}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.Clerk", "NuGet.Clerk\NuGet.Clerk\NuGet.Clerk.csproj", "{A68B9DAA-A276-4C8D-A9BC-87883220F33B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.Clerk.Core", "NuGet.Clerk\NuGet.Clerk.Core\NuGet.Clerk.Core.csproj", "{FC0F26B6-93A8-4FAC-9ABD-59699CA5DDFA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.Clerk.Abstractions", "NuGet.Clerk\NuGet.Clerk.Abstractions\NuGet.Clerk.Abstractions.csproj", "{808B2DC5-3EFF-4EFB-BAFE-0369719B03F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.Clerk.DependencyInjection", "NuGet.Clerk\NuGet.Clerk.DependencyInjection\NuGet.Clerk.DependencyInjection.csproj", "{118E23C3-69CC-4C56-BADC-2FF32BCFC850}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.Clerk.Models", "NuGet.Clerk\NuGet.Clerk.Models\NuGet.Clerk.Models.csproj", "{1C423C34-C01B-497B-B65A-F65E2B54E113}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +27,36 @@ Global
 		{02AADEE6-D61F-43DC-AC5F-81F927BD1F7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02AADEE6-D61F-43DC-AC5F-81F927BD1F7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02AADEE6-D61F-43DC-AC5F-81F927BD1F7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68B9DAA-A276-4C8D-A9BC-87883220F33B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68B9DAA-A276-4C8D-A9BC-87883220F33B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68B9DAA-A276-4C8D-A9BC-87883220F33B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68B9DAA-A276-4C8D-A9BC-87883220F33B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC0F26B6-93A8-4FAC-9ABD-59699CA5DDFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0F26B6-93A8-4FAC-9ABD-59699CA5DDFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0F26B6-93A8-4FAC-9ABD-59699CA5DDFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0F26B6-93A8-4FAC-9ABD-59699CA5DDFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{808B2DC5-3EFF-4EFB-BAFE-0369719B03F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{808B2DC5-3EFF-4EFB-BAFE-0369719B03F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{808B2DC5-3EFF-4EFB-BAFE-0369719B03F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{808B2DC5-3EFF-4EFB-BAFE-0369719B03F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{118E23C3-69CC-4C56-BADC-2FF32BCFC850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{118E23C3-69CC-4C56-BADC-2FF32BCFC850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{118E23C3-69CC-4C56-BADC-2FF32BCFC850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{118E23C3-69CC-4C56-BADC-2FF32BCFC850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C423C34-C01B-497B-B65A-F65E2B54E113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C423C34-C01B-497B-B65A-F65E2B54E113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C423C34-C01B-497B-B65A-F65E2B54E113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C423C34-C01B-497B-B65A-F65E2B54E113}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A68B9DAA-A276-4C8D-A9BC-87883220F33B} = {7C8969D3-5F2E-48D4-8FA9-92027CEA5278}
+		{FC0F26B6-93A8-4FAC-9ABD-59699CA5DDFA} = {7C8969D3-5F2E-48D4-8FA9-92027CEA5278}
+		{808B2DC5-3EFF-4EFB-BAFE-0369719B03F1} = {7C8969D3-5F2E-48D4-8FA9-92027CEA5278}
+		{118E23C3-69CC-4C56-BADC-2FF32BCFC850} = {7C8969D3-5F2E-48D4-8FA9-92027CEA5278}
+		{1C423C34-C01B-497B-B65A-F65E2B54E113} = {7C8969D3-5F2E-48D4-8FA9-92027CEA5278}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E125D43-251B-48FB-8FD8-12B86CF095B3}

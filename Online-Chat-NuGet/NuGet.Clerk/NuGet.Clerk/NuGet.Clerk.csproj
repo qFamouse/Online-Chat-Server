@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NuGet.Clerk.Abstractions\NuGet.Clerk.Abstractions.csproj" />
+    <ProjectReference Include="..\NuGet.Clerk.Core\NuGet.Clerk.Core.csproj" />
+    <ProjectReference Include="..\NuGet.Clerk.DependencyInjection\NuGet.Clerk.DependencyInjection.csproj" />
+    <ProjectReference Include="..\NuGet.Clerk.Models\NuGet.Clerk.Models.csproj" />
+  </ItemGroup>
+
+</Project>
