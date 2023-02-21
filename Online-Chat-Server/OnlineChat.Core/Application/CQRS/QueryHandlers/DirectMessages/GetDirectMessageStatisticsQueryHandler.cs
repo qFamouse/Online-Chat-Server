@@ -1,7 +1,7 @@
 ﻿using Application.CQRS.Queries.DirectMessages;
-using Application.Documents;
 using MediatR;
-using QuestPDF.Fluent;
+using NuGet.Clerk.Abstractions;
+using NuGet.Clerk.Models;
 using Repositories.Abstractions;
 using Services.Abstractions;
 
@@ -11,15 +11,18 @@ internal class GetDirectMessageStatisticsQueryHandler : IRequestHandler<GetDirec
 {
     private readonly IDirectMessageRepository _directMessageRepository;
     private readonly IIdentityService _identityService;
+    private readonly IClerkDocumentService _clerkDocumentService;
 
     public GetDirectMessageStatisticsQueryHandler
     (
         IDirectMessageRepository directMessageRepository,
-        IIdentityService identityService
+        IIdentityService identityService,
+        IClerkDocumentService clerkDocumentService
     )
     {
         _directMessageRepository = directMessageRepository ?? throw new ArgumentNullException(nameof(directMessageRepository));
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+        _clerkDocumentService = clerkDocumentService ?? throw new ArgumentNullException(nameof(clerkDocumentService));
     }
 
     public async Task<Stream> Handle(GetDirectMessageStatisticsQuery request, CancellationToken cancellationToken)
@@ -27,11 +30,15 @@ internal class GetDirectMessageStatisticsQueryHandler : IRequestHandler<GetDirec
         int userId = _identityService.GetUserId();
         var statistics = await _directMessageRepository.GetDirectMessageStatisticsByUserIdAsync(userId, cancellationToken);
 
-        var document = new DirectMessageStatisticsDocument(statistics);
+        var statisticsMap = new UsageStatistics
+        {
+            TotalMessages = statistics.TotalMessages,
+            TotalSent = statistics.TotalSent,
+            TotalReceived = statistics.TotalReceived
+        };
 
-        Stream stream = new MemoryStream();
-        document.GeneratePdf(stream);
-        stream.Seek(0, SeekOrigin.Begin);
+        var stream = await _clerkDocumentService.GeneratePdfByUsageStatisticsAsync(statisticsMap);
+
         return stream;
     }
 }

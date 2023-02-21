@@ -8,6 +8,7 @@ using FluentValidation;
 using MediatR;
 using Repositories.Abstractions;
 using Application.Mappers.Abstractions;
+using NuGet.Clerk.DependencyInjection;
 using Services;
 using Services.Abstractions;
 
@@ -77,6 +78,14 @@ namespace OnlineChat.WebUI.Extensions
         {
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddSingleton<IHubConnectionsService, HubConnectionsService>();
+        }
+
+        public static void AddClerk(this IServiceCollection services, string baseAddress)
+        {
+            services.AddClerk(cfg =>
+            {
+                cfg.BaseAddress = baseAddress;
+            });
         }
     }
 }

@@ -28,6 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #region Custom Services
+
 ConfigurationManager configuration = builder.Configuration;
 builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Identity"));
 builder.Services.Configure<AzureBlobConfiguration>(configuration.GetSection("AzureBlob"));
@@ -35,6 +36,8 @@ builder.Services.Configure<AzureBlobConfiguration>(configuration.GetSection("Azu
 builder.Services.AddSignalR();
 
 builder.Services.AddAutoMappers();
+
+builder.Services.AddClerk(builder.Configuration.GetConnectionString("ClerkConnection"));
 
 builder.Services.AddMediatR(typeof(SignUpUserCommand));
 
