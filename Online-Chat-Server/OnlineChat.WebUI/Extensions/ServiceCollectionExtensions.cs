@@ -11,6 +11,7 @@ using Application.Mappers.Abstractions;
 using NuGet.Clerk.DependencyInjection;
 using Services;
 using Services.Abstractions;
+using Application.CQRS.Commands.Users;
 
 namespace OnlineChat.WebUI.Extensions
 {
@@ -85,6 +86,14 @@ namespace OnlineChat.WebUI.Extensions
             services.AddClerk(cfg =>
             {
                 cfg.BaseAddress = new Uri(baseAddress);
+            });
+        }
+
+        public static void AddMediatR(this IServiceCollection services)
+        {
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(typeof(SignUpUserCommand).Assembly);
             });
         }
     }

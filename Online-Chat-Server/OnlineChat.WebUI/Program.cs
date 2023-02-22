@@ -1,5 +1,4 @@
 using Configurations;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -7,7 +6,6 @@ using Microsoft.OpenApi.Models;
 using OnlineChat.WebUI.Hubs;
 using Shared;
 using System.Text;
-using Application.CQRS.Commands.Users;
 using Domain.Entities;
 using Hellang.Middleware.ProblemDetails;
 using EntityFramework.SqlServer;
@@ -39,7 +37,7 @@ builder.Services.AddAutoMappers();
 
 builder.Services.AddClerk(builder.Configuration.GetConnectionString("ClerkConnection"));
 
-builder.Services.AddMediatR(typeof(SignUpUserCommand));
+builder.Services.AddMediatR();
 
 builder.Services.AddRepositories();
 
