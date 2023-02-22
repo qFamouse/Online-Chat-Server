@@ -4,11 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <PackageOutputPath>../../.packages</PackageOutputPath>
+	<Version>6.0.0</Version>
+	<PackageOutputPath>../../.packages</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGet.Clerk.Models" Version="1.1.0" />
+    <PackageReference Include="NuGet.Clerk.Models" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
