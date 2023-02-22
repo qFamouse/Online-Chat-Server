@@ -4,12 +4,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\NuGet.Clerk.Abstractions\NuGet.Clerk.Abstractions.csproj" />
-    <ProjectReference Include="..\NuGet.Clerk.Core\NuGet.Clerk.Core.csproj" />
-    <ProjectReference Include="..\NuGet.Clerk.DependencyInjection\NuGet.Clerk.DependencyInjection.csproj" />
-    <ProjectReference Include="..\NuGet.Clerk.Models\NuGet.Clerk.Models.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="NuGet.Clerk.Abstractions" Version="1.0.0" />
+	  <PackageReference Include="NuGet.Clerk.Core" Version="1.2.0" />
+	  <PackageReference Include="NuGet.Clerk.DependencyInjection" Version="1.1.0.1" />
+	  <PackageReference Include="NuGet.Clerk.Models" Version="1.1.0" />
+	</ItemGroup>
 
 </Project>

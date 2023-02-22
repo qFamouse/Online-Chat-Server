@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NuGet.Clerk.Models\NuGet.Clerk.Models.csproj" />
+    <PackageReference Include="NuGet.Clerk.Models" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

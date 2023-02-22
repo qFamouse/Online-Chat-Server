@@ -14,8 +14,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.Clerk.Abstractions", "NuGet.Clerk\NuGet.Clerk.Abstractions\NuGet.Clerk.Abstractions.csproj", "{808B2DC5-3EFF-4EFB-BAFE-0369719B03F1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.Clerk.DependencyInjection", "NuGet.Clerk\NuGet.Clerk.DependencyInjection\NuGet.Clerk.DependencyInjection.csproj", "{118E23C3-69CC-4C56-BADC-2FF32BCFC850}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1C423C34-C01B-497B-B65A-F65E2B54E113} = {1C423C34-C01B-497B-B65A-F65E2B54E113}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGet.Clerk.Models", "NuGet.Clerk\NuGet.Clerk.Models\NuGet.Clerk.Models.csproj", "{1C423C34-C01B-497B-B65A-F65E2B54E113}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGet.Clerk.Models", "NuGet.Clerk\NuGet.Clerk.Models\NuGet.Clerk.Models.csproj", "{1C423C34-C01B-497B-B65A-F65E2B54E113}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

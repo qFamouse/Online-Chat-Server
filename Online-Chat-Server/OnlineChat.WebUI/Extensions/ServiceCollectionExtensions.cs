@@ -84,7 +84,7 @@ namespace OnlineChat.WebUI.Extensions
         {
             services.AddClerk(cfg =>
             {
-                cfg.BaseAddress = baseAddress;
+                cfg.BaseAddress = new Uri(baseAddress);
             });
         }
     }
