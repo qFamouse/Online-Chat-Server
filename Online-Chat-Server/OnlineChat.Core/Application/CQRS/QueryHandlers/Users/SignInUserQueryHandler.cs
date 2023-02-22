@@ -18,16 +18,19 @@ namespace Application.CQRS.QueryHandlers.Users;
 internal class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAuthorizationView>
 {
     private readonly UserManager<User> _userManager;
-    private readonly IdentityConfiguration _identityConfiguration;
+    private readonly IOptions<AuthenticationConfiguration> _authenticationOptions;
+    private readonly IOptions<IdentityConfiguration> _identityOptions;
 
     public SignInUserQueryHandler
     (
         UserManager<User> userManager,
-        IOptions<IdentityConfiguration> identityConfiguration
+        IOptions<AuthenticationConfiguration> identityConfiguration, 
+        IOptions<IdentityConfiguration> identityOptions
     )
     {
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-        _identityConfiguration = identityConfiguration.Value ?? throw new ArgumentNullException(nameof(identityConfiguration));
+        _authenticationOptions = identityConfiguration ?? throw new ArgumentNullException(nameof(identityConfiguration));
+        _identityOptions = identityOptions ?? throw new ArgumentNullException(nameof(identityOptions));
     }
 
     public async Task<UserAuthorizationView> Handle(SignInUserQuery request, CancellationToken cancellationToken)
@@ -55,10 +58,10 @@ internal class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAut
         };
         authClaims.AddRange(roleClaims); // Adding user roles to main claims list
 
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_identityConfiguration.SecurityKey));
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationOptions.Value.SecurityKey));
 
         var token = new JwtSecurityToken(
-            expires: DateTime.Now.AddHours(_identityConfiguration.ExpiresHours),
+            expires: DateTime.Now.AddHours(_identityOptions.Value.ExpiresHours),
             claims: authClaims,
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
         );

@@ -28,6 +28,7 @@ builder.Services.AddSwaggerGen();
 #region Custom Services
 
 ConfigurationManager configuration = builder.Configuration;
+builder.Services.Configure<AuthenticationConfiguration>(configuration.GetSection("Authentication"));
 builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Identity"));
 builder.Services.Configure<AzureBlobConfiguration>(configuration.GetSection("AzureBlob"));
 
@@ -75,7 +76,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes(configuration["Identity:SecurityKey"]))
+                                Encoding.UTF8.GetBytes(configuration["Authentication:SecurityKey"]))
             };
             options.Events = new JwtBearerEvents
             {
