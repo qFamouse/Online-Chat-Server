@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Net;
+using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
 using NuGet.Clerk.Abstractions;
 using NuGet.Clerk.Models;
@@ -33,6 +34,12 @@ public class ClerkDocumentService : IClerkDocumentService
             $"Documents?TotalMessages={statistics.TotalMessages}&TotalSent={statistics.TotalSent}&TotalReceived={statistics.TotalReceived}");
 
         var response = await client.SendAsync(request);
+
+        if (response.StatusCode != HttpStatusCode.OK)
+        {
+            throw new HttpRequestException(response.ReasonPhrase, null, response.StatusCode);
+        }
+
         var stream = await response.Content.ReadAsStreamAsync();
 
         return stream;
