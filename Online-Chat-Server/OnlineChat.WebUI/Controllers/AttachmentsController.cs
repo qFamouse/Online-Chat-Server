@@ -26,7 +26,7 @@ namespace OnlineChat.WebUI.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult> GetFileFromAttachmentById(int id)
         {
-            var downloadInfo = await _sender.Send(new GetFileFromAttachmentByIdCommand(id));
+            var downloadInfo = await _sender.Send(new GetFileFromAttachmentByIdQuery(id));
             return File(downloadInfo.Content, downloadInfo.ContentType);
         }
     }

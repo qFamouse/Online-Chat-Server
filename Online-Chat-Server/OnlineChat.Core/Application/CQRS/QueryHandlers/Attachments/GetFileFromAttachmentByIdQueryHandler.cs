@@ -8,13 +8,13 @@ using Services.Abstractions;
 
 namespace Application.CQRS.QueryHandlers.Attachments;
 
-internal class GetFileFromAttachmentByIdCommandHandler : IRequestHandler<GetFileFromAttachmentByIdCommand, BlobDownloadInfo>
+internal class GetFileFromAttachmentByIdQueryHandler : IRequestHandler<GetFileFromAttachmentByIdQuery, BlobDownloadInfo>
 {
     private readonly IAttachmentRepository _attachmentRepository;
     private readonly IBlobService _blobService;
     private readonly AzureBlobConfiguration _blobConfiguration;
 
-    public GetFileFromAttachmentByIdCommandHandler
+    public GetFileFromAttachmentByIdQueryHandler
     (
         IAttachmentRepository attachmentRepository,
         IBlobService blobService,
@@ -26,7 +26,7 @@ internal class GetFileFromAttachmentByIdCommandHandler : IRequestHandler<GetFile
         _blobConfiguration = azureBlobOptions.Value ?? throw new ArgumentNullException(nameof(azureBlobOptions));
     }
 
-    public async Task<BlobDownloadInfo> Handle(GetFileFromAttachmentByIdCommand request, CancellationToken cancellationToken)
+    public async Task<BlobDownloadInfo> Handle(GetFileFromAttachmentByIdQuery request, CancellationToken cancellationToken)
     {
         var attachment = await _attachmentRepository.GetByIdAsync(request.Id, cancellationToken);
 

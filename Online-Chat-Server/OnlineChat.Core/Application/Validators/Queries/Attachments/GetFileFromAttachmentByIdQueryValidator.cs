@@ -6,12 +6,12 @@ using Services.Abstractions;
 
 namespace Application.Validators.Queries.Attachments;
 
-public class GetFileFromAttachmentByIdValidator : AbstractValidator<GetFileFromAttachmentByIdCommand>
+public class GetFileFromAttachmentByIdQueryValidator : AbstractValidator<GetFileFromAttachmentByIdQuery>
 {
     private readonly IAttachmentRepository _attachmentRepository;
     private readonly IIdentityService _identityService;
 
-    public GetFileFromAttachmentByIdValidator(IAttachmentRepository attachmentRepository, IIdentityService identityService)
+    public GetFileFromAttachmentByIdQueryValidator(IAttachmentRepository attachmentRepository, IIdentityService identityService)
     {
         _attachmentRepository = attachmentRepository ?? throw new ArgumentNullException(nameof(attachmentRepository));
         _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));

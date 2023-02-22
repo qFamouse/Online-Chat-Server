@@ -3,11 +3,11 @@ using MediatR;
 
 namespace Application.CQRS.Queries.Attachments;
 
-public class GetFileFromAttachmentByIdCommand : IRequest<BlobDownloadInfo>
+public class GetFileFromAttachmentByIdQuery : IRequest<BlobDownloadInfo>
 {
     public int Id { get; set; }
 
-    public GetFileFromAttachmentByIdCommand(int id)
+    public GetFileFromAttachmentByIdQuery(int id)
     {
         Id = id;
     }
