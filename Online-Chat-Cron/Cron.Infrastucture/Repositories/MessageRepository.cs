@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Entities;
-using Application.Interfaces;
-using Dapper;
+﻿using Dapper;
+using Domain.Entities;
+using Repositories.Abstractions;
 using Shared;
 
 namespace Repositories;

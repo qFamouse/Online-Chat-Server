@@ -1,8 +1,8 @@
-﻿using Application.Interfaces;
-using Hangfire;
+﻿using Hangfire;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using NuGet.MassTransit.Contracts;
+using Repositories.Abstractions;
 
 namespace Application.Consumers
 {

@@ -1,10 +1,8 @@
-using System.Net.Mime;
 using System.Reflection;
-using Application.Consumers;
-using Application.Interfaces;
 using Hangfire;
 using MassTransit;
 using Repositories;
+using Repositories.Abstractions;
 using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
