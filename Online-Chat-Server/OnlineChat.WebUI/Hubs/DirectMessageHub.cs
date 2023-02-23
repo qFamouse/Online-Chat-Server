@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using System.Security.Claims;
 using Application.CQRS.Commands.DirectMessages;
 using Contracts.Views;
 using Application.Mappers.Abstractions;
@@ -50,21 +49,22 @@ namespace OnlineChat.WebUI.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            var userIdentity = Context.GetHttpContext()?.User.Identity as ClaimsIdentity;
-            if (userIdentity != null)
+            if (!_identityService.UserIsAuthenticated)
             {
-                string connectionID = Context.ConnectionId;
-                string userId = userIdentity.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+                await base.OnConnectedAsync();
+            }
 
-                if (_hubConnectionsService.TryGetValue(int.Parse(userId), out var connections))
-                {
-                    connections.Add(connectionID);
-                }
-                else
-                {
-                    connections = new List<string>() { connectionID };
-                    _hubConnectionsService.Add(int.Parse(userId), connections);
-                }
+            var connectionId = Context.ConnectionId;
+            var userId = _identityService.GetUserId();
+
+            if (_hubConnectionsService.TryGetValue(userId, out var connections))
+            {
+                connections.Add(connectionId);
+            }
+            else
+            {
+                connections = new List<string> { connectionId };
+                _hubConnectionsService.Add(userId, connections);
             }
 
             await base.OnConnectedAsync();
@@ -72,20 +72,21 @@ namespace OnlineChat.WebUI.Hubs
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            var userIdentity = Context.GetHttpContext()?.User.Identity as ClaimsIdentity;
-            if (userIdentity != null)
+            if (!_identityService.UserIsAuthenticated)
             {
-                string connectionID = Context.ConnectionId;
-                string userId = userIdentity.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+                await base.OnDisconnectedAsync(exception);
+            }
 
-                if (_hubConnectionsService.TryGetValue(int.Parse(userId), out var connections))
+            var connectionId = Context.ConnectionId;
+            var userId = _identityService.GetUserId();
+
+            if (_hubConnectionsService.TryGetValue(userId, out var connections))
+            {
+                connections.Remove(connectionId);
+
+                if (connections.Count == 0)
                 {
-                    connections.Remove(connectionID);
-
-                    if (connections.Count == 0)
-                    {
-                        _hubConnectionsService.Remove(int.Parse(userId));
-                    }
+                    _hubConnectionsService.Remove(userId);
                 }
             }
 
