@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Hangfire.Core" Version="1.7.33" />
     <PackageReference Include="MassTransit" Version="8.0.12" />
-    <PackageReference Include="OnlineChat.MassTransit" Version="1.0.0" />
+    <PackageReference Include="NuGet.MassTransit" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

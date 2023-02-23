@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Hangfire;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using OnlineChat.MassTransit.Contracts;
+using NuGet.MassTransit.Contracts;
 
 namespace Application.Consumers
 {
