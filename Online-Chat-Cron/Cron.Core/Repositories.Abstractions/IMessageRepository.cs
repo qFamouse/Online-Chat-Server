@@ -1,10 +1,9 @@
 ﻿using Domain.Entities;
 
-namespace Repositories.Abstractions
+namespace Repositories.Abstractions;
+
+public interface IMessageRepository
 {
-    public interface IMessageRepository
-    {
-        Task<Message> GetByIdAsync(int id);
-        Task DeleteMessageByIdAsync(int id);
-    }
+    Task<Message> GetByIdAsync(int id);
+    Task DeleteMessageByIdAsync(int id);
 }
