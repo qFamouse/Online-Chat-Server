@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OnlineChatCron.Domain\Application\Application.csproj" />
+    <ProjectReference Include="..\..\Cron.Core\Application\Application.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 

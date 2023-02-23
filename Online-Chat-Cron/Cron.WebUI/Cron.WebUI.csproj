@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -15,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OnlineChatCron.Domain\Application\Application.csproj" />
-    <ProjectReference Include="..\OnlineChatCron.Infrastructure\Repositories\Repositories.csproj" />
-    <ProjectReference Include="..\OnlineChatCron.Infrastructure\Shared\Shared.csproj" />
+    <ProjectReference Include="..\Cron.Core\Application\Application.csproj" />
+    <ProjectReference Include="..\Cron.Infrastucture\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\Cron.Infrastucture\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>

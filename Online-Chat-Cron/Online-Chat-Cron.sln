@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33402.96
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineChat.Cron", "OnlineChat.Cron\OnlineChat.Cron.csproj", "{63A448DB-DD5F-4089-A337-AF54EAE55991}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cron.WebUI", "Cron.WebUI\Cron.WebUI.csproj", "{63A448DB-DD5F-4089-A337-AF54EAE55991}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OnlineChatCron.Domain", "OnlineChatCron.Domain", "{F155F2EF-377E-48FF-B642-F410EF306B0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Cron.Core\Application\Application.csproj", "{8AD44085-066B-4C08-B16F-9FDA96DCCC6B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OnlineChatCron.Infrastructure", "OnlineChatCron.Infrastructure", "{26CF726E-37C4-4169-AAB1-F4495ECF85F1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cron.Core", "Cron.Core", "{A26641EC-02D5-4165-B5A3-555EBBCC0370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "OnlineChatCron.Domain\Application\Application.csproj", "{8AD44085-066B-4C08-B16F-9FDA96DCCC6B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cron.Infrastructure", "Cron.Infrastructure", "{EA95783E-13DF-45E1-867F-C069FECAA12A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "OnlineChatCron.Infrastructure\Shared\Shared.csproj", "{7CC92C0C-A514-4C7B-8BCD-59CDF763A9A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Cron.Infrastucture\Shared\Shared.csproj", "{AF51E177-237C-4C6C-BB7A-C59DD4DAF424}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "OnlineChatCron.Infrastructure\Repositories\Repositories.csproj", "{37C2BE62-EEBB-4C8D-8D55-379F8C53791E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Cron.Infrastucture\Repositories\Repositories.csproj", "{FBA850DF-A6A5-434D-A945-1D33791547CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,22 +29,22 @@ Global
 		{8AD44085-066B-4C08-B16F-9FDA96DCCC6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AD44085-066B-4C08-B16F-9FDA96DCCC6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AD44085-066B-4C08-B16F-9FDA96DCCC6B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CC92C0C-A514-4C7B-8BCD-59CDF763A9A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CC92C0C-A514-4C7B-8BCD-59CDF763A9A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CC92C0C-A514-4C7B-8BCD-59CDF763A9A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CC92C0C-A514-4C7B-8BCD-59CDF763A9A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37C2BE62-EEBB-4C8D-8D55-379F8C53791E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37C2BE62-EEBB-4C8D-8D55-379F8C53791E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37C2BE62-EEBB-4C8D-8D55-379F8C53791E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37C2BE62-EEBB-4C8D-8D55-379F8C53791E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF51E177-237C-4C6C-BB7A-C59DD4DAF424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF51E177-237C-4C6C-BB7A-C59DD4DAF424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF51E177-237C-4C6C-BB7A-C59DD4DAF424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF51E177-237C-4C6C-BB7A-C59DD4DAF424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA850DF-A6A5-434D-A945-1D33791547CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA850DF-A6A5-434D-A945-1D33791547CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA850DF-A6A5-434D-A945-1D33791547CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA850DF-A6A5-434D-A945-1D33791547CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8AD44085-066B-4C08-B16F-9FDA96DCCC6B} = {F155F2EF-377E-48FF-B642-F410EF306B0C}
-		{7CC92C0C-A514-4C7B-8BCD-59CDF763A9A5} = {26CF726E-37C4-4169-AAB1-F4495ECF85F1}
-		{37C2BE62-EEBB-4C8D-8D55-379F8C53791E} = {26CF726E-37C4-4169-AAB1-F4495ECF85F1}
+		{8AD44085-066B-4C08-B16F-9FDA96DCCC6B} = {A26641EC-02D5-4165-B5A3-555EBBCC0370}
+		{AF51E177-237C-4C6C-BB7A-C59DD4DAF424} = {EA95783E-13DF-45E1-867F-C069FECAA12A}
+		{FBA850DF-A6A5-434D-A945-1D33791547CE} = {EA95783E-13DF-45E1-867F-C069FECAA12A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4176737D-8706-4B16-9E3D-2EDB15973940}
