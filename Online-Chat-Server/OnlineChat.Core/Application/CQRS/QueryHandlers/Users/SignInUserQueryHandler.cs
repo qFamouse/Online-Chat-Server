@@ -47,6 +47,15 @@ internal class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAut
             throw new ProblemDetailsException((int)HttpStatusCode.BadRequest, UserMessages.IncorrectPassword);
         }
 
+        if (user.TwoFactorEnabled)
+        {
+            return new UserAuthorizationView()
+            {
+                IsAuthSuccessful = true,
+                IsTfaEnabled = true
+            };
+        }
+
         var roles = await _userManager.GetRolesAsync(user);
         var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r)); // Claim all user roles
 
@@ -68,6 +77,11 @@ internal class SignInUserQueryHandler : IRequestHandler<SignInUserQuery, UserAut
 
         string encodedJwt = new JwtSecurityTokenHandler().WriteToken(token);
 
-        return new UserAuthorizationView(encodedJwt, token.ValidTo);
+        return new UserAuthorizationView()
+        {
+            IsAuthSuccessful = true,
+            IsTfaEnabled = false,
+            Token = encodedJwt
+        };
     }
 }

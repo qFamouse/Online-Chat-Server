@@ -2,13 +2,8 @@
 {
     public class UserAuthorizationView
     {
-        public string Token { get; }
-        public DateTime Expires { get; }
-
-        public UserAuthorizationView(string token, DateTime expires)
-        {
-            Token = token;
-            Expires = expires;
-        }
+        public bool IsAuthSuccessful { get; set; }
+        public bool IsTfaEnabled { get; set; }
+        public string? Token { get; set; }
     }
 }
