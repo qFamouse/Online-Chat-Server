@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.104" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\OnlineChat.Core\Resources\Resources.csproj" />
     <ProjectReference Include="..\..\OnlineChat.Core\Services.Abstractions\Services.Abstractions.csproj" />
   </ItemGroup>
 

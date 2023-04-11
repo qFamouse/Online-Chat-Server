@@ -11,6 +11,7 @@ using Hellang.Middleware.ProblemDetails;
 using EntityFramework.SqlServer;
 using OnlineChat.WebUI.Extensions;
 using Serilog;
+using StackExchange.Redis;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -49,13 +50,13 @@ try
 
     builder.Services.AddAutoMappers();
 
-    builder.Services.AddClerk(builder.Configuration.GetConnectionString("ClerkConnection"));
+    builder.Services.AddClerk(configuration.GetConnectionString("ClerkConnection"));
 
     builder.Services.AddMediatR();
 
     builder.Services.AddRepositories();
 
-    builder.Services.AddAzureBlobStorage(builder.Configuration.GetConnectionString("AzureBlobConnection"));
+    builder.Services.AddAzureBlobStorage(configuration.GetConnectionString("AzureBlobConnection"));
 
     builder.Services.AddMassTransit();
 
@@ -65,7 +66,9 @@ try
 
     builder.Services.AddServices();
 
-    builder.Services.AddSqlServerDbContext(builder.Configuration.GetConnectionString("DefaultConnection"));
+    builder.Services.AddSqlServerDbContext(configuration.GetConnectionString("DefaultConnection"));
+
+    builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(configuration.GetConnectionString("RedisConnection")));
 
     builder.Services.AddCors(options =>
     {

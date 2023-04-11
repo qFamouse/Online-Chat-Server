@@ -2,7 +2,7 @@
 {
     public interface ITfaService
     {
-        Task<bool> AuthenticateAsync(string email, string code);
-        Task StartAuthenticationAsync(string email);
+        Task<bool> AuthenticateAsync(string email, int code);
+        Task SendNewAuthenticationCodeAsync(string email);
     }
 }

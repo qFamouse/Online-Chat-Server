@@ -79,6 +79,7 @@ namespace OnlineChat.WebUI.Extensions
         {
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddSingleton<IHubConnectionsService, HubConnectionsService>();
+            services.AddSingleton<ITfaService, TfaService>();
         }
 
         public static void AddClerk(this IServiceCollection services, string baseAddress)

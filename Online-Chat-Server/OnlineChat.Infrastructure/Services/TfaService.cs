@@ -1,17 +1,40 @@
-﻿using Services.Abstractions;
+﻿using Hellang.Middleware.ProblemDetails;
+using Resources.Messages;
+using Services.Abstractions;
+using StackExchange.Redis;
 
 namespace Services
 {
     public class TfaService : ITfaService
     {
-        public Task<bool> AuthenticateAsync(string email, string code)
+        private readonly IDatabase _redis;
+
+        public TfaService
+        (
+            IConnectionMultiplexer multiplexer)
         {
-            throw new NotImplementedException();
+            _redis = multiplexer.GetDatabase();
         }
 
-        public Task StartAuthenticationAsync(string email)
+        public async Task<bool> AuthenticateAsync(string email, int code)
         {
-            throw new NotImplementedException();
+            RedisValue value = await _redis.StringGetAsync(email);
+
+
+            if (value.IsNull || value != code)
+            {
+                throw new ProblemDetailsException(400, TfaMessages.InvalidCode);
+            }
+
+            
+            return true;
+        }
+
+        public async Task SendNewAuthenticationCodeAsync(string email)
+        {
+            int code = new Random().Next(100000, 999999);
+
+            await _redis.StringSetAsync(email, code, TimeSpan.FromMinutes(15));
         }
     }
 }

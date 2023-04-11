@@ -17,6 +17,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ChatMessages.resx</DependentUpon>
     </Compile>
+    <Compile Update="Messages\TfaMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TfaMessages.resx</DependentUpon>
+    </Compile>
     <Compile Update="Messages\UserMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -37,6 +42,10 @@
     <EmbeddedResource Update="Messages\ChatMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ChatMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Messages\TfaMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TfaMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Messages\UserMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
