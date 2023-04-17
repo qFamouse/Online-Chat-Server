@@ -8,26 +8,23 @@ namespace Services
     public class TfaService : ITfaService
     {
         private readonly IDatabase _redis;
+        private readonly IEmailSenderService _emailSenderService;
 
         public TfaService
         (
-            IConnectionMultiplexer multiplexer)
+            IConnectionMultiplexer multiplexer,
+            IEmailSenderService emailSenderService
+        )
         {
             _redis = multiplexer.GetDatabase();
+            _emailSenderService = emailSenderService;
         }
 
         public async Task<bool> AuthenticateAsync(string email, int code)
         {
             RedisValue value = await _redis.StringGetAsync(email);
 
-
-            if (value.IsNull || value != code)
-            {
-                throw new ProblemDetailsException(400, TfaMessages.InvalidCode);
-            }
-
-            
-            return true;
+            return !value.IsNull && value == code;
         }
 
         public async Task SendNewAuthenticationCodeAsync(string email)
@@ -35,6 +32,7 @@ namespace Services
             int code = new Random().Next(100000, 999999);
 
             await _redis.StringSetAsync(email, code, TimeSpan.FromMinutes(15));
+            await _emailSenderService.SendEmailAsync(email, "Authentication Code", code.ToString());
         }
     }
 }

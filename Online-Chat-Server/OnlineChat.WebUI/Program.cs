@@ -45,6 +45,7 @@ try
     builder.Services.Configure<AuthenticationConfiguration>(configuration.GetSection("Authentication"));
     builder.Services.Configure<IdentityConfiguration>(configuration.GetSection("Identity"));
     builder.Services.Configure<AzureBlobConfiguration>(configuration.GetSection("AzureBlob"));
+    builder.Services.Configure<EmailConfiguration>(configuration.GetSection("Email"));
 
     builder.Services.AddSignalR();
 
