@@ -30,6 +30,12 @@ namespace OnlineChat.WebUI.Controllers
             return Ok(await _sender.Send(new SignInUserQuery(request)));
         }
 
+        [HttpPost("tfa-login")]
+        public async Task<ActionResult> LoginAsync([FromBody] UserAuthorizationTfaRequest request)
+        {
+            return Ok(await _sender.Send(new SignInTfaUserQuery(request)));
+        }
+
         [Authorize]
         [HttpGet("about")]
         public async Task<ActionResult> AboutAsync()

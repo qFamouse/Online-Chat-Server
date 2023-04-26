@@ -21,7 +21,7 @@ namespace Application.CQRS.Pipelines.Users
         {
             if (response.IsTfaEnabled && response.IsAuthSuccessful)
             {
-                await _tfaService.StartAuthenticationAsync(request.Email);
+                await _tfaService.SendNewAuthenticationCodeAsync(request.Email);
             }
         }
     }
